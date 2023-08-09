@@ -70,8 +70,7 @@
 
 
     
-    <div class="container">
-        <!-- Product items will be added here dynamically -->
+    <div class="container product-container">
         {% for product in products %}
             <div class="product">
                 <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
@@ -80,6 +79,7 @@
             </div>
         {% endfor %}
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
