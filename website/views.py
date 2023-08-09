@@ -28,3 +28,22 @@ def stylemepage():
 @views.route('/upload_image_page')
 def upload_image_page():
     return render_template('upload_image.html')
+
+@views.route('/upload', methods=['POST'])
+def upload():
+    file = request.files['file']
+    if file:
+        # Modify the filename to include the poker_board_id
+        filename = file.filename
+        # Upload the file to Google Cloud Storage
+        client = storage.Client()
+        bucket_name = 'uploaded-cloth'  # Replace with your bucket name
+        bucket = client.get_bucket(bucket_name)
+        blob = bucket.blob(filename)
+        blob.upload_from_file(file)
+
+        flash('File uploaded successfully!', 'success')
+        return redirect('/upload_image_page')
+
+    flash('No File is Selected.', 'danger')
+    return redirect('/upload_image_page')

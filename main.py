@@ -5,7 +5,7 @@ from website import create_app
 dir_path = os.path.dirname(os.path.abspath(__file__))
 
 # Construct the absolute path of the credentials file in the secrets directory
-credentials_path = os.path.join(dir_path, 'secrets', 'credentials.json')
+credentials_path = os.path.join(dir_path, 'secret', 'credentials.json')
 
 # Set the environment variable to the credentials file path
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
