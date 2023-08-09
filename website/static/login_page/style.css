@@ -1,0 +1,102 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+	background-image: url(background.jpg);
+	margin: 0;
+	padding: 0;
+}
+
+.login-container {
+	background-color: white;
+	padding: 20px;
+	margin: 10% auto;
+	margin-top: 90px;
+	max-width: 400px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	height: auto;
+	
+}
+
+
+
+#heading_2 {
+	text-align: center;
+	font-size: 25px;
+	margin-bottom: 15px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+input {
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #130665;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #3e8e41;
+}
+.navbar-custom {
+	background-color:  #130665;/* change background color */
+  }
+  
+  .navbar-custom .navbar-brand {
+	color: #fff; /* change brand text color */
+	
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+  }
+  
+  .navbar-brand img {
+	width: 140px; /* increase width */
+	height: auto; /* maintain aspect ratio */
+	margin-right: 10px;
+  }
+  
+  .navbar-custom .navbar-nav .nav-link {
+	color: #fff; /* change nav link text color */
+	font-size: 15px;
+	margin-right: 20px; /* add some spacing between nav links */
+  }
+  #forgotpassword{
+	width: 100%;
+	text-align: end;
+	margin-top: 5px;
+  }
+  
+  
+/* Media Queries */
+@media screen and (max-width: 768px) {
+	.login-container {
+		max-width: 90%;
+	}
+}
+
+

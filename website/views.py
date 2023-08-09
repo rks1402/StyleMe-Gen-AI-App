@@ -9,21 +9,37 @@ import string
 import os
 from google.cloud import storage
 from google.cloud import datastore
-
+import requests
 
 views = Blueprint('views', __name__)
 
+
+
+
+
+
+# API route to fetch products
+@views.route('/product')
+def fetch_products():
+    response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')  # Replace with your actual API URL
+    products = response.json()
+    return products
+
+# Route to render HTML page and display products
 @views.route('/')
-def home():
-    return redirect('/homepage')
+def display_products():
+    products = fetch_products()  # Fetch products using the API
+    return render_template('homepage.html', products=products)
 
-@views.route('/homepage')
-def homepage():
-    return render_template('home.html')
 
-@views.route('/stylemepage')
-def stylemepage():
-    return render_template('stylemepage.html')
+@views.route('/styleme')
+def styleme():
+    # ... (rest of your code)
+
+    # Render the template and pass the fetched records
+    return render_template('styleme.html')
+
+
 
 @views.route('/upload_image_page')
 def upload_image_page():
@@ -37,7 +53,7 @@ def upload():
         filename = file.filename
         # Upload the file to Google Cloud Storage
         client = storage.Client()
-        bucket_name = 'uploaded-cloth'  # Replace with your bucket name
+        bucket_name = 'upload_imagwa'  # Replace with your bucket name
         bucket = client.get_bucket(bucket_name)
         blob = bucket.blob(filename)
         blob.upload_from_file(file)
@@ -47,3 +63,4 @@ def upload():
 
     flash('No File is Selected.', 'danger')
     return redirect('/upload_image_page')
+
