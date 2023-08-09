@@ -9,8 +9,15 @@
         <link rel="stylesheet" href="../static/upload_image_page/style.css">
     </head>
     <body>
+        {% with messages = get_flashed_messages(with_categories = true)%}
+            {% for category,message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endwith %}
         <div class="container-fluid h-100">
-            
             <div class="row h-100">
                 <div class="col-md-4 border-right text-center d-flex align-items-center justify-content-center">
                     <div>
@@ -18,7 +25,7 @@
                         <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="image">Choose Image:</label>
-                                <input type="file" class="form-control-file" id="image" name="image">
+                                <input type="file" class="form-control-file" id="image" name="file">
                             </div>
                             <button type="submit" class="btn btn-primary">Upload</button>
                         </form>
