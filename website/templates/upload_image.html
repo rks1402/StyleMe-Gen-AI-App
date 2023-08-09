@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Upload</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/upload_image_page/style.css">
+    </head>
+    <body>
+        <div class="container-fluid h-100">
+            
+            <div class="row h-100">
+                <div class="col-md-4 border-right text-center d-flex align-items-center justify-content-center">
+                    <div>
+                        <h1 class="my-4">Image Upload</h1>
+                        <form class="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="image">Choose Image:</label>
+                                <input type="file" class="form-control-file" id="image" name="image">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </form>
+                        {% if image_url %}
+                            <h2 class="my-4">Image Preview:</h2>
+                            <img class="img-fluid image-preview" src="{{ image_url }}" alt="Image Preview">
+                        {% endif %}
+                    </div>
+                </div>                
+
+                <div class="col-md-8">
+                    <!-- Your code to display the related clothes result goes here -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
