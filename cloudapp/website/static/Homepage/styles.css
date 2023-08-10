@@ -1,125 +1,211 @@
-/* Reset default margin and padding */
-body, h1, h2, p, ul {
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
 }
 
-/* Set a base font size and line height */
+/* Basic styling */
 body {
     font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navigation bar */
+.navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
 }
 
-/* Header styles */
-/* Style for the header */
-.header {
-    background-color: #000000; /* Header background color */
-    color: white; /* Header text color */
-    padding: 0px; /* Padding around the header content */
-    display: flex; /* Display the header content in a row */
-    justify-content: space-between; /* Space items evenly across the header */
-    align-items: center; /* Align items vertically in the center */
+.nav-link {
+    color: #333;
 }
 
-/* Style for the logo (h1 element) */
-.header h1 {
-    font-size: 28px;
-    margin: 0; /* Remove default margin */
-    align-items: center;
-}
-
-/* Style for the navigation menu */
-.header nav ul {
-    list-style: none; /* Remove bullet points from list */
-    display: flex; /* Display menu items in a row */
-    align-items: center; /* Align items vertically in the center */
-}
-
-/* Style for navigation menu items (li elements) */
-.header nav ul li {
-    margin-right: 20px; /* Space between menu items */
-}
-
-/* Style for dropdown menu */
-.dropdown-content {
-    display: none; /* Hide dropdown content by default */
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Show dropdown content when hovering over the dropdown */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Style for search input */
-.topnav input[type="text"] {
-    padding: 6px;
-    border: none;
-    border-radius: 4px;
-}
-
-/* Style for login link */
-.topnav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-}
-
-
-/* Container for product cards */
-.container {
+/* Add this CSS for product grid layout */
+.product-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 2rem;
+    justify-content: space-between;
+    margin: -10px;
 }
 
-/* Individual product card */
 .product {
-    background-color: #fff;
+    flex: 0 0 calc(25% - 20px); /* 4 products per row */
+    margin: 10px;
+    padding: 10px;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
+    background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 1rem;
-    padding: 1.5rem;
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    max-width: 300px;
-    width: 100%;
 }
 
-.product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
+
 
 .product img {
     max-width: 100%;
     height: auto;
-    margin-bottom: 1rem;
 }
 
 .product h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 15px;
+    margin-top: 5px;
 }
 
 .product p {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 1rem;
+    font-size: 15px;
+    margin-top: 5px;
 }
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {s
+/* Dropdown adjustments */
+.dropdown-menu {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    font-size: 16px;
+    color: #333;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
     .product {
+        flex: 0 0 calc(50% - 20px); /* 2 products per row */
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .product img {
         max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .product p {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .form-control {
+        margin-top: 0;
+        margin-bottom: 10px;
     }
 }
+
+
+
+
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .product {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .product p {
+        margin-top: 10px;
+    }
