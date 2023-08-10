@@ -16,7 +16,9 @@ views = Blueprint('views', __name__)
 
 
 
-
+@views.route('/')
+def home():
+    return redirect('/homepage')
 
 # API route to fetch products
 @views.route('/product')
@@ -26,8 +28,8 @@ def fetch_products():
     return products
 
 # Route to render HTML page and display products
-@views.route('/')
-def display_products():
+@views.route('/homepage')
+def homepage():
     products = fetch_products()  # Fetch products using the API
     return render_template('homepage.html', products=products)
 
