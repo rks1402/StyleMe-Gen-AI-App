@@ -12,14 +12,14 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">DRZZ </a>
+              <a class="navbar-brand" href="{{ url_for('views.homepage')}}">DRZZ </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('views.homepage')}}">Home</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('views.styleme') }}">Style Me</a>
@@ -29,16 +29,16 @@
                      Clothes For
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Men</a></li>
-                      <li><a class="dropdown-item" href="#">Women</a></li>
-                      <li><a class="dropdown-item" href="#">Boys</a></li>
-                      <li><a class="dropdown-item" href="#">Girls</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Men</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Women</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Boys</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Girls</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Wedding</a></li>
-                      <li><a class="dropdown-item" href="#">Party</a></li>
-                      <li><a class="dropdown-item" href="#">Birthday</a></li>
-                      <li><a class="dropdown-item" href="#">Casual</a></li>
-                      <li><a class="dropdown-item" href="#">Formal</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Wedding</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Party</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Birthday</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Casual</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('views.homepage')}}">Formal</a></li>
                      
                     </ul>
                   </li>
@@ -66,9 +66,6 @@
             </div>
           </nav>
     </div>
-
-    <!-- Button trigger modal -->
-    
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
