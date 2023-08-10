@@ -34,6 +34,9 @@ def homepage():
     return render_template('homepage.html', products=products)
 
 
+
+
+
 @views.route('/styleme')
 def styleme():
     # ... (rest of your code)
@@ -50,7 +53,7 @@ def upload():
         filename = file.filename
         # Upload the file to Google Cloud Storage
         client = storage.Client()
-        bucket_name = 'uploaded-cloth'  # Replace with your bucket name
+        bucket_name = 'upload_imagwa'  # Replace with your bucket name
         bucket = client.get_bucket(bucket_name)
         blob = bucket.blob(filename)
         blob.upload_from_file(file)
@@ -61,3 +64,112 @@ def upload():
     flash('No File is Selected.', 'danger')
     return redirect('/')
 
+
+
+
+
+@views.route('/men')
+def fetch_men_data():
+    gender = "men"  # API parameter in uppercase
+    url = f"https://gender-iqcjxj5v4a-el.a.run.app/get_by_gender?gender={gender}"
+    
+    response = requests.get(url)
+    
+    products = response.json()
+    
+    return render_template('homepage.html', products=products)  # Render a template to display the data
+
+@views.route('/women')
+def fetch_women_data():
+    gender = "women"  # API parameter in uppercase
+    url = f"https://gender-iqcjxj5v4a-el.a.run.app/get_by_gender?gender={gender}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html', products=products)  # Render a template to display the data
+
+@views.route('/boys')
+def fetch_boys_data():
+    gender = "boys"  # API parameter in uppercase
+    url = f"https://gender-iqcjxj5v4a-el.a.run.app/get_by_gender?gender={gender}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html', products=products)  # Render a template to display the data
+
+@views.route('/girls')
+def fetch_girls_data():
+    gender = "girls"  # API parameter in uppercase
+    url = f"https://gender-iqcjxj5v4a-el.a.run.app/get_by_gender?gender={gender}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+
+@views.route('/wedding')
+def fetch_wedding_data():
+    ocassion = "wedding"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+
+@views.route('/party')
+def fetch_party_data():
+    ocassion = "party"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+@views.route('/casual')
+def fetch_casual_data():
+    ocassion = "casual"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+
+@views.route('/birthday')
+def fetch_birthday_data():
+    ocassion = "birthday"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+
+@views.route('/formal')
+def fetch_formal_data():
+    ocassion = "formal"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html', products=products)  # Render a template to display the data
+
+
+@views.route('/vacation')
+def fetch_vacation_data():
+    ocassion = "vacation"  # API parameter in uppercase
+    url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
