@@ -39,11 +39,9 @@ def homepage():
 
 @views.route('/styleme')
 def styleme():
-    # ... (rest of your code)
-
-    # Render the template and pass the fetched records
-    return render_template('styleme.html')
-
+    products = fetch_products() 
+     
+    return render_template('styleme.html', products=products)
 
 @views.route('/upload', methods=['POST'])
 def upload():
