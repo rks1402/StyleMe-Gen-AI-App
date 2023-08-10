@@ -117,8 +117,9 @@ body {
     overflow: hidden; /* Ensure content doesn't overflow */
 }
 
+
 .chat-box {
-    height: 200px;
+    height: 300px;
     overflow-y: auto;
     margin-bottom: 10px;
 }
