@@ -64,8 +64,6 @@ def upload():
 
 
 
-
-
 @views.route('/men')
 def fetch_men_data():
     gender = "men"  # API parameter in uppercase
@@ -166,6 +164,17 @@ def fetch_formal_data():
 def fetch_vacation_data():
     ocassion = "vacation"  # API parameter in uppercase
     url = f"https://ocassion-iqcjxj5v4a-el.a.run.app/product/ocassion?ocassion={ocassion}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+
+@views.route('/search')
+def fetch_search_data():
+    search_query = request.args.get('query')  # API parameter in uppercase
+    url = f"https://get-product-by-description-hmvyexj3oa-el.a.run.app/get_product_by_description?query={search_query}"
     
     response = requests.get(url)
     products = response.json()
