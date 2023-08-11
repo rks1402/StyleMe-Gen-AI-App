@@ -37,6 +37,12 @@ body {
     color: #ffc107;
 }
 
+
+::placeholder {
+
+    font-weight: bold;
+
+  }
 /* Chatbot interface */
 .chat-container {
     background-color: white;

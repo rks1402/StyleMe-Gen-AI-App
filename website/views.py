@@ -388,13 +388,37 @@ def fetch_vacation_data():
     return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
 
 
-@views.route('/search')
-def fetch_search_data():
-    search_query = request.args.get('query')  # API parameter in uppercase
+
+def fetch_search_dataa(page, per_page):
+    search_query = request.args.get('query')
+    print(search_query)  # API parameter in uppercase
     url = f"https://get-product-by-description-hmvyexj3oa-el.a.run.app/get_product_by_description?query={search_query}"
     
     response = requests.get(url)
     products = response.json()
-    
-    return render_template('homepage.html',  products=products)  # Render a template to display the data
+
+    total_products = len(products)
+    start_idx = (page - 1) * per_page
+    end_idx = start_idx + per_page
+    paginated_products = products[start_idx:end_idx]
+
+    return paginated_products, total_products
+
+
+
+@views.route('/search')
+def fetch_search_data():
+
+    page = request.args.get('page', default=1, type=int)  # Get the requested page number from the URL
+    per_page = 8 # Number of products per page
+
+    products, total_products = fetch_search_dataa(page, per_page)  # Fetch products using the API
+
+    total_pages = (total_products + per_page - 1) // per_page  # Calculate the total number of pages
+
+    return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
+
+
+
+
 
