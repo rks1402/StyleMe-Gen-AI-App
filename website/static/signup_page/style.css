@@ -54,7 +54,7 @@ input {
 }
 
 button[type="submit"] {
-	background-color: #4CAF50;
+	background-color: #040404;
 	color: white;
 	padding: 10px;
 	border: none;
@@ -68,7 +68,7 @@ button[type="submit"] {
   }  
 
 button[type="submit"]:hover {
-	background-color: #3e8e41;
+	background-color: #ffaa01;
 }
 .navbar-custom {
 	background-color:  #130665; /* change background color */

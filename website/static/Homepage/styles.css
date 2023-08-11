@@ -181,11 +181,9 @@ body {
 
 
 
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
+.container {
+    width: 100%;
+}
 
     .product {
         border: 1px solid #ccc;
