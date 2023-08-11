@@ -60,7 +60,9 @@ def styleme():
      
     return render_template('styleme.html', products=products)
 
-
+@views.route('/magazine')
+def magazine():    
+    return render_template('magazine.html')
 
 
 @views.route('/upload', methods=['POST'])
