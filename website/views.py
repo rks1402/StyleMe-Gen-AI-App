@@ -83,10 +83,8 @@ def upload():
     return redirect('/')
 
 
-
-
-
 def fetch_products_men(page, per_page):
+
     gender = "men"  # API parameter in uppercase
     url = f"https://gender-iqcjxj5v4a-el.a.run.app/get_by_gender?gender={gender}"
     
@@ -377,6 +375,7 @@ def fetch_products_vacation(page, per_page):
 
 @views.route('/vacation')
 def fetch_vacation_data():
+
     page = request.args.get('page', default=1, type=int)  # Get the requested page number from the URL
     per_page = 8 # Number of products per page
 
@@ -387,7 +386,13 @@ def fetch_vacation_data():
     return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
 
 
-
-
-
+@views.route('/search')
+def fetch_search_data():
+    search_query = request.args.get('query')  # API parameter in uppercase
+    url = f"https://get-product-by-description-hmvyexj3oa-el.a.run.app/get_product_by_description?query={search_query}"
+    
+    response = requests.get(url)
+    products = response.json()
+    
+    return render_template('homepage.html',  products=products)  # Render a template to display the data
 
