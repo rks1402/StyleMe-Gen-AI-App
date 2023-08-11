@@ -24,18 +24,10 @@ def get_product_by_description():
 
         # Iterate through each record and apply matching logic
         for record in all_records:
+            search_query_words = search_query.lower().split()  # Split query into words
             if all(
-                term in record['color'].lower() or
-                term in record['material'].lower() or
-                term in record['product_category'].lower() or
-                term in record['ocassion'].lower() or
-                term in record['fit'].lower() or
-                term in record['pattern'].lower() or
-                term in record['gender'].lower() or
-                term in record['brand'].lower() or
-                term in record['description'].lower() or
-                term in record['product_name'].lower()
-                for term in search_query.split()
+                term in record['search_query'].lower().split()  # Split search_query into words
+                for term in search_query_words
             ):
                 matching_records.append(record)
 
