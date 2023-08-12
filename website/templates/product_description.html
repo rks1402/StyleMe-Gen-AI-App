@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Fashion Web Page</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Homepage/styles.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='product_description/product_details.css') }}" >
     <!-- Add Bootstrap CSS link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
@@ -10,7 +10,7 @@
 <body>
     <!-- Use Bootstrap container for better content alignment -->
     <div class="container">
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
             <div class="container-fluid">
               <a class="navbar-brand" href="{{ url_for('views.homepage')}}">DRZZ </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,49 +92,48 @@
         </div>
       </div>
     </div>
-    
-        <!-- Product items will be added here dynamically -->
-        <!-- Product items will be added here dynamically -->
-        <div class="container product-container">
-          {% for product in products %}
-            <div class="product">
-              <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
-                <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
-                <h2>{{ product.product_name }}</h2>
-                <p>Price: ${{ product.price }}</p>
-              </a>
+   
+      <!-- Main Content -->
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Product Display -->
+                <div class="product-container">
+                    <div class="product-image">
+                      <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
+                  </div>
+          
+                    <!-- Add more product display sections here -->
+                    <!-- ... -->
+                </div>
             </div>
-          {% endfor %}
+            <div class="col-md-6">
+                <!-- Chatbot Interface -->
+                <div class="chat-container">
+                  <div class="product-info">
+                    <h1>{{ product.product_name }}</h1>
+                    <p class="price">${{ product.price }}</p>
+                    <p class="description">{{ product.description }}</p>
+                    <p><strong>Brand:</strong> {{ product.brand }}</p>
+                    <p><strong>Size:</strong> {{ product.size }}</p>
+                    <p><strong>Color:</strong> {{ product.color }}</p>
+                    <p><strong>Gender:</strong> {{ product.gender }}</p>
+                    <p><strong>Age Group:</strong> {{ product.age_group }}</p>
+                    <p><strong>Pattern:</strong> {{ product.pattern }}</p>
+                    <p><strong>Fit:</strong> {{ product.fit }}</p>
+                    <p><strong>Material:</strong> {{ product.material }}</p>
+                    <p><strong>Occasion:</strong> {{ product.ocassion }}</p>
+                  </div>
+                </div>
+            </div>
+            
         </div>
-        
-        
-        
+    </div>
 
-<!-- Pagination controls -->
-<div class="pagination">
-  {% if page > 1 %}
-    <a href="{{ url_for('views.homepage', page=page-1) }}" class="page-link">Previous</a>
-  {% endif %}
-
-  {% for p in range(1, total_pages + 1) %}
-    <a href="{{ url_for('views.homepage', page=p) }}" class="page-link{% if p == page %} active{% endif %}">{{ p }}</a>
-  {% endfor %}
-
-  {% if page < total_pages %}
-    <a href="{{ url_for('views.homepage', page=page+1) }}" class="page-link">Next</a>
-  {% endif %}
-</div>
-
-
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-</body>
-</html>
+    
 
-
-
-
-
-
-
+  </body>
+  </html>
 

@@ -20,6 +20,11 @@ views = Blueprint('views', __name__)
 def home():
     return redirect('/homepage')
 
+
+
+
+
+
 # Function to fetch products with pagination
 def fetch_products(page, per_page):
     response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')  # Replace with your actual API URL
@@ -44,6 +49,23 @@ def homepage():
     total_pages = (total_products + per_page - 1) // per_page  # Calculate the total number of pages
 
     return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
+
+
+
+
+
+# Existing routes and functions...
+
+@views.route('/product/<string:product_id>')
+def product_details(product_id):
+    api_url = f"https://fetch-iqcjxj5v4a-el.a.run.app/get_record?product_id={product_id}"
+    response = requests.get(api_url)
+    product_data = response.json()
+
+    return render_template('product_description.html', product=product_data)
+
+
+
 
 
 

@@ -79,6 +79,11 @@ button[type="submit"]:hover {
 	height: auto; /* maintain aspect ratio */
 	margin-right: 10px;
   }
+
+  .nav-link {
+    color: #fffdfd !important;
+    font-weight: bold !important;
+}
   
   .navbar-custom .navbar-nav .nav-link {
 	color: #fff; /* change nav link text color */

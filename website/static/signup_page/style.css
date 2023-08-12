@@ -95,6 +95,10 @@ button[type="submit"]:hover {
   }
   
   
+  .nav-link {
+    color: #fffdfd !important;
+    font-weight: bold !important;
+}
   
 
 

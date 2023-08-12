@@ -56,7 +56,7 @@ body {
 
 /* Navigation bar */
 .navbar {
-    background-color: #f8f9fa;
+    background-color: #0b0b0b;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -66,9 +66,12 @@ body {
     color: #333;
 }
 
+/* Make links darker and bold */
 .nav-link {
-    color: #333;
+    color: #fffdfd !important;
+    font-weight: bold !important;
 }
+
 
 /* Add this CSS for product grid layout */
 .product-container {
@@ -92,6 +95,8 @@ body {
 
 
 
+
+
 .product img {
     max-width: 100%;
     height: auto;
@@ -107,6 +112,23 @@ body {
     margin-top: 5px;
 }
 
+/* Change color of product links to blue and remove underline */
+.product a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active product link */
+.product a.active {
+    font-weight: bold; /* Highlight the active link */
+}
+
+
+
+
+
+
+
 /* Dropdown adjustments */
 .dropdown-menu {
     background-color: #fff;
@@ -118,6 +140,49 @@ body {
     font-size: 16px;
     color: #333;
 }
+
+
+/* Style for pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Add margin on top and bottom */
+}
+
+.pagination a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    margin: 0 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+/* Change color of pagination links to blue and remove underline */
+.pagination a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active pagination link */
+.pagination a.active {
+    font-weight: bold; /* Highlight the active link */
+}
+
 
 
 /* Responsive adjustments */
