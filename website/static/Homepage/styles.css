@@ -51,13 +51,14 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0px;
 }
 
 /* Navigation bar */
 .navbar {
     background-color: #0b0b0b;
     border-bottom: 1px solid #e0e0e0;
+    max-width: 100%;
 }
 
 .navbar-brand {
@@ -143,6 +144,7 @@ body {
 
 
 /* Style for pagination */
+/* Style for pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -153,10 +155,11 @@ body {
 .pagination a {
     color: #333;
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 4px 8px; /* Adjust padding for smaller size */
     border: 1px solid #ccc;
-    margin: 0 4px;
+    margin: 0 2px; /* Adjust margin for smaller spacing */
     border-radius: 4px;
+    font-size: 14px; /* Adjust font size for smaller text */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -171,7 +174,6 @@ body {
     font-weight: bold;
 }
 
-
 /* Change color of pagination links to blue and remove underline */
 .pagination a {
     color: rgb(0, 0, 0); /* Change to your desired color */
@@ -182,7 +184,6 @@ body {
 .pagination a.active {
     font-weight: bold; /* Highlight the active link */
 }
-
 
 
 /* Responsive adjustments */
@@ -272,3 +273,16 @@ body {
     .product p {
         margin-top: 10px;
     }
+  
+   
+    
+        .pagination a {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    
+        .pagination a.active {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    

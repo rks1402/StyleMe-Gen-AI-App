@@ -159,8 +159,61 @@ body {
 /* ... More CSS code ... */
 
 /* Media Queries */
+
+
+
+/* Media Queries */
 @media (max-width: 768px) {
     .chat-container {
         margin-top: 20px;
+        max-width: 100%; /* Make chat container full width */
+        border-radius: 10px; /* Slightly rounded corners */
     }
+
+    .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    .input-container {
+        flex-direction: column; /* Stack input and send button vertically */
+    }
+
+    #user-input {
+        margin-right: 0; /* Remove margin to make full width */
+        border-radius: 10px; /* Slightly rounded input */
+    }
+
+    #send-button {
+        margin-top: 10px; /* Add some space between input and button */
+        border-radius: 10px; /* Slightly rounded button */
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%; /* Adjust message width for mobile */
+    }
+
+    .bot-message, .customer-message {
+        border-radius: 10px; /* Slightly rounded message bubbles */
+        max-width: 70%; /* Limit message width */
+    }
+
+    .bot-message {
+        background-color: #c0daf0;
+        float: left;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    .customer-message {
+        background-color: #e1e5bc;
+        float: right;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    /* Adjust other styles as needed for better mobile appearance */
 }
+

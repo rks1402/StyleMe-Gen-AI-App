@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <body>
     <!-- Use Bootstrap container for better content alignment -->
-    <div class="container">
+    
         <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
             <div class="container-fluid">
               <a class="navbar-brand" href="{{ url_for('views.homepage')}}">DRZZ </a>
@@ -71,8 +71,8 @@
               </div>
             </div>
           </nav>
-    </div>
-
+    
+    <br>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -95,7 +95,7 @@
     
         <!-- Product items will be added here dynamically -->
         <!-- Product items will be added here dynamically -->
-        <div class="container product-container">
+        <div class="container-fluid product-container">
           {% for product in products %}
             <div class="product">
               <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
@@ -116,15 +116,22 @@
     <a href="{{ url_for('views.homepage', page=page-1) }}" class="page-link">Previous</a>
   {% endif %}
 
-  {% for p in range(1, total_pages + 1) %}
-    <a href="{{ url_for('views.homepage', page=p) }}" class="page-link{% if p == page %} active{% endif %}">{{ p }}</a>
-  {% endfor %}
+  {% if page > 1 %}
+  <a href="{{ url_for('views.homepage', page=1) }}" class="page-link">1</a>
+  <span class="ellipsis">...</span>
+{% endif %}
+
+<a href="{{ url_for('views.homepage', page=page) }}" class="page-link active">{{ page }}</a>
+
+{% if page < total_pages %}
+  <span class="ellipsis">...</span>
+  <a href="{{ url_for('views.homepage', page=total_pages) }}" class="page-link">{{ total_pages }}</a>
+{% endif %}
 
   {% if page < total_pages %}
     <a href="{{ url_for('views.homepage', page=page+1) }}" class="page-link">Next</a>
   {% endif %}
 </div>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

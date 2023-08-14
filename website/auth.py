@@ -63,7 +63,7 @@ def signup():
             
         
         # Render the signup page for GET request
-        return render_template('signup.html')
+        return render_template('signup_page.html')
 
 
 @auth.route('/reset_password', methods=['GET', 'POST'])
