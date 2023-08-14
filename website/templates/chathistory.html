@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('views.magazine') }}">Magazine</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look-Alike</a>
+                          </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Shop For
@@ -45,12 +48,7 @@
                                 <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Formal</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <!-- Modal Trigger -->
-                            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">
-                                Look-Alike
-                            </a>
-                        </li>
+                        
                     </ul>
                     <!-- Search Form -->
                     <form class="d-flex" role="search">
@@ -71,26 +69,7 @@
         </nav>
     
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Choose Your Image</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <div class="input-group">
-                            <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                            <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Upload</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
+    
     <!-- Main Content -->
     <div class="container-fluid">
         <div class="row">
