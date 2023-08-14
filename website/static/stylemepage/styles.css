@@ -28,24 +28,19 @@ body {
     font-weight: bold;
 }
 
+
+
+
 .nav-link {
     color: #fffdfd !important;
     font-weight: bold !important;
     transition: color 0.3s ease;
 }
 
-
-
 .nav-link:hover {
     color: #ffc107;
 }
 
-
-::placeholder {
-
-    font-weight: bold;
-
-  }
 /* Chatbot interface */
 .chat-container {
     background-color: white;
@@ -103,7 +98,9 @@ body {
 .product:hover {
     transform: translateY(-5px);
 }
-
+::placeholder {
+    font-weight: bold;
+  }
 .product-image {
     height: 220px;
     overflow-y: auto;
@@ -159,10 +156,6 @@ body {
 /* ... More CSS code ... */
 
 /* Media Queries */
-
-
-
-/* Media Queries */
 @media (max-width: 768px) {
     .chat-container {
         margin-top: 20px;
@@ -216,4 +209,3 @@ body {
 
     /* Adjust other styles as needed for better mobile appearance */
 }
-
