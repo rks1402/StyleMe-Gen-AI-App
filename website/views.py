@@ -86,6 +86,10 @@ def styleme():
 def magazine():    
     return render_template('magazine.html')
 
+@views.route('/chathistory')
+def chathistory():    
+    return render_template('chathistory.html')
+
 
 @views.route('/upload', methods=['POST'])
 def upload():
