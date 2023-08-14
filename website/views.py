@@ -86,6 +86,10 @@ def styleme():
 def magazine():    
     return render_template('magazine.html')
 
+@views.route('/chathistory')
+def chathistory():    
+    return render_template('chathistory.html')
+
 
 @views.route('/upload', methods=['POST'])
 def upload():
@@ -101,25 +105,10 @@ def upload():
         blob.upload_from_file(file)
 
         flash('File uploaded successfully!', 'success')
-        return redirect('/lookalike')
+        return redirect('/')
 
     flash('No File is Selected.', 'danger')
-    return redirect('/lookalike')
-
-
-
-def fetch_products_lookalike():
-    response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')
-    products = response.json()
-    return products[:3]  # Return only the first three products
-
-@views.route('/lookalike')
-def lookalike():
-    products = fetch_products_lookalike()
-
-    return render_template('upload.html', products=products)
-
-
+    return redirect('/')
 
 
 def fetch_products_men(page, per_page):
