@@ -102,7 +102,8 @@ def reset_password():
         else:
             return render_template('reset_password.html')
    
-
+# Initialize Google Cloud Datastore client
+datastore_client = datastore.Client()
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -120,25 +121,27 @@ def login():
             return redirect('/login')
 
         # Query Datastore for user with matching email
-        query = datastore_client.query(kind='User')
-        query.add_filter('email', '=', email)
+        query = datastore_client.query(kind='CustomerData')
+        query.add_filter('Email', '=', email)
         result = list(query.fetch(limit=1))
 
         if result:
-            # User found, retrieve hashed password
+            # User found, retrieve user information
             user = result[0]
-            hashed_password = user['password'].encode('utf-8')
+            stored_password = user['Password']  # Retrieve the stored password from the dataset
 
             # Validate password
-            if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+            if password == stored_password:
                 # Passwords match, log in user
-                session['email'] = email
-                session['name'] = user.get('name')
-                
-                if user['user_role'] == 'scrum_master':
-                    return redirect('/scrum_master_landing')
-                else:
-                    return redirect('/scrum_member_landing')
+                session['customer_id'] = user['Customer_ID']
+                session['first_name'] = user['First_Name']
+                session['last_name'] = user['Last_Name']
+
+                # Assuming you have a user role field in your dataset
+                # user_role = user['User_Role']
+                # You can adjust the role logic here
+
+                return redirect('/homepage')  # Replace with the appropriate route
             else:
                 # Incorrect password
                 flash('Incorrect password', 'danger')
@@ -149,10 +152,9 @@ def login():
             return redirect('/login')
     else:
         # Render login page
-        if 'email' in session:
-            return redirect('/logout')
+        if 'customer_id' in session:
+            return redirect('/homepage')  # Replace with the appropriate route
         return render_template('login.html')
-
 
 @auth.route('/logout')
 def logout():
