@@ -1,16 +1,14 @@
 from flask import Flask, request, jsonify
 from google.cloud import datastore
-from google.oauth2 import service_account
+import json
+
 
 app = Flask(__name__)
 
-# Replace with the path to your JSON key file
-key_file = 'secret/credentials.json'
-credentials = service_account.Credentials.from_service_account_file(key_file)
-client = datastore.Client(credentials=credentials)
 
-@app.route('/products', methods=['GET'])
+@app.route('/product/ocassion', methods=['GET'])
 def get_products():
+    client = datastore.Client()
     # Get the occasion parameter from the request arguments
     ocassion = request.args.get('ocassion')
     if not ocassion:
@@ -21,8 +19,14 @@ def get_products():
     query.add_filter('ocassion', '=', ocassion)
     results = list(query.fetch())
 
-    # Return the results as a JSON object
-    return jsonify({'products': results})
+    if not results:
+        return "No records found.", 404
+
+        # Convert the entities to a list of dictionaries
+    records = [dict(result) for result in results]
+
+        # Return the JSON response
+    return json.dumps(records)
 
 if __name__ == '__main__':
     app.run()
