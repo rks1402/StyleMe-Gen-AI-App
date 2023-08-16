@@ -73,6 +73,11 @@ body {
     font-weight: bold !important;
 }
 
+.welcome {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
 
 /* Add this CSS for product grid layout */
 .product-container {

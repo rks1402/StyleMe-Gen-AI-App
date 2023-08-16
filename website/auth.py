@@ -133,9 +133,10 @@ def login():
             # Validate password
             if password == stored_password:
                 # Passwords match, log in user
-                session['customer_id'] = user['Customer_ID']
-                session['first_name'] = user['First_Name']
-                session['last_name'] = user['Last_Name']
+                session['customer_id'] = user.get('Customer_ID')
+                session['first_name'] = user.get('First_Name')
+                session['last_name'] = user.get('Last_Name')
+                print(user.get('First_Name'))
 
                 # Assuming you have a user role field in your dataset
                 # user_role = user['User_Role']
