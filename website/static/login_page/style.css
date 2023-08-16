@@ -1,8 +1,12 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
 body {
-    margin: 0;
-    padding: 0;
+    max-height: max-content;
     background: linear-gradient(45deg, #a0a0a0, #ffffff);
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
     font-family: Verdana, Tahoma, sans-serif;
 }
@@ -21,7 +25,7 @@ body {
 
 
 .container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
 }
@@ -63,7 +67,7 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     margin: 2% auto 0;
-	margin-bottom: 100px;
+	margin-bottom: 275px;
     text-align: center;
     position: relative;
     box-sizing: border-box;
@@ -191,10 +195,14 @@ input[type=checkbox] {
     background-color: #ffffff;
 }
 
+label {
+    color: #000000;
+}
+
 #check {
     margin-top: 10px;
     text-align: left;
-    color: #4a90e2;
+    color: black;
     font-size: 15px;
 }
 
