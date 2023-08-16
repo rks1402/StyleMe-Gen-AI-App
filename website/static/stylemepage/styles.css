@@ -1,13 +1,4 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(45deg, #a0a0a0, #ffffff);
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Verdana, Tahoma, sans-serif;
-}
-
-
+/* Reset default styles */
 body, h1, h2, h3, p {
     margin: 0;
     padding: 0;
@@ -37,184 +28,185 @@ body {
     font-weight: bold;
 }
 
+
+
+
 .nav-link {
     color: #fffdfd !important;
     font-weight: bold !important;
     transition: color 0.3s ease;
 }
 
-
-
 .nav-link:hover {
     color: #ffc107;
 }
 
-
-::placeholder {
-
-    font-weight: bold;
-
-  }
-
-.box {
-    width: 380px;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.9);
+/* Chatbot interface */
+.chat-container {
+    background-color: white;
+    border-radius: 8px;
     padding: 20px;
-    margin: 2% auto 0;
-	margin-bottom: 275px;
-    text-align: center;
-    position: relative;
-    box-sizing: border-box;
-    flex-direction: column;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    
-}
-
-.box img {
-    width:60px;
-    
-}
-
-.header {
-    width: 100%; /* Adjusted */
-    height: 50px;
-    text-transform: uppercase;
-    display: inline-flex;
-    padding-top: 20px;
-    padding-bottom: 0;
-    justify-content: center; /* Centered horizontally */
-    align-items: center; /* Centered vertically */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 
 
-.header a {
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000000;
-    display: inline-flex;
-    padding-left: 25px;
-    padding-right: 25px;
-    justify-content: center;
-    cursor: pointer;
+.chat-box {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
 }
 
-.header .active {
-    color: #000000c3;
-    font-weight: bold;
-    position: center;
+.input-container {
+    display: flex;
+  
 }
 
-.header .active:after {
-    position: absolute;
+#user-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
     border: none;
-    content: "";
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-#errorMsg {
-    color: #f08ca1;
-    text-align: center;
-    font-size: 12px;
-    padding-bottom: 20px;
-}
-
-.content {
-    display: inline-flex;
-    overflow: hidden;
-}
-
-form {
-    position: relative;
-    display: inline-flex;
-    width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    flex-direction: column;
-    transition: right 0.5s;
-}
-
-.login a {
-    text-decoration: none;
-    color: #000000;
-    font-size: 15px;
-    text-align: center;
+#send-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.extend form {
-    right: 100%;
+#send-button:hover {
+    background-color: #555;
 }
 
-input[type=text], input[type=password], input[type=email] {
-    display: block;
-    position: relative;
-    border: 2px solid #000000;
-    padding: 12px;
-    margin-bottom: 15px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 17px;
-    outline: none;
-    border-radius: 7px;
+/* ... Previous CSS code ... */
+
+/* Product display */
+.product {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-input[type=text]:hover, input[type=password]:hover, input[type=email]:hover {
-    border: 2px solid #000000;
+.product:hover {
+    transform: translateY(-5px);
+}
+::placeholder {
+    font-weight: bold;
+  }
+.product-image {
+    height: 220px;
+    overflow-y: auto;
+    margin-bottom: 10px;/* Adjust as needed */
 }
 
-input[type=submit] {
-    display: block;
-    position: relative;
-    border: 2px solid #000000;
-    padding: 12px;
-    margin-bottom: 20px;
-    width: 100%;
-    border-radius: 25px;
-    background-color: #000000;
-    text-align: center;
-    font-size: 20px;
-    color: #ffffff;
-    cursor: pointer;
-    outline: none;
-}
 
-input[type=submit]:hover {
-    background-color: #ffffff;
-    color: #000000;
     
+
+/* Media Queries ... */
+
+
+
+/* ... Previous CSS code ... */
+
+/* Chatbot interface */
+.chat-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure content doesn't overflow */
 }
 
-input[type=checkbox] {
-    background-color: #ffffff;
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
 }
 
-#check {
-    margin-top: 10px;
-    text-align: left;
-    color: #4a90e2;
-    font-size: 15px;
+/* Add your existing CSS styles here */
+
+/* Message styles */
+.message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    max-width: 70%;
 }
 
-
-@media (max-width: 480px) {
-    .box {
-        width: 100%; /* Take up full width on small screens */
-        padding: 15px; /* Adjust padding for small screens */
-    }
-
-    .box img {
-        margin-top: -30px; /* Adjust image margin for better alignment */
-    }
-
-    input[type=submit] {
-        font-size: 16px; /* Reduce font size for better fit */
-    }
-
-    input[type=text], input[type=password], input[type=email] {
-        font-size: 14px; /* Reduce font size for better fit */
-    }
+.bot-message {
+    background-color: #c0daf0;
+    float: left;
+    clear: both;
 }
 
+.customer-message {
+    background-color: #e1e5bc;
+    float: right;
+    clear: both;
+}
+
+/* ... More CSS code ... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .chat-container {
+        margin-top: 20px;
+        max-width: 100%; /* Make chat container full width */
+        border-radius: 10px; /* Slightly rounded corners */
+    }
+
+    .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    .input-container {
+        flex-direction: column; /* Stack input and send button vertically */
+    }
+
+    #user-input {
+        margin-right: 0; /* Remove margin to make full width */
+        border-radius: 10px; /* Slightly rounded input */
+    }
+
+    #send-button {
+        margin-top: 10px; /* Add some space between input and button */
+        border-radius: 10px; /* Slightly rounded button */
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%; /* Adjust message width for mobile */
+    }
+
+    .bot-message, .customer-message {
+        border-radius: 10px; /* Slightly rounded message bubbles */
+        max-width: 70%; /* Limit message width */
+    }
+
+    .bot-message {
+        background-color: #c0daf0;
+        float: left;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    .customer-message {
+        background-color: #e1e5bc;
+        float: right;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    /* Adjust other styles as needed for better mobile appearance */
+}
