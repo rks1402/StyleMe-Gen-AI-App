@@ -4,6 +4,8 @@ from flask import Flask, render_template, request, Blueprint, url_for, redirect,
 from google.cloud import datastore
 import bcrypt
 import os
+import datetime
+import random
 
 
 # Create a Flask app
@@ -13,54 +15,49 @@ auth = Blueprint('auth', __name__)
 datastore_client = datastore.Client()
 
 
+
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         # Get form data from request
         name = request.form['name']
-        user_id = request.form['email']
         email = request.form['email']
-        user_role = request.form['user_role']
         password = request.form['password']
         confirm_password = request.form['confirm-password']
-
-        hashed_password = bcrypt.hashpw(
-            password.encode('utf-8'), bcrypt.gensalt())
+        
+        
         # Check if password and confirm password match
         if password != confirm_password:
-            return 'Password and Confirm Password do not match', 400
+            flash('Password and Confirm Password do not match', 'danger')
+            return redirect('/signup')
 
         # Check if user already exists in Datastore
-        query = datastore_client.query(kind='User')
-        query.add_filter('email', '=', email)
+        query = datastore_client.query(kind='CustomerData')
+        query.add_filter('Email', '=', email)
         existing_users = query.fetch()
 
         if len(list(existing_users)) > 0:
-            flash('User with this email already exist','danger')
+            flash('User with this email already exists', 'danger')
             return redirect('/signup')
-
-        # Hash the password
+        
+        current_datetime = datetime.datetime.now()
+        random_number = random.randint(100, 999)  # Adjust range as needed
+        Customer_ID = f'C{current_datetime.strftime("%Y%m%d%H%M%S")}_{random_number}'
 
         # Save new user to Datastore
-        user_key = datastore_client.key('User', user_id)
+        user_key = datastore_client.key('CustomerData', Customer_ID)  # Use email as the key
         user = datastore.Entity(key=user_key)
-        user['name'] = name
-        user['email'] = email
-        user['user_id'] = user_id
-        user['user_role'] = user_role
-        
-        user['password'] = hashed_password.decode('utf-8')
+
+        user['First_Name'] = name
+        user['Email'] = email
+        user['Password'] = password
+        user['Customer_ID'] = Customer_ID
         datastore_client.put(user)
-        
+
         flash("Account Created Successfully!", "success")
         return redirect('/login')
 
     else:
-        if "email" in session:
-            flash("Already Logged In!", "info")
-
-            return redirect('/poker_master_landing')
-            
         
         # Render the signup page for GET request
         return render_template('signup_page.html')
