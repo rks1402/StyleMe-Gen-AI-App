@@ -62,7 +62,7 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     margin: 2% auto 0;
-	margin-bottom: 100px;
+	margin-bottom: 275px;
     text-align: center;
     position: relative;
     box-sizing: border-box;
@@ -92,6 +92,7 @@ body {
 
 .header a {
     font-size: 20px;
+    font-weight: bold;
     text-decoration: none;
     color: #000000;
     display: inline-flex;
@@ -102,7 +103,7 @@ body {
 }
 
 .header .active {
-    color: #25f752c3;
+    color: #000000c3;
     font-weight: bold;
     position: center;
 }
