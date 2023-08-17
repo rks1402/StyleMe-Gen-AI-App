@@ -1,0 +1,13 @@
+{
+    "conversation": [
+        {
+            "sender": "user",
+            "message": "Hello, bot!"
+        },
+        {
+            "sender": "bot",
+            "message": "Hi there!"
+        }
+   
+    ]
+}
