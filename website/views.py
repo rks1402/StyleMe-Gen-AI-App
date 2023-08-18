@@ -7,6 +7,7 @@ import hashlib
 import random
 import string
 import os
+import google.generativeai as palm
 from google.cloud import storage
 from google.cloud import datastore
 import requests
@@ -458,6 +459,25 @@ def fetch_search_data():
     return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
 
 
+@views.route('/submit_chat', methods=['POST'])
+def submit_chat():
+    API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
 
-      
+    chat = request.form['chat']
+
+    # Test POST request
+    prompt = chat + "Give the User Occasion and demographics from this conversation in JSON format."
+    data = {"content": prompt}
+
+    response_post = requests.post(API_URL, json=data)
+    if response_post.status_code == 200:
+        response_data = response_post.json()
+        summary = response_data.get("summary", "No summary available.")
+        
+        return summary
+    else:
+        print("POST Request Failed!")
+        print(response_post.text)
+
+     
 
