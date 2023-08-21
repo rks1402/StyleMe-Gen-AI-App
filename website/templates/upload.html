@@ -80,11 +80,17 @@
       <form action="/upload" method="post" enctype="multipart/form-data">
         <div class="input-group">
             <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-            <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Upload</button>
+            <button class="btn btn-outline-secondary" type="submit" id="analyze-button">Upload</button>
         </div>
       </form>
     </div>
     </div>
+
+    <div class="container">
+      <div class="analysis-results">
+          <pre id="results"></pre>
+      </div>
+  </div>
 
   
             <!-- Product Display -->
@@ -101,6 +107,8 @@
             </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="../static/upload/scripts.js"></script>
+
 </body>
 </html>
 

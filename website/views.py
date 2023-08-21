@@ -1,6 +1,10 @@
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 from flask import Blueprint, render_template, url_for, request, session, redirect, Flask, jsonify, flash
 from google.cloud import datastore
+from google.cloud import vision_v1
+from google.cloud.vision_v1 import types
+from colorthief import ColorThief
+import io
 import json
 import datetime
 import hashlib
@@ -89,7 +93,7 @@ def magazine():
     return render_template('magazine.html')
 
 
-@views.route('/upload', methods=['POST'])
+"""@views.route('/upload', methods=['POST'])
 def upload():
     file = request.files['file']
     if file:
@@ -106,7 +110,50 @@ def upload():
         return redirect('/lookalike')
 
     flash('No File is Selected.', 'danger')
-    return redirect('/lookalike')
+    return redirect('/lookalike')"""
+
+def analyze_image(image_file):
+    # Initialize the Vision API client
+    client = vision_v1.ImageAnnotatorClient()
+
+    # Read the image content from the uploaded file
+    image_content = image_file.read()
+
+    # Create a Vision API image object from the content
+    image = types.Image(content=image_content)
+
+    # Perform label detection using Vision API
+    response = client.label_detection(image=image)
+    labels = [label.description for label in response.label_annotations]
+
+    # Use colorthief to get the dominant color
+    color_thief = ColorThief(io.BytesIO(image_content))
+    dominant_color = color_thief.get_color(quality=1)
+
+    # Create a JSON output with analysis results
+    analysis_result = {
+        "labels": labels,
+        "dominant_color": dominant_color
+    }
+
+    return analysis_result
+
+@views.route("/upload", methods=["POST"])
+def upload():
+    print("Analyzing image...")
+    if "file" not in request.files:
+        return jsonify({"error": "No file part"})
+
+    file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"error": "No selected file"})
+
+    if file:
+        analysis_result = analyze_image(file)
+        return jsonify(analysis_result)
+    
+    print("Analysis results:", analysis_result)
+    return jsonify(analysis_result)
 
 def chat_summary():
 
