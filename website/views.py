@@ -74,11 +74,12 @@ def product_details(product_id):
 def fetch_products_styleme():
     response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')  # Replace with your actual API URL
     products = response.json()
-    return products
+    return products[:3]
 
 
 @views.route('/styleme')
 def styleme():
+
     products = fetch_products_styleme() 
      
     return render_template('styleme.html', products=products)
@@ -107,9 +108,35 @@ def upload():
     flash('No File is Selected.', 'danger')
     return redirect('/lookalike')
 
+def chat_summary():
+
+    client = datastore.Client()
+
+    API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
+    chat_id = session.get('chat_id')
+    conversation_entity = client.get(client.key('Conversation', chat_id))
+    if conversation_entity:
+        # Extract the conversation messages
+        chat_messages = [message["message"] for message in conversation_entity["chat"]]
+    # Create the prompt for summarization
+    prompt = "\n".join(chat_messages) + "\n\nFrom this conversation create summary for fashion advisor so that it will be easy to understand the user needs."
+
+    data = {"content": prompt}
+
+    response_post = requests.post(API_URL, json=data)
+    if response_post.status_code == 200:
+        response_data = response_post.json()
+        summary = response_data.get("summary", "No summary available.")
+        
+        return summary
+    else:
+        print("POST Request Failed!")
+        print(response_post.text)
+
 @views.route('/chathistory')
 def chathistory():    
-    return render_template('chathistory.html')
+    summary = chat_summary()
+    return render_template('chathistory.html', summary = summary)
 
 def fetch_products_lookalike():
     response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')
@@ -458,12 +485,77 @@ def fetch_search_data():
 
     return render_template('homepage.html', products=products, page=page, per_page=per_page, total_pages=total_pages)
 
+# Function to create simple text into desired JSON format.
+def parse_conversation(text):
+    lines = text.strip().split('\n')
+    conversation = []
+    sender = None
+    current_message = []
+
+    for line in lines:
+        line = line.strip()
+        if line.startswith('User:'):
+            if sender and current_message:
+                conversation.append({"sender": sender, "message": ' '.join(current_message)})
+            sender = 'user'
+            current_message = [line[len('User:'):].strip()]
+        elif line.startswith('Fashion Assistant:'):
+            if sender and current_message:
+                conversation.append({"sender": sender, "message": ' '.join(current_message)})
+            sender = 'bot'
+            current_message = [line[len('Fashion Assistant:'):].strip()]
+        else:
+            current_message.append(line)
+
+    if sender and current_message:
+        conversation.append({"sender": sender, "message": ' '.join(current_message)})
+
+    return conversation
+
+# Function to take the JSON chat and store into datastore
+def store_conversation_in_datastore(conversation_data):
+    try:
+        # Make a POST request to the cloud function
+        response = requests.post("https://asia-south1-gen-ai-app.cloudfunctions.net/chat_to_datastore", json=conversation_data)
+
+        if response.status_code == 200:
+            response_data = response.json()  # Parse the response JSON
+            chat_id = response_data.get("chat_id")  # Extract the entity key
+            
+            if chat_id:
+                response_message = {
+                    "message": "Conversation sent and stored successfully",
+                    "chat_id": chat_id  # Include the entity key in the response
+                }
+                session['chat_id'] = chat_id
+                print(session['chat_id'])
+            else:
+                response_message = {
+                    "message": "Conversation sent and stored successfully"
+                }
+            
+            return response_message
+        else:
+            return {
+                "message": f"Error sending conversation: {response.text}"
+            }
+    except Exception as e:
+        return {
+            "message": str(e)
+        }
+    
 
 @views.route('/submit_chat', methods=['POST'])
 def submit_chat():
     API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
 
     chat = request.form['chat']
+    conversation = parse_conversation(chat)
+    chat_conversation = {"conversation": conversation}  # Removed the jsonify call here
+
+    response_message = store_conversation_in_datastore(chat_conversation)
+
+    return jsonify({"message": response_message})
 
     # Test POST request
     prompt = chat + "Give the User Occasion and demographics from this conversation in JSON format."

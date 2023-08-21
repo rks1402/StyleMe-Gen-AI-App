@@ -63,6 +63,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +95,7 @@
                 <!-- Product Display -->
                 <div class="product-container">
                     <div class="product">
-                        <p style="font-weight: bold;">A customer needs fashion advice for his son's school event. It's a formal event at his son's school. He wants formal dress for him and his wife and his son. His son is 7 years old. He likes dresses. They are thinking of shades of blue colour. The event is on end of August. He is not quite satisfied with the recommendation. He has asked for a human stylist.</p>
+                        <p style="font-weight: bold;">{{summary}}</p>
                     </div>
                     <br>
                     <div class="button-container">
