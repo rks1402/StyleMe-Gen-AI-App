@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fashion Web Page</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='magazinepage/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='marketingpage/styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
@@ -30,7 +30,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('views.marketing') }}">Marketing</a>
-                        </li> 
+                        </li>                        
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look-Alike</a>
                           </li>
@@ -81,37 +81,54 @@
     <!-- Modal -->
    
 
-    <!-- Main Content -->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <!-- Product Display -->
-                <div class="product-container">
-                    <div class="product">
-                        <img class="product-image" src="https://i0.wp.com/textilelearner.net/wp-content/uploads/2023/02/Grazia-Fashion-india.jpg?resize=400%2C501&ssl=1" alt="Product 1">
+                <!-- Marketing Prompt Box Container -->
+                <div class="horizontal-container">
+                    <div class="marketing-prompt-box">
+                        <h2>Marketing Ad Prompt</h2>
+                        <div id="prompt-box"></div>
+                        <button id="generate-prompt">Generate Prompt</button>
+
+                        <!-- Display ads here -->
+                        <div class="image-container">
+                            <img src="https://imagescdn.allensolly.com/img/app/product/8/890233-10762807.jpg?q=75&auto=format&w=342" alt="Ad 1">
+                            <p>Product A - Special Offer!</p>
+                            <img src="https://imagescdn.allensolly.com/img/app/product/8/808572-9614114.jpg?q=75&auto=format&w=342" alt="Ad 2">
+                            <p>Product B - Limited Stock!</p>
+                        </div>
+                        <!-- Add more ads as needed -->
+                        <div class="prompt-container">
+                            <p class="prompt-text">
+                                Discover our latest collection! <!-- Replace with actual prompt -->
+                            </p>
+                        </div>
                     </div>
-                    <!-- Add more product display sections here -->
-                    <!-- ... -->
                 </div>
             </div>
             <div class="col-md-6">
-                <!-- Chatbot Interface -->
-                <div class="chat-container">
-                    <div class="chat-box" id="chat-box">
-                        <!-- Chat messages go here -->
-                    </div>
-                    <div class="input-container">
-                        <input type="text" id="user-input" placeholder="Type your message...">
-                        <button id="send-button">Send</button>
+                <!-- Response Box Container -->
+                <div class="horizontal-container">
+                    <div class="response-box">
+                        <div class="chat-interface">
+                            <div class="chat-area" id="chat-area">
+                                <!-- Chat messages will appear here -->
+                            </div>
+                            <div class="input-area">
+                                <input type="text" id="chat-input" placeholder="Type your message...">
+                                <button id="send-button">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="../static/Stylemepage/scripts.js"></script>
+    <script src="../static/marketingpage/scripts.js"></script>
 </body>
 </html>

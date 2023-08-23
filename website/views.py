@@ -92,6 +92,9 @@ def styleme():
 def magazine():    
     return render_template('magazine.html')
 
+@views.route('/marketing')
+def marketing():
+    return render_template('marketing.html')
 
 """@views.route('/upload', methods=['POST'])
 def upload():
