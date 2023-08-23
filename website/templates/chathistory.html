@@ -29,6 +29,9 @@
                             <a class="nav-link" href="{{ url_for('views.magazine') }}">Magazine</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('views.marketing') }}">Marketing</a>
+                        </li>        
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look-Alike</a>
                         </li>
                         <li class="nav-item dropdown">
@@ -107,6 +110,12 @@
             </div>
         </div>
     </div>
+    <h1>Recent Conversation Summaries</h1>
+    <ul>
+        <li>{{ request.args.get('summary1') }}</li>
+        <li>{{ request.args.get('summary2') }}</li>
+        <li>{{ request.args.get('summary3') }}</li>
+    </ul>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

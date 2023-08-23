@@ -1,0 +1,135 @@
+/* Style the chat container */
+.chat-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Style the chat box */
+.chat-box {
+    height: 300px;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Style user and bot messages */
+.user-message {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.bot-message {
+    background-color: #e0f1ff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Style the input container */
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Style the user input field and send button */
+#user-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+#send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Style the marketing prompt box */
+.marketing-prompt-box {
+    background-color: #ffffe0;
+    border: 2px solid #ffffff;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex; /* Display as flex to align content horizontally */
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start; /* Align items at the start of the flex container */
+}
+
+.prompt-container {
+    margin-top: 20px; /* Add space above the prompt */
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.image-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 20px; /* Add space between images */
+    margin-top: 20px;
+}
+
+.image-container img {
+    max-width: 30%; /* Adjust the image size */
+    height: auto;
+}
+
+.collection-label {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+/* Style the response box */
+.response-box {
+    background-color: #e0ffe0;
+    border: 10px solid #ffffff;
+    padding: 150px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.chat-area {
+    flex: 1; /* Expand to fill available space */
+    height: 100%; /* Fill available height */
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 50px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+.input-area {
+    display: flex;
+    align-items:left;
+    width: 100%; /* Fill available width */
+}
+
+#chat-input {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+#send-chat-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
