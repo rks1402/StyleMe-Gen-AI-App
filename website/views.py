@@ -591,6 +591,40 @@ def store_conversation_in_datastore(conversation_data):
             "message": str(e)
         }
     
+def get_product_by_json_summary(summary):
+    try:
+        print(type(summary))
+        # Make a POST request to the cloud function
+        response = requests.post("https://asia-south1-gen-ai-app.cloudfunctions.net/get-product-by-ocassion-and-demographics", json = summary)
+
+        print(response)
+        response_data = response.json()  # Parse the response JSON
+        print(response_data)
+        return response_data
+        
+        
+    except Exception as e:
+        return {
+            "message": str(e)
+        }
+    
+def get_products_by_id(product_ids):
+    try:
+        
+        
+        # Make a POST request to the cloud function
+        response = requests.post("https://asia-south1-gen-ai-app.cloudfunctions.net/get-products-by-id", json = product_ids)
+
+        print(response)
+        response_data = response.json()  # Parse the response JSON
+        print(response_data)
+        return response_data
+        
+        
+    except Exception as e:
+        return {
+            "message": str(e)
+        }    
 
 @views.route('/submit_chat', methods=['POST'])
 def submit_chat():
@@ -602,18 +636,46 @@ def submit_chat():
 
     response_message = store_conversation_in_datastore(chat_conversation)
 
-    return jsonify({"message": response_message})
-
+    #return jsonify({"message": response_message})
+    occasion_demographics = """
+    {
+        "Occasion": "wedding",
+        "color": "black",
+        "material": "silk",
+        "pattern": "solid",
+        "Demographics": {
+            "Budget": {
+            "Min": 150,
+            "Max": 200
+            },
+            "gender": "men",
+            "Style": "Classic and Elegant"
+        }
+    }
+        """
     # Test POST request
-    prompt = chat + "Give the User Occasion and demographics from this conversation in JSON format."
+    prompt = chat + "Give the User Occasion and demographics from this conversation in JSON format." + occasion_demographics + "Don't give color. and gender can be only from (boys,girls,women and men)"
     data = {"content": prompt}
 
     response_post = requests.post(API_URL, json=data)
     if response_post.status_code == 200:
         response_data = response_post.json()
         summary = response_data.get("summary", "No summary available.")
-        
-        return summary
+        try:
+            summary_dict = json.loads(summary)
+            print(summary_dict)  # This should now be a dictionary
+            product_ids = get_product_by_json_summary(summary_dict)
+            # Rest of your code
+        except json.JSONDecodeError as e:
+            print("Failed to decode JSON:", e)
+        #return summary
+        #return product_ids  # Return the product_ids as JSON response
+        print(product_ids)
+        print(type(product_ids))
+        products = get_products_by_id(product_ids)
+        #return products
+        return render_template('styleme.html', products=products)
+    
     else:
         print("POST Request Failed!")
         print(response_post.text)
