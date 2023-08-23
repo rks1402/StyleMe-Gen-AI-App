@@ -1,18 +1,13 @@
 {
     "conversation": [
         {
-            "sender": "Ankur",
+            "sender": "user",
             "message": "Hello, bot!"
         },
         {
             "sender": "bot",
-            "message": "Hi Ankur!"
-        },
-        {
-            "sender": "Ankur",
-            "message": "I want a red Shirt!"
+            "message": "Hi there!"
         }
-   
    
     ]
 }
