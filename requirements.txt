@@ -3,6 +3,5 @@ gunicorn
 google-cloud-datastore
 bcrypt
 google-cloud-storage
-google-cloud-vision
+google-cloud-visionai
 colorthief
-google-generativeai
