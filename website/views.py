@@ -687,7 +687,39 @@ def submit_chat():
         print(response_post.text)
 
 
+@views.route('/marketing_response', methods=['POST'])
+def marketing_response():
+    API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
+
+    chat = request.form['chat']
+    
+    json= '''{
+        "age": 35,
+    "gender": "female",
+    "income": "high",
+    "education": "bachelor's degree",
+    "occupation": "professional",
+    "location": "urban"
+    }'''
+    
+    # Test POST request
+    prompt = chat + "Read the above passage and create a promotion advertisement banner text as one liner for the clothing ,return the user data in JSON format like this"
+    data = {"content": prompt}
+
+    response_post = requests.post(API_URL, json=data)
+    if response_post.status_code == 200:
+        response_data = response_post.json()
+        summary = response_data.get("summary", "No summary available.")
+
         
+        
+        return render_template('marketing.html', summary=summary)
+    
+    else:
+        print("POST Request Failed!")
+        print(response_post.text)
+
+
 
      
 

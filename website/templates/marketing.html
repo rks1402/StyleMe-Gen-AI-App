@@ -86,41 +86,23 @@
             <div class="col-md-6">
                 <!-- Marketing Prompt Box Container -->
                 <div class="horizontal-container">
-                    <div class="marketing-prompt-box">
-                        <h2>Marketing Ad Prompt</h2>
-                        <div id="prompt-box"></div>
-                        <button id="generate-prompt">Generate Prompt</button>
+                   {{summary}}
 
-                        <!-- Display ads here -->
-                        <div class="image-container">
-                            <img src="https://imagescdn.allensolly.com/img/app/product/8/890233-10762807.jpg?q=75&auto=format&w=342" alt="Ad 1">
-                            <p>Product A - Special Offer!</p>
-                            <img src="https://imagescdn.allensolly.com/img/app/product/8/808572-9614114.jpg?q=75&auto=format&w=342" alt="Ad 2">
-                            <p>Product B - Limited Stock!</p>
-                        </div>
-                        <!-- Add more ads as needed -->
-                        <div class="prompt-container">
-                            <p class="prompt-text">
-                                Discover our latest collection! <!-- Replace with actual prompt -->
-                            </p>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <div class="col-md-6">
                 <!-- Response Box Container -->
                 <div class="horizontal-container">
-                    <div class="response-box">
-                        <div class="chat-interface">
-                            <div class="chat-area" id="chat-area">
-                                <!-- Chat messages will appear here -->
-                            </div>
-                            <div class="input-area">
-                                <input type="text" id="chat-input" placeholder="Type your message...">
-                                <button id="send-button">Send</button>
-                            </div>
-                        </div>
-                    </div>
+                        <div class="form-box">
+                            <form action="/marketing_response" method="post">
+                                <div class="input-group">
+                                    <textarea class="form-control" name="chat" rows="5"
+                                        placeholder="Enter your chat script here"></textarea>
+                                    <button class="btn btn-outline-secondary" type="submit">Submit Chat</button>
+                                </div>
+                            </form>
+                        </div>                   
                 </div>
             </div>
         </div>
