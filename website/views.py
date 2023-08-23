@@ -182,7 +182,10 @@ def chat_summary():
 
 @views.route('/chathistory')
 def chathistory():    
-    summary = chat_summary()
+    if 'chat_id' in session :
+        summary = chat_summary()
+    else:
+        summary = "chat on style me to see summary."    
     return render_template('chathistory.html', summary = summary)
 
 def fetch_products_lookalike():
@@ -679,6 +682,9 @@ def submit_chat():
     else:
         print("POST Request Failed!")
         print(response_post.text)
+
+
+        
 
      
 
