@@ -88,21 +88,22 @@
                 <!-- Product Display -->
                 <div class="product-container">
                     <div class="product">
-                        <img class="product-image" src="https://i0.wp.com/textilelearner.net/wp-content/uploads/2023/02/Grazia-Fashion-india.jpg?resize=400%2C501&ssl=1" alt="Product 1">
+                        <img class="product-image" src="../static/magazinepage/image.png" alt="Product 1">
                     </div>
                     <!-- Add more product display sections here -->
                     <!-- ... -->
                 </div>
             </div>
             <div class="col-md-6">
-                <!-- Chatbot Interface -->
-                <div class="chat-container">
-                    <div class="chat-box" id="chat-box">
-                        <!-- Chat messages go here -->
-                    </div>
-                    <div class="input-container">
-                        <input type="text" id="user-input" placeholder="Type your message...">
-                        <button id="send-button">Send</button>
+                <div class="container">
+                    <div class="form-box">
+                        <form action="/magazine_submit" method="post">
+                            <div class="input-group">
+                                <textarea class="form-control" name="chat" rows="5"
+                                    placeholder="Enter your chat script here"></textarea>
+                                <button class="btn btn-outline-secondary" type="submit">Submit Chat</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
