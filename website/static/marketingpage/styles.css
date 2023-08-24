@@ -1,135 +1,293 @@
-/* Style the chat container */
-.chat-container {
-    border: 1px solid #ccc;
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    max-width: 600px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-/* Style the chat box */
-.chat-box {
-    height: 300px;
-    overflow-y: scroll;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-/* Style user and bot messages */
-.user-message {
-    background-color: #f0f0f0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-.bot-message {
-    background-color: #e0f1ff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-/* Style the input container */
-.input-container {
-    display: flex;
-    align-items: center;
-}
-
-/* Style the user input field and send button */
-#user-input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
-
-#send-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    padding: 10px 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
+  }
+  
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
 }
 
-/* Style the marketing prompt box */
-.marketing-prompt-box {
-    background-color: #ffffe0;
-    border: 2px solid #ffffff;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex; /* Display as flex to align content horizontally */
-    flex-direction: column; /* Stack content vertically */
-    align-items: flex-start; /* Align items at the start of the flex container */
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
 }
 
-.prompt-container {
-    margin-top: 20px; /* Add space above the prompt */
-    padding: 10px;
-    background-color: #f0f0f0;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
 }
 
-.image-container {
+/* Navigation bar */
+.navbar {
+    background-color: #0b0b0b;
+    border-bottom: 1px solid #e0e0e0;
+    max-width: 100%;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Make links darker and bold */
+.nav-link {
+    color: #fffdfd !important;
+    font-weight: bold !important;
+}
+
+.welcome {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+
+/* Add this CSS for product grid layout */
+.product-container {
     display: flex;
-    align-items: center; /* Align items vertically */
-    gap: 20px; /* Add space between images */
-    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: -10px;
 }
 
-.image-container img {
-    max-width: 30%; /* Adjust the image size */
+.product {
+    flex: 0 0 calc(25% - 20px); /* 4 products per row */
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+
+
+
+.product img {
+    max-width: 100%;
     height: auto;
 }
 
-.collection-label {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 18px;
-}
-/* Style the response box */
-.response-box {
-    background-color: #e0ffe0;
-    border: 10px solid #ffffff;
-    padding: 150px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.product h2 {
+    font-size: 15px;
+    margin-top: 5px;
 }
 
-.chat-area {
-    flex: 1; /* Expand to fill available space */
-    height: 100%; /* Fill available height */
-    overflow-y: scroll;
-    border: 1px solid #ccc;
-    padding: 50px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.product p {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+/* Change color of product links to blue and remove underline */
+.product a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active product link */
+.product a.active {
+    font-weight: bold; /* Highlight the active link */
 }
 
 
-.input-area {
-    display: flex;
-    align-items:left;
-    width: 100%; /* Fill available width */
-}
 
-#chat-input {
-    flex: 1;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-}
 
-#send-chat-button {
-    background-color: #007bff;
-    color: white;
+
+
+
+/* Dropdown adjustments */
+.dropdown-menu {
+    background-color: #fff;
     border: none;
-    border-radius: 0 5px 5px 0;
-    padding: 10px 20px;
-    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.dropdown-item {
+    font-size: 16px;
+    color: #333;
+}
+
+
+/* Style for pagination */
+/* Style for pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Add margin on top and bottom */
+}
+
+.pagination a {
+    color: #333;
+    text-decoration: none;
+    padding: 4px 8px; /* Adjust padding for smaller size */
+    border: 1px solid #ccc;
+    margin: 0 2px; /* Adjust margin for smaller spacing */
+    border-radius: 4px;
+    font-size: 14px; /* Adjust font size for smaller text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Change color of pagination links to blue and remove underline */
+.pagination a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active pagination link */
+.pagination a.active {
+    font-weight: bold; /* Highlight the active link */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .product {
+        flex: 0 0 calc(50% - 20px); /* 2 products per row */
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .product p {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .form-control {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+.container {
+    width: 100%;
+}
+
+    .product {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .product p {
+        margin-top: 10px;
+    }
+  
+   
+    
+        .pagination a {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    
+        .pagination a.active {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    
