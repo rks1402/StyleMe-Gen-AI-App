@@ -15,6 +15,7 @@ import google.generativeai as palm
 from google.cloud import storage
 from google.cloud import datastore
 import requests
+import re
 
 views = Blueprint('views', __name__)
 
@@ -94,7 +95,53 @@ def magazine():
 
 @views.route('/marketing')
 def marketing():
-    return render_template('marketing.html')
+    if 'chat_id' in session:
+        API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
+
+        chat_id = session.get('chat_id')
+        client = datastore.Client()
+
+        conversation_entity = client.get(client.key('Conversation', chat_id))
+        
+        if conversation_entity:
+            # Get the summary from the conversation entity
+            summary = conversation_entity.get("summary", "No summary available.")
+        
+        json= '''{
+            "age": 35,
+        "gender": "female",
+        "income": "high",
+        "education": "bachelor's degree",
+        "occupation": "professional",
+        "location": "urban"
+        }'''
+        
+        # Test POST request
+        prompt = summary + "Read the above passage and create a promotion advertisement banner text as one liner for the clothing ,return the user data in JSON format like this"
+        data = {"content": prompt}
+
+        response_post = requests.post(API_URL, json=data)
+        if response_post.status_code == 200:
+            response_data = response_post.json()
+            response = response_data.get("summary", "No summary available.")
+            pattern = r'({.*})\s+(.+)'
+            match = re.search(pattern, response, re.DOTALL)
+
+            if match:
+                json_part = match.group(1)
+                text_part = match.group(2)
+            
+            
+            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary)
+        
+        else:
+            print("POST Request Failed!")
+            print(response_post.text)
+
+    else:
+            summary = "Session is not present. Please add some script in StyleMe first."
+            return render_template('marketing.html',summary=summary)
+    
 
 """@views.route('/upload', methods=['POST'])
 def upload():
@@ -177,6 +224,10 @@ def chat_summary():
     if response_post.status_code == 200:
         response_data = response_post.json()
         summary = response_data.get("summary", "No summary available.")
+
+         # Update the conversation entity with the generated summary
+        conversation_entity["summary"] = summary
+        client.put(conversation_entity)  # Save the updated entity
         
         return summary
     else:
@@ -686,38 +737,6 @@ def submit_chat():
         print("POST Request Failed!")
         print(response_post.text)
 
-
-@views.route('/marketing_response', methods=['POST'])
-def marketing_response():
-    API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
-
-    chat = request.form['chat']
-    
-    json= '''{
-        "age": 35,
-    "gender": "female",
-    "income": "high",
-    "education": "bachelor's degree",
-    "occupation": "professional",
-    "location": "urban"
-    }'''
-    
-    # Test POST request
-    prompt = chat + "Read the above passage and create a promotion advertisement banner text as one liner for the clothing ,return the user data in JSON format like this"
-    data = {"content": prompt}
-
-    response_post = requests.post(API_URL, json=data)
-    if response_post.status_code == 200:
-        response_data = response_post.json()
-        summary = response_data.get("summary", "No summary available.")
-
-        
-        
-        return render_template('marketing.html', summary=summary)
-    
-    else:
-        print("POST Request Failed!")
-        print(response_post.text)
 
 
 
