@@ -131,8 +131,8 @@ def marketing():
                 json_part = match.group(1)
                 text_part = match.group(2)
             
-            
-            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary)
+            products = fetch_products_lookalike() #for testing
+            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary,products=products)
         
         else:
             print("POST Request Failed!")

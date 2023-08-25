@@ -154,6 +154,66 @@ body {
     clear: both;
 }
 
+/* Default styles for larger screens */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    max-width: 39%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.product h2 {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+}
+
+.product a {
+    text-decoration: none;
+    /* Remove underline from all links within .product */
+}
+
+
+
+.product p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    flex: 1 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
 /* ... More CSS code ... */
 
 /* Media Queries */
