@@ -240,7 +240,9 @@ def chathistory():
         summary = chat_summary()
     else:
         summary = "chat on style me to see summary."    
-    return render_template('chathistory.html', summary = summary)
+    
+    products =session.get('products')
+    return render_template('chathistory.html', products=products, summary = summary)
 
 def fetch_products_lookalike():
     response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')
