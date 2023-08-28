@@ -6,7 +6,21 @@
     <title>Fashion Web Page</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='magazinepage/styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+
+       
+    <script>
+        function toggleContent() {
+            var imageContainer = document.getElementById('image-container');
+            var articleContainer = document.getElementById('article-container');
+
+            imageContainer.style.display = 'none';
+            articleContainer.style.display = 'block';
+        }
+    </script>
+
 </head>
+
 <body>
     
         <!-- Navigation Bar -->
@@ -78,35 +92,53 @@
         </nav>
     
 
-    <!-- Modal -->
-   
-
+        <div class="col-md-6">
+            <div class="container">
+                <div class="form-box">
+                    <form action="/magazine_submit" method="post">
+                        <div class="input-group">
+                            <textarea class="form-control" name="chat" rows="5"
+                                placeholder="Enter your chat script here"></textarea>
+                            <button class="btn btn-outline-secondary" type="submit">Ask</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <!-- Main Content -->
-    <div class="container-fluid">
+     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
                 <!-- Product Display -->
-                <div class="product-container">
-                    <div class="product">
+                <div id="image-container" class="product-container">
+                    <!-- Call the JavaScript function when the image is clicked -->
+                    <a href="javascript:void(0);" onclick="toggleContent()">
                         <img class="product-image" src="../static/magazinepage/image.png" alt="Product 1">
-                    </div>
-                    <!-- Add more product display sections here -->
-                    <!-- ... -->
+                    </a>
                 </div>
+                <!-- ... Other product display sections ... -->
             </div>
-            <div class="col-md-6">
-                <div class="container">
-                    <div class="form-box">
-                        <form action="/magazine_submit" method="post">
-                            <div class="input-group">
-                                <textarea class="form-control" name="chat" rows="5"
-                                    placeholder="Enter your chat script here"></textarea>
-                                <button class="btn btn-outline-secondary" type="submit">Ask</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div id="article-container" class="col-md-6" style="display: none;">
+                {% if articles %}
+                    <!-- Display articles for a specific magazine -->
+                    <!-- Display articles for a specific magazine -->
+                        <h1>Articles for Magazine {{ magazine_id }}</h1>
+                        <ul>
+                            {% for article in articles %}
+                                <li>
+                                    <pre>{{ article }}</pre>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                {% else %}
+                    <h1>Welcome to the Magazine Page!</h1>
+                    <!-- Other content here -->
+                {% endif %}
             </div>
+        </div>
+    </div>
+        
             
         </div>
     </div>

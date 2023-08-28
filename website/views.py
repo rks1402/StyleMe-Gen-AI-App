@@ -90,8 +90,18 @@ def styleme():
     return render_template('styleme.html', products=products)
 
 @views.route('/magazine')
-def magazine():    
+def magazine():  
+
     return render_template('magazine.html')
+
+CLOUD_FUNCTION_URL = 'https://asia-south1-gen-ai-app.cloudfunctions.net/get-articles'
+
+@views.route('/magazine/<magazine_id>')
+def magazines(magazine_id):
+    response = requests.post(CLOUD_FUNCTION_URL, json={'magazine_id': magazine_id})
+    articles = response.json()
+
+    return render_template('magazine.html', articles=articles)
 
 @views.route('/marketing')
 def marketing():
