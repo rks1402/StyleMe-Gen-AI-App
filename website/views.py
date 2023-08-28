@@ -251,7 +251,7 @@ def chathistory():
     else:
         summary = "chat on style me to see summary."    
     
-    products =session.get('products')
+    products = session.get('products')
     return render_template('chathistory.html', products=products, summary = summary)
 
 def fetch_products_lookalike():
@@ -742,6 +742,7 @@ def submit_chat():
         print(product_ids)
         print(type(product_ids))
         products = get_products_by_id(product_ids)
+        session['products'] = products
         #return products
         return render_template('styleme.html', products=products)
     

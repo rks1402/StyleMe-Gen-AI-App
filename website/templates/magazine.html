@@ -9,15 +9,7 @@
 
 
        
-    <script>
-        function toggleContent() {
-            var imageContainer = document.getElementById('image-container');
-            var articleContainer = document.getElementById('article-container');
-
-            imageContainer.style.display = 'none';
-            articleContainer.style.display = 'block';
-        }
-    </script>
+ 
 
 </head>
 
@@ -90,21 +82,10 @@
                 </div>
             </div>
         </nav>
-    
+    <br>
 
-        <div class="col-md-6">
-            <div class="container">
-                <div class="form-box">
-                    <form action="/magazine_submit" method="post">
-                        <div class="input-group">
-                            <textarea class="form-control" name="chat" rows="5"
-                                placeholder="Enter your chat script here"></textarea>
-                            <button class="btn btn-outline-secondary" type="submit">Ask</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+       
+        
     <!-- Main Content -->
      <div class="container-fluid">
         <div class="row">
@@ -112,14 +93,32 @@
                 <!-- Product Display -->
                 <div id="image-container" class="product-container">
                     <!-- Call the JavaScript function when the image is clicked -->
-                    <a href="javascript:void(0);" onclick="toggleContent()">
+                    <a href="{{ url_for('views.magazines', magazine_id=1) }}">
                         <img class="product-image" src="../static/magazinepage/image.png" alt="Product 1">
                     </a>
+                    
+                    
+                    
+                    
                     
                 </div>
                 <!-- ... Other product display sections ... -->
             </div>
-            <div id="article-container" class="col-md-6" style="display: none;">
+
+            <div class="col-md-6">
+                <div class="chat-container">
+                    <div class="chat-box" id="chat-box">
+                        <!-- Bot messages will be displayed here -->
+                        <div class="message bot-message">Hello! How can I assist you today?</div>
+                    </div>
+                    <div class="input-container">
+                        <textarea class="form-control" id="user-input" rows="3"
+                                  placeholder="Type your message..."></textarea>
+                        <button class="btn btn-outline-secondary" id="send-button">Send</button>
+                    </div>
+                </div>
+            </div>
+            <div id="article-container" class="col-md-6" >
                 {% if articles %}
                     <!-- Display articles for a specific magazine -->
                     <!-- Display articles for a specific magazine -->
