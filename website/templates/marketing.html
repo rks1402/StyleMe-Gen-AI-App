@@ -94,11 +94,23 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <!-- Marketing Prompt Box Container -->
-                <div class="horizontal-container">
-                    <div class="summary">
-                        <h4>User Summary :</h4>
-                        {{summary}}
+                <!-- Flip Card Container -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <!-- Summary Side -->
+                        <div class="flip-card-front horizontal-container">
+                            <div class="summary">
+                                <h4>User Summary :</h4>
+                                {{summary}}
+                            </div>
+                        </div>
+                        <!-- JSON Data Side -->
+                        <div class="flip-card-back horizontal-container">
+                            <div class="json">
+                                <h4>JSON Data :</h4>
+                                <pre>{{json_part}}</pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,19 +119,13 @@
                 <div class="horizontal-container">
                     <div class="template">
                         <h4>Promotional Text :</h4>
-                        {{text_part}}
+                        {{text_part}} <!-- Replace this with your promotional text -->
                     </div>
                 </div>
+                
             </div>
-            <div class="col-md-4">
-                <!-- Marketing Prompt Box Container -->
-                <div class="horizontal-container">
-                    <div class="json">
-                        <h4>JSON Data :</h4>
-                        <pre>{{json_part}}</pre>
-                    </div>
-                </div>
-            </div>
+            
+            
             <!-- Button to reload the page -->
             <div class="reload-button">
                 <button class="btn btn-primary" onclick="location.reload()">Regenerate Promotional Text</button>
@@ -127,18 +133,18 @@
         </div>
     </div>
 
-    <!-- Product Display -->
-    <div class="container-fluid product-container">
-        {% for product in products %}
-          <div class="product">
-            <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
-              <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
-              <h2>{{ product.product_name }}</h2>
-              <p>Price: ${{ product.price }}</p>
-            </a>
-          </div>
-        {% endfor %}
-    </div>
+<!-- Product Display -->
+<div class="container-fluid product-container" id="productDisplayContainer">
+    {% for product in products %}
+      <div class="product">
+        <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
+          <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
+          <h2>{{ product.product_name }}</h2>
+          <p>Price: ${{ product.price }}</p>
+        </a>
+      </div>
+    {% endfor %}
+</div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

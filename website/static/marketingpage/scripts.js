@@ -83,3 +83,14 @@ function generatePrompt() {
     // Replace this with your logic to generate a prompt
     return 'Sample prompt generated here';
 }
+
+// JavaScript to toggle the flip card
+document.addEventListener('DOMContentLoaded', function () {
+    const flipCards = document.querySelectorAll('.flip-card');
+    
+    flipCards.forEach(card => {
+        card.addEventListener('click', function () {
+            card.querySelector('.flip-card-inner').classList.toggle('flipped');
+        });
+    });
+    });
