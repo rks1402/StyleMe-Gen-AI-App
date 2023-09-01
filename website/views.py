@@ -103,6 +103,8 @@ def magazines(magazine_id):
 
     return render_template('magazine.html', articles=articles)
 
+
+datastore_client= datastore.Client()
 @views.route('/marketing')
 def marketing():
     if 'chat_id' in session:
@@ -117,18 +119,24 @@ def marketing():
             # Get the summary from the conversation entity
             summary = conversation_entity.get("summary", "No summary available.")
         
+    
+        
         json= '''{
             "age": 35,
         "gender": "female",
         "income": "high",
-        "education": "bachelor's degree",
         "occupation": "professional",
+        "tone of text": "friendly"
         "location": "urban"
         }'''
         
+        # Generate a random discount percentage between 5% and 25%
+        discount = random.randint(1, 5) * 5
+        
         # Test POST request
-        prompt = summary + "Read the above passage and create a promotion advertisement banner text as one liner for the clothing ,return the user data in JSON format like this"
+        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
         data = {"content": prompt}
+        print(discount)
 
         response_post = requests.post(API_URL, json=data)
         if response_post.status_code == 200:
@@ -141,8 +149,13 @@ def marketing():
                 json_part = match.group(1)
                 text_part = match.group(2)
             
-            products = fetch_products_lookalike() #for testing
-            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary,products=products)
+            response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')  # Replace with your actual API URL
+            # products = response.json()
+            
+            products = response.json()
+           
+          
+            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary,products=products[:3], discount=discount)
         
         else:
             print("POST Request Failed!")
