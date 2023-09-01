@@ -220,6 +220,12 @@ body {
     transform: rotateY(180deg);
 }
 
+#shopNowButton {
+    display: block; /* Make it a block-level element */
+    margin: 0 auto; /* Set left and right margins to auto */
+    text-align: center; /* Center the text inside the button */
+    margin-top: 20px;
+  }
 
 /* Media query for tablets */
 @media (max-width: 992px) {
