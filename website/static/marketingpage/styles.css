@@ -162,7 +162,7 @@ body {
 }
 
 .product-container {
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 30px;
@@ -183,6 +183,43 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Flip Card Styles */
+.flip-card {
+    perspective: 1000px;
+    height: 400px;
+    overflow: hidden;
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+/* Styling for the front and back sides */
+.flip-card-front {
+    background-color: #fff;
+}
+
+.flip-card-back {
+    background-color: #fff;
+    transform: rotateY(180deg);
+}
+
 
 /* Media query for tablets */
 @media (max-width: 992px) {
