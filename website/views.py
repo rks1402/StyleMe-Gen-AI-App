@@ -15,6 +15,7 @@ import google.generativeai as palm
 from google.cloud import storage
 from google.cloud import datastore
 import requests
+
 import re
 
 views = Blueprint('views', __name__)
@@ -103,6 +104,35 @@ def magazines(magazine_id):
 
     return render_template('magazine.html', articles=articles)
 
+
+# Initialize the Datastore client
+datastore_client = datastore.Client()
+
+def fetchCustomerMetrics():
+    try:
+        customer_id = request.args.get('customer_id')
+        print(customer_id)
+        if not customer_id:
+            return 'Missing customerId parameter', 400
+
+        query = datastore_client.query(kind='metric')  
+        # Add a filter to fetch data specific to the provided customer ID
+        query.add_filter('customer_id', '=', customer_id)
+
+        entities = list(query.fetch())
+        
+        return jsonify(entities), 200
+    except Exception as e:
+        return str(e), 500
+
+
+@views.route('/fetch-customer-metrics', methods=['GET'])
+def fetch_customer_metrics_route():
+    return fetchCustomerMetrics()
+
+if __name__ == '__main__':
+    views.run()
+    
 def fetch_products_with_discount(discount_value):
     try:
         # Create a client to interact with Google Cloud Datastore
@@ -129,6 +159,9 @@ def fetch_products_with_discount(discount_value):
         print(f"Error fetching products: {str(e)}")
         return []
 
+
+
+    
 datastore_client= datastore.Client()
 @views.route('/marketing')
 def marketing():
