@@ -1,5 +1,5 @@
 from flask import jsonify, request, render_template
-from flask import Blueprint, render_template, url_for, request, session, redirect, Flask, jsonify, flash
+from flask import Blueprint, render_template, url_for, request, session, redirect, Flask, jsonify, flash, make_response
 from google.cloud import datastore
 from google.cloud import vision_v1
 from google.cloud.vision_v1 import types
@@ -110,7 +110,7 @@ datastore_client = datastore.Client()
 
 def fetchCustomerMetrics():
     try:
-        customer_id = request.args.get('customer_id')
+        customer_id = "C001"
         print(customer_id)
         if not customer_id:
             return 'Missing customerId parameter', 400
@@ -121,18 +121,10 @@ def fetchCustomerMetrics():
 
         entities = list(query.fetch())
         
-        return jsonify(entities), 200
+        return entities
     except Exception as e:
         return str(e), 500
 
-
-@views.route('/fetch-customer-metrics', methods=['GET'])
-def fetch_customer_metrics_route():
-    return fetchCustomerMetrics()
-
-if __name__ == '__main__':
-    views.run()
-    
 def fetch_products_with_discount(discount_value):
     try:
         # Create a client to interact with Google Cloud Datastore
@@ -195,6 +187,7 @@ def marketing():
         prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
         data = {"content": prompt}
         
+        json_metrics = fetchCustomerMetrics()
 
         response_post = requests.post(API_URL, json=data)
         if response_post.status_code == 200:
@@ -212,7 +205,7 @@ def marketing():
             
            
           
-            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary,products=products[:3], discount=discount_value)
+            return render_template('marketing.html', json_metrics=json_metrics, json_part=json_part,text_part=text_part,summary=summary,products=products[:3], discount=discount_value)
         
         else:
             print("POST Request Failed!")
