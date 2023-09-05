@@ -77,9 +77,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
-                    </li>
+                    
                    
                 </ul>
             </div>
@@ -99,14 +97,14 @@
                         <!-- Summary Side -->
                         <div class="flip-card-front horizontal-container">
                             <div class="summary">
-                                <h4>User Summary :</h4>
+                                <h6>User Summary :</h6>
                                 {{summary}}
                             </div>
                         </div>
                         <!-- JSON Data Side -->
                         <div class="flip-card-back horizontal-container">
                             <div class="json">
-                                <h4>JSON Data :</h4>
+                                <h6>JSON Data :</h6>
                                 <pre>{{json_part}}</pre>
                             </div>
                         </div>
@@ -117,27 +115,36 @@
                 <!-- Marketing Prompt Box Container -->
                 <div class="horizontal-container">
                     <div class="template">
-                        <h4>Promotional Text :</h4>
+                        <h6>Promotional Text :</h6>
                         {{text_part}} <!-- Replace this with your promotional text -->
                     </div>
                 </div>
-                <div class="horizontal-container">
+                <!--<div class="horizontal-container">
                     <div class="template">
-                        <h4>Discount :</h4>
+                        <h6>Discount :</h6>
                     
-                        {{discount}} <!-- Replace this with your promotional text -->
+                        {{discount}}  
                     </div>
-                </div>
+                </div>-->
                 
             </div>
             <div class="col-md-4">
                 <!-- Marketing Prompt Box Container -->
                 <div class="horizontal-container">
                     <div class="template">
-                        <h4>User Promotional Text :</h4>
-                        {{json_metrics}} <!-- Replace this with your promotional text -->
+                        <h6>User Promotional Text :</h6>
+                        <!-- Display previous and current promotional texts as an unordered list -->
+                        <div>
+                        <ul id="user-promotional-text">
+                            <!-- Previous texts will be added here -->
+                        </ul>
+                        </div>
                     </div>
                 </div>
+                
+                
+                
+                
                 
             </div>
             

@@ -16,29 +16,57 @@ body {
     padding: 20px;
 }
 
-/* Navigation bar */
 .navbar {
     background-color: #333;
-    color: white;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .navbar-brand {
     font-size: 28px;
-    font-weight: bold;
+   
+    color: #fff;
 }
 
-
-
+.navbar-toggler-icon {
+    background-color: #fff;
+}
 
 .nav-link {
-    color: #fffdfd !important;
-    font-weight: bold !important;
-    transition: color 0.3s ease;
+    color: #fff !important;
+    
+    transition: 0.3s;
 }
 
 .nav-link:hover {
-    color: #ffc107;
+    color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: #fff !important;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    color: #fff;
+    border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffcc00;
+    color: #333;
 }
 
 /* Chatbot interface */
