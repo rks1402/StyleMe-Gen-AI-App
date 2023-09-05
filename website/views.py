@@ -25,7 +25,7 @@ views = Blueprint('views', __name__)
 
 @views.route('/')
 def home():
-    return redirect('/homepage')
+    return redirect('/home')
 
 
 
@@ -46,7 +46,7 @@ def fetch_products(page, per_page):
 
 
 # Route to render HTML page and display products with pagination
-@views.route('/homepage')
+@views.route('/home')
 def homepage():
     page = request.args.get('page', default=1, type=int)  # Get the requested page number from the URL
     per_page = 8 # Number of products per page
@@ -318,7 +318,7 @@ def chathistory():
         products = session.get('products')
     else:
         products = fetch_products_lookalike()
-    return render_template('chathistory.html', products=products, summary = summary)
+    return render_template('chathistory.html', products=products[:3], summary = summary)
 
 def fetch_products_lookalike():
     response = requests.get('https://full-iqcjxj5v4a-el.a.run.app/get_all_product')
