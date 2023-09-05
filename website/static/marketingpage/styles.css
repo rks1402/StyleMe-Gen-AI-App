@@ -99,23 +99,57 @@ body {
     padding: 0px;
 }
 
-/* Navigation bar */
 .navbar {
-    background-color: #0b0b0b;
+    background-color: #333;
     border-bottom: 1px solid #e0e0e0;
-    max-width: 100%;
 }
 
 .navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
+    font-size: 28px;
+   
+    color: #fff;
 }
 
-/* Make links darker and bold */
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
 .nav-link {
-    color: #fffdfd !important;
-    font-weight: bold !important;
+    color: #fff !important;
+    
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: #fff !important;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    color: #fff;
+    border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffcc00;
+    color: #333;
 }
 
 .welcome {

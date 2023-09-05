@@ -67,9 +67,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
-                        </li>
+                        
                         
                     </ul>
                 </div>
@@ -82,7 +80,7 @@
     <div class="container-fluid">
         <div class="row">
             <br><br><br>
-            <h3 style="font-weight: bold;">Notes for Stylist</h3>
+            <h3 style="font-size: large;margin-top: 20px;">Notes for Stylist</h3>
             <div class="col-md-6">
                 <!-- Product Display -->
                 <div class="container-fluid product-container">
@@ -90,7 +88,7 @@
                     <div class="product">
                         <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
                             <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
-                            <h2>{{ product.product_name }}</h2>
+                            <h6>{{ product.product_name }}</h6>
                             <p>Price: ${{ product.price }}</p>
                         </a>
                     </div>
@@ -101,14 +99,16 @@
                 <!-- Product Display -->
                 <div class="product-container">
                     <div class="product">
-                        <p style="font-weight: bold;">{{summary}}</p>
+                        <p>{{summary}}</p>
                     </div>
-                    <br>
-                    <div class="button-container">
-                        <button id="send-button" type="button">Accept Appointment</button>
-                    </div>
+                    
+                    
+                    
                     <!-- Add more product display sections here -->
                     <!-- ... -->
+                </div>
+                <div class="button-container">
+                    <button id="send-button" type="button">Accept Appointment</button>
                 </div>
             </div>
         </div>
