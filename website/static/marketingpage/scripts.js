@@ -4,14 +4,25 @@ const reloadButton = document.querySelector('.reload-button button');
 // Get a reference to the "User Promotional Text" ul
 const userPromotionalTextUl = document.getElementById('user-promotional-text');
 
+// Set the maximum number of promotional texts to display
+const maxPromotionalTexts = 10;
+
 // Add an event listener to the "Regenerate Promotional Text" button
 reloadButton.addEventListener('click', function() {
   // Get the promotional text from the "Promotional Text" div
-  const promotionalText = document.querySelector('.template h4').nextSibling.textContent.trim();
+  const promotionalText = document.querySelector('.template h6').nextSibling.textContent.trim();
 
   // Store the promotional text in an array in localStorage
   const storedPromotionalTexts = JSON.parse(localStorage.getItem('promotionalTexts')) || [];
-  storedPromotionalTexts.push(promotionalText);
+
+  // Add the new promotional text to the beginning of the array
+  storedPromotionalTexts.unshift(promotionalText);
+
+  // Limit the stored texts to the maximum allowed
+  if (storedPromotionalTexts.length > maxPromotionalTexts) {
+    storedPromotionalTexts.pop(); // Remove the oldest text
+  }
+
   localStorage.setItem('promotionalTexts', JSON.stringify(storedPromotionalTexts));
 
   // Clear the user promotional text ul
@@ -36,6 +47,7 @@ for (const text of storedPromotionalTexts) {
 
   userPromotionalTextUl.appendChild(listItem);
 }
+
 
 // Get a reference to the "Shop Now" button
 const shopNowButton = document.getElementById('shopNowButton');
