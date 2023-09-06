@@ -119,7 +119,7 @@
                 {% if articles %}
                     <!-- Display articles for a specific magazine -->
                     <!-- Display articles for a specific magazine -->
-                        <h1>Articles for Magazine {{ magazine_id }}</h1>
+                        <h5>Articles for Magazine {{ magazine_id }}</h5>
                         <ul>
                             {% for article in articles %}
                                 <li>
@@ -129,7 +129,7 @@
                         </ul>
 
                 {% else %}
-                    <h1>Welcome to the Magazine Page!</h1>
+                    <h5>Welcome to the Magazine Page!</h5>
                     <!-- Other content here -->
                 {% endif %}
             </div>
