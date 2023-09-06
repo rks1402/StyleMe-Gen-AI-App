@@ -104,7 +104,7 @@
 
 
     <!-- Product Display -->
-    <div class="container-fluid product-container">
+    <div class="container-fluid product-container" style="font-family: 'Times New Roman', Times, serif;">
         {% for product in products %}
         <div class="product">
             <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
