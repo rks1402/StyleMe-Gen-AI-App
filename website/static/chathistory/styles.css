@@ -283,6 +283,9 @@ body {
         clear: both;
         padding: 10px; /* Add padding for message bubbles */
     }
-
+    .product{
+        margin-bottom: 10px;
+    }
+    
     /* Adjust other styles as needed for better mobile appearance */
 }
