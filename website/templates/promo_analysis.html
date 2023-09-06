@@ -142,7 +142,7 @@
 <button class="btn btn-success ml-2" id="shopNowButton">View The Collection</button>
 
 <!-- Product Display -->
-<div class="container-fluid product-container" id="productDisplayContainer" style="display: fluid;">
+<div class="container-fluid product-container" id="productDisplayContainer" style="display: none;">
     {% for product in products %}
       <div class="product">
         <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
@@ -158,7 +158,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <script src="../static/marketingpage/scripts.js"></script>    
+    <script src="../static/promo_analysis/scripts.js"></script>    
     <script>
         document.getElementById('promotionTone').textContent = metrics['promotion tone'];
         document.getElementById('emotion').textContent = metrics['emotion'];
