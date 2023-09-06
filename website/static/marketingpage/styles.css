@@ -290,7 +290,7 @@ body {
 
 /* Add subtle pulsing animation to the reload button */
 .reload-button button {
-    animation: pulse 2s infinite;
+    animation: pulse 2s ;
 }
 
 @keyframes pulse {
