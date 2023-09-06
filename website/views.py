@@ -108,48 +108,48 @@ def magazines(magazine_id):
 # Initialize the Datastore client
 datastore_client = datastore.Client()
 
-def fetchCustomerMetrics():
-    try:
-        customer_id = "C001"
-        print(customer_id)
-        if not customer_id:
-            return 'Missing customerId parameter', 400
+# def fetchCustomerMetrics():
+#     try:
+#         customer_id = "C001"
+#         print(customer_id)
+#         if not customer_id:
+#             return 'Missing customerId parameter', 400
 
-        query = datastore_client.query(kind='metric')  
-        # Add a filter to fetch data specific to the provided customer ID
-        query.add_filter('customer_id', '=', customer_id)
+#         query = datastore_client.query(kind='metric')  
+#         # Add a filter to fetch data specific to the provided customer ID
+#         query.add_filter('customer_id', '=', customer_id)
 
-        entities = list(query.fetch())
+#         entities = list(query.fetch())
         
-        return entities
-    except Exception as e:
-        return str(e), 500
+#         return entities
+#     except Exception as e:
+#         return str(e), 500
 
-def fetch_products_with_discount(discount_value):
-    try:
-        # Create a client to interact with Google Cloud Datastore
-        client = datastore.Client()
+# def fetch_products_with_discount(discount_value):
+#     try:
+#         # Create a client to interact with Google Cloud Datastore
+#         client = datastore.Client()
 
-        # Define the kind (entity type) in Datastore
-        kind = "MasterData"
+#         # Define the kind (entity type) in Datastore
+#         kind = "MasterData"
 
-        # Define a query to filter products with a specific discount
-        query = client.query(kind=kind)
-        query.add_filter("discount", "=", str(discount_value))
+#         # Define a query to filter products with a specific discount
+#         query = client.query(kind=kind)
+#         query.add_filter("discount", "=", str(discount_value))
 
-        # Print the query being executed
-        print(f"Executing query: {query}")
+#         # Print the query being executed
+#         print(f"Executing query: {query}")
 
-        # Execute the query and fetch matching products
-        matching_products = list(query.fetch())
+#         # Execute the query and fetch matching products
+#         matching_products = list(query.fetch())
 
-        # Print the number of matching products
-        print(f"Found {len(matching_products)} matching products")
+#         # Print the number of matching products
+#         print(f"Found {len(matching_products)} matching products")
 
-        return matching_products
-    except Exception as e:
-        print(f"Error fetching products: {str(e)}")
-        return []
+#         return matching_products
+#     except Exception as e:
+#         print(f"Error fetching products: {str(e)}")
+#         return []
 
 
 
@@ -180,14 +180,11 @@ def marketing():
         "location": "urban"
         }'''
         
-        # Generate a random discount percentage between 5% and 25%
-        discount_value = random.randint(1, 5) * 5
-        
         # Test POST request
         prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
         data = {"content": prompt}
         
-        json_metrics = fetchCustomerMetrics()
+        # json_metrics = fetchCustomerMetrics()
 
         response_post = requests.post(API_URL, json=data)
         if response_post.status_code == 200:
@@ -200,13 +197,11 @@ def marketing():
                 json_part = match.group(1)
                 text_part = match.group(2)
             
-            products = fetch_products_with_discount(discount_value)
-            # products = response.json()
             
             session['promo'] = text_part
            
           
-            return render_template('marketing.html', json_metrics=json_metrics, json_part=json_part,text_part=text_part,summary=summary,products=products[:3], discount=discount_value)
+            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary)
         
         else:
             print("POST Request Failed!")
