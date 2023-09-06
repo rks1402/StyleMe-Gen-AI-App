@@ -166,7 +166,25 @@ body {
     max-width: 100%; /* Ensure images don't exceed their container */
 }
 
+.product {
+    animation: pulse 2s infinite;
+    
+}
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.product:hover {
+    background-color: #f5c0c0;
+}
     
 
 /* Media Queries ... */

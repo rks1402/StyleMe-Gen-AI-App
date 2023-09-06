@@ -9,6 +9,7 @@ body {
     border: 1px solid #dee2e6;
     border-radius: 5px;
     padding: 15px;
+    margin-top: 20px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -261,6 +262,50 @@ body {
     margin-top: 20px;
   }
 
+/* Your existing CSS styles... */
+
+/* Additional animations and styles */
+/* Apply a fade-in animation to the columns */
+.col-md-4 {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add hover effect to promotional text */
+.template:hover {
+    margin-top: 5px;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Add subtle pulsing animation to the reload button */
+.reload-button button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
 /* Media query for tablets */
 @media (max-width: 992px) {
     .product-container {
@@ -281,6 +326,7 @@ body {
         font-size: 12px;
     }
 }
+
 
 /* Media query for mobile devices */
 /* Media query for mobile devices */

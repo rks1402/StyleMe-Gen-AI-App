@@ -236,6 +236,40 @@ label {
 }
 
 
+.navbar {
+    background-color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+    background-color: #555; /* Change to your desired color */
+}
+input[type=submit]:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+.header a {
+    transition: color 0.3s ease;
+}
+
+.header a:hover {
+    color: #ffcc00; /* Change to your desired color */
+}
+.box img:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+input[type=checkbox] {
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
 @media (max-width: 480px) {
     .box {
         width: 100%; /* Take up full width on small screens */
