@@ -203,6 +203,7 @@ def marketing():
             products = fetch_products_with_discount(discount_value)
             # products = response.json()
             
+            session['promo'] = text_part
            
           
             return render_template('marketing.html', json_metrics=json_metrics, json_part=json_part,text_part=text_part,summary=summary,products=products[:3], discount=discount_value)
@@ -817,7 +818,36 @@ def submit_chat():
         print(response_post.text)
 
 
+@views.route('/promo_analysis', methods=['GET'])
+def promo_analysis():
 
+    promo = session.get('promo')
+
+    API_URL = "https://summary-gen-ai-api-hmvyexj3oa-el.a.run.app/summarize"
+
+    #return jsonify({"message": response_message})
+    sample = """
+    {
+        
+        "promotion tone": "friendly",
+        "emotion": "positive",
+        "season": "fall",
+        "occasion": "wedding"
+    }
+        """
+    # Test POST request
+    prompt = "You are the marketing campaign consultant, Review the following text in the triple quotes and give the tone, emotion ,season and occasion from the text and return the value as son attributes. for any missing value, mention as null  " + promo + "sample json like  " + sample
+    data = {"content": prompt}
+
+    response_post = requests.post(API_URL, json=data)
+    if response_post.status_code == 200:
+        response_data = response_post.json()
+        summary = response_data.get("summary", "No summary available.")
+        print(type(summary))
+
+    products = session.get('products')
+
+    return render_template('promo_analysis.html', text_part = promo, summary=summary ,products=products[:3])
 
      
 
