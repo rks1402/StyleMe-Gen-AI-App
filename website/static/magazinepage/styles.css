@@ -202,6 +202,8 @@ body {
     text-decoration: underline;
 }
 
+
+
 /* Responsive adjustments for article section */
 @media (max-width: 768px) {
     .article-container {
