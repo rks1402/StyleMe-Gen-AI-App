@@ -312,8 +312,10 @@ body {
 
 /* Add subtle pulsing animation to the reload button */
 .reload-button button {
+
     animation: pulse 2s ;
     background-color: #464343;
+
 }
 
 @keyframes pulse {
@@ -327,10 +329,7 @@ body {
         transform: scale(1);
     }
 }
-.product {
-    animation: pulse 2s ;
-    
-}
+
 
 @keyframes pulse {
     0% {
@@ -362,6 +361,7 @@ body {
 #send-button:hover {
     background-color: #555;
 }
+
 
 
 /* Media query for tablets */
