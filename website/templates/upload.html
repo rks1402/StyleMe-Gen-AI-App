@@ -74,38 +74,34 @@
       </div>
     </div>
   </nav>
-
+  
   <br>
   <div class="container">
     <div class="form-box">
       <form action="/upload" method="post" enctype="multipart/form-data">
         <div class="input-group">
           <input type="file" name="file" class="form-control" id="inputGroupFile04"
-            aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
           <button class="btn btn-outline-secondary" type="submit" id="analyze-button">Upload</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div class="container">
-    <div class="analysis-results">
-      <pre id="results"></pre>
-    </div>
-  </div>
-
+  
 
   <!-- Product Display -->
   <div class="container-fluid product-container">
-    {% for product in products %}
+    
+
+    
+    <!-- Display visually similar images -->
+    
     <div class="product">
-      <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
-        <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
-        <h2>{{ product.product_name }}</h2>
-        <p>Price: ${{ product.price }}</p>
-      </a>
+        {% for image_url in visually_similar_images %}
+            <img src="{{ image_url }}" alt="Visually Similar Image" width="200">
+        {% endfor %}
     </div>
-    {% endfor %}
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

@@ -139,7 +139,7 @@ def login():
                 # user_role = user['User_Role']
                 # You can adjust the role logic here
 
-                return redirect('/homepage')  # Replace with the appropriate route
+                return redirect('/home')  # Replace with the appropriate route
             else:
                 # Incorrect password
                 flash('Incorrect password', 'danger')
