@@ -92,13 +92,14 @@
         <div class="row">
             <div class="col-md-4">
                 <!-- Flip Card Container -->
-                <div class="flip-card">
+                <div class="flip-card" id="flip-card-1">
                     <div class="flip-card-inner">
                         <!-- Summary Side -->
                         <div class="flip-card-front horizontal-container">
                             <div class="summary">
                                 <h6>User Summary :</h6>
-                                {{summary}}
+                                <p id="summaryText">{{summary}}</p>
+                                <button id="editButton">Edit</button>
                             </div>
                         </div>
                         <!-- JSON Data Side -->
@@ -151,11 +152,11 @@
             
             <!-- Button to reload the page -->
             <div class="reload-button">
-                <button class="btn btn-primary" onclick="location.reload()">Regenerate Promotional Text</button>
+                <button id="send-button" onclick="location.reload()">Regenerate Promotional Text</button>
             </div>
             <br>
             <div class="reload-button">
-                <a href="{{ url_for('views.promo_analysis') }}"><button class="btn btn-primary" style="margin-top: 10px;">Promotional Analysis</button></a> 
+                <a href="{{ url_for('views.promo_analysis') }}"><button id="send-button" style="margin-top: 10px;">Promotional Analysis</button></a> 
             </div>
         </div>
     </div>

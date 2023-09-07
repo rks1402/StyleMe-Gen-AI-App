@@ -144,11 +144,16 @@ body {
 .product h2 {
     font-size: 15px;
     margin-top: 5px;
+    color: #000;
 }
 
 .product p {
     font-size: 15px;
     margin-top: 5px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+    
 }
 
 /* Change color of product links to blue and remove underline */

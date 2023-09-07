@@ -125,6 +125,7 @@ body {
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 
@@ -166,8 +167,35 @@ body {
     max-width: 100%; /* Ensure images don't exceed their container */
 }
 
+
+.product h6 {
+    margin-top: 10px;
+    font-size: 15px;
+    
+    color: #000;
+}
+
+.product a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    /* Remove underline from all links within .product */
+}
+
+
+
+.product p {
+    margin-top: 5px;
+    font-size: 15px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+
 /*.product {
     animation: pulse 2s infinite;
+
     
 }
 
