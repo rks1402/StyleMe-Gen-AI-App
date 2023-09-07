@@ -166,8 +166,8 @@ body {
     max-width: 100%; /* Ensure images don't exceed their container */
 }
 
-.product {
-    animation: pulse 2s ;
+/*.product {
+    animation: pulse 2s infinite;
     
 }
 
@@ -181,7 +181,7 @@ body {
     100% {
         transform: scale(1);
     }
-}
+}*/
 .product:hover {
     background-color: #f5c0c0;
 }
@@ -283,9 +283,6 @@ body {
         clear: both;
         padding: 10px; /* Add padding for message bubbles */
     }
-    .product{
-        margin-bottom: 10px;
-    }
-    
+
     /* Adjust other styles as needed for better mobile appearance */
 }

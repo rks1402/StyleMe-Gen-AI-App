@@ -290,7 +290,7 @@ body {
 
 /* Add subtle pulsing animation to the reload button */
 .reload-button button {
-    animation: pulse 2s ;
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -304,25 +304,8 @@ body {
         transform: scale(1);
     }
 }
-.product {
-    animation: pulse 2s ;
-    
-}
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-.product:hover {
-    background-color: #f5c0c0;
-}
+
 /* Media query for tablets */
 @media (max-width: 992px) {
     .product-container {

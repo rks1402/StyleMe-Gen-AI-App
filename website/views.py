@@ -15,7 +15,7 @@ import google.generativeai as palm
 from google.cloud import storage
 from google.cloud import datastore
 import requests
-
+from typing import Sequence
 import re
 
 views = Blueprint('views', __name__)
@@ -231,7 +231,7 @@ def upload():
     flash('No File is Selected.', 'danger')
     return redirect('/lookalike')"""
 
-def analyze_image(image_file):
+"""def analyze_image(image_file):
     # Initialize the Vision API client
     client = vision_v1.ImageAnnotatorClient()
 
@@ -255,24 +255,197 @@ def analyze_image(image_file):
         "dominant_color": dominant_color
     }
 
-    return analysis_result
+    return analysis_result"""
 
-@views.route("/upload", methods=["POST"])
+
+
+'''from typing import Sequence
+
+from google.cloud import vision
+
+
+def analyze_image(
+    image_uri: str,
+    feature_types: Sequence,
+) -> vision.AnnotateImageResponse:
+    client = vision.ImageAnnotatorClient()
+
+    image = vision.Image()
+    image.source.image_uri = image_uri
+    features = [vision.Feature(type_=feature_type) for feature_type in feature_types]
+    request = vision.AnnotateImageRequest(image=image, features=features)
+
+    response = client.annotate_image(request=request)
+   
+    return response
+
+
+
+def print_labels(response: vision.AnnotateImageResponse):
+    print("=" * 80)
+    for label in response.label_annotations:
+        print(
+            f"{label.score:4.0%}",
+            f"{label.description:5}",
+            sep=" | ",
+        )
+
+def print_objects(response: vision.AnnotateImageResponse):
+    print("=" * 80)
+    for obj in response.localized_object_annotations:
+        nvertices = obj.bounding_poly.normalized_vertices
+        print(
+            f"{obj.score:4.0%}",
+            f"{obj.name:15}",
+            f"{obj.mid:10}",
+            ",".join(f"({v.x:.1f},{v.y:.1f})" for v in nvertices),
+            sep=" | ",
+        )
+        
+image_uri = "gs://photodrzz/photo/13000072a.jpg"
+features = [
+    # vision.Feature.Type.OBJECT_LOCALIZATION,
+    # vision.Feature.Type.FACE_DETECTION,
+    # vision.Feature.Type.LANDMARK_DETECTION,
+    # vision.Feature.Type.LOGO_DETECTION,
+    # vision.Feature.Type.LABEL_DETECTION,
+    # vision.Feature.Type.TEXT_DETECTION,
+    # vision.Feature.Type.DOCUMENT_TEXT_DETECTION,
+    # vision.Feature.Type.SAFE_SEARCH_DETECTION,
+     #vision.Feature.Type.IMAGE_PROPERTIES,
+    # vision.Feature.Type.CROP_HINTS,
+     #vision.Feature.Type.WEB_DETECTION,
+     #vision.Feature.Type.PRODUCT_SEARCH,
+    # vision.Feature.Type.OBJECT_LOCALIZATION,
+]
+
+response = analyze_image(image_uri, features)
+
+
+image_uri = "gs://photodrzz/photo/-473Wx593H-443007260-pink-MODEl6.jpg"
+features = [vision.Feature.Type.OBJECT_LOCALIZATION]
+
+response = analyze_image(image_uri, features)
+
+
+
+
+from flask import Flask, request, render_template
+from google.cloud import vision
+from google.cloud import storage
+import tempfile
+
+# Initialize your Flask app
+app = Flask(__name__)
+
+# Define your Google Cloud Storage bucket name
+bucket_name = "uploaded-cloth"
+
+# Initialize the Google Cloud Storage client
+storage_client = storage.Client()
+
+# Your analyze_image and print_objects functions (as defined earlier)
+
+@views.route("/upload", methods=["GET", "POST"])
+def upload_image():
+    if request.method == "POST":
+        # Get the uploaded file
+        uploaded_file = request.files["file"]
+
+        if uploaded_file:
+            # Create a temporary file to store the uploaded image
+            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                uploaded_file.save(temp_file.name)
+            
+            # Upload the image to the Google Cloud Storage bucket
+            bucket = storage_client.bucket(bucket_name)
+            blob = bucket.blob(uploaded_file.filename)
+            blob.upload_from_filename(temp_file.name)
+
+            # Get the public URL of the uploaded image
+            image_uri = f"gs://{bucket_name}/{uploaded_file.filename}"
+
+            # Use the analyze_image function with the uploaded image URI
+            features = [vision.Feature.Type.OBJECT_LOCALIZATION]
+            response = analyze_image(image_uri, features)
+
+            # You can do something with the response here (e.g., print_objects)
+            # For example, print detected objects:
+            print_objects(response)
+
+            return jsonify(response)  # You'll need to import jsonify from flask
+
+
+    return render_template("upload.html")  # Create an HTML template for the upload page
+'''
+
+
+
+
+
+
+from flask import Flask, render_template, request, redirect, url_for
+from google.cloud import storage, vision
+from werkzeug.utils import secure_filename
+
+
+
+# Initialize the Google Cloud Storage client
+storage_client = storage.Client()
+bucket_name = 'uploaded-cloth'  # Replace with your GCS bucket name
+
+
+
+@views.route('/upload', methods=['POST'])
 def upload():
-    print("Analyzing image...")
-    if "file" not in request.files:
-        return jsonify({"error": "No file part"})
+    # Handle the uploaded image
+    uploaded_image = request.files['file']
+    if uploaded_image:
+        # Ensure the filename is secure (prevents directory traversal attacks)
+        filename = secure_filename(uploaded_image.filename)
+        # Upload the image to GCS
+        image_blob = upload_image_to_gcs(uploaded_image, filename)
+        # Analyze the image using its GCS URI
+        image_uri = f'gs://{bucket_name}/{image_blob.name}'
+        features = [vision.Feature.Type.WEB_DETECTION]
+        response = analyze_image_from_uri(image_uri, features)
+        original_image_url = image_blob.public_url
+        visually_similar_images = get_visual_similar_images(response)
+        return render_template('upload.html', original_image_url=original_image_url, visually_similar_images=visually_similar_images)
 
-    file = request.files["file"]
-    if file.filename == "":
-        return jsonify({"error": "No selected file"})
+def upload_image_to_gcs(uploaded_image, filename):
+    # Create a blob in the GCS bucket with the provided filename
+    bucket = storage_client.bucket(bucket_name)
+    image_blob = bucket.blob(filename)
+    # Upload the image file to the blob
+    image_blob.upload_from_string(uploaded_image.read(), content_type=uploaded_image.content_type)
+    return image_blob
 
-    if file:
-        analysis_result = analyze_image(file)
-        return jsonify(analysis_result)
-    
-    print("Analysis results:", analysis_result)
-    return jsonify(analysis_result)
+def analyze_image_from_uri(image_uri: str, feature_types: list) -> vision.AnnotateImageResponse:
+    client = vision.ImageAnnotatorClient()
+    image = vision.Image()
+    image.source.image_uri = image_uri
+    features = [vision.Feature(type_=feature_type) for feature_type in feature_types]
+    request = vision.AnnotateImageRequest(image=image, features=features)
+
+    response = client.annotate_image(request=request)
+    return response
+
+def get_visual_similar_images(response):
+    visually_similar_images = []
+    if response.web_detection and response.web_detection.visually_similar_images:
+        for image in response.web_detection.visually_similar_images:
+            visually_similar_images.append(image.url)
+          
+    return visually_similar_images[:4]
+
+
+
+
+
+
+
+
 
 def chat_summary():
 
@@ -845,4 +1018,3 @@ def promo_analysis():
     return render_template('promo_analysis.html', text_part = promo, summary=summary ,products=products[:3])
 
      
-
