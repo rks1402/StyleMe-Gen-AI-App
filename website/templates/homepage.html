@@ -90,7 +90,7 @@
               <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
                 <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
                 <h2>{{ product.product_name }}</h2>
-                <p>Price: ${{ product.price }}</p>
+                <p>${{ product.price }}</p>
               </a>
             </div>
           {% endfor %}

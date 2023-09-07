@@ -156,15 +156,20 @@ body {
 
 
 /* ... Previous CSS code ... */
-
 /* Styles for the article section */
-.article-container {
-    display: none;
+#article-container {
     padding: 20px;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+}
+
+#article-container h5 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff3366; /* Customize the color to your liking */
+    text-transform: uppercase;
 }
 
 .article-list {
@@ -176,13 +181,12 @@ body {
 .article-item {
     border-bottom: 1px solid #e0e0e0;
     padding: 15px 0;
-    display: flex;
-    justify-content: space-between;
 }
 
 .article-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+    color: #333; /* Customize the color to your liking */
     margin-bottom: 5px;
 }
 
@@ -200,6 +204,28 @@ body {
 
 .article-toggle:hover {
     text-decoration: underline;
+}
+
+/* Add more specific styles for the content of the articles */
+.article-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Style the images in the articles */
+.article-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Style the article's author information */
+.article-author {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
 }
 
 

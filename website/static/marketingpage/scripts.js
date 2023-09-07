@@ -50,13 +50,47 @@ for (const text of storedPromotionalTexts) {
 
 // JavaScript to toggle the flip card
 document.addEventListener('DOMContentLoaded', function () {
-    const flipCards = document.querySelectorAll('.flip-card');
-    
-    flipCards.forEach(card => {
-        card.addEventListener('click', function () {
-            card.querySelector('.flip-card-inner').classList.toggle('flipped');
-        });
-    });
-    });    
+  const flipCards = document.querySelectorAll('.flip-card');
+  
+  flipCards.forEach(card => {
+      card.addEventListener('click', function () {
+          card.classList.toggle('flipped'); // Toggle the 'flipped' class on click
+      });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const flipCards = document.querySelectorAll('.flip-card');
+
+  flipCards.forEach(card => {
+      const summaryText = card.querySelector('#summaryText');
+      const editButton = card.querySelector('#editButton');
+
+      // Function to toggle between displaying text and an input field
+      function toggleEditable() {
+          const isEditing = summaryText.contentEditable === 'true';
+          summaryText.contentEditable = !isEditing;
+          summaryText.style.border = isEditing ? 'none' : '1px solid #ccc';
+
+          if (isEditing) {
+              editButton.textContent = 'Edit';
+          } else {
+              editButton.textContent = 'Save';
+          }
+      }
+
+      // Prevent card flipping when clicking the "Edit" button
+      editButton.addEventListener('click', function (e) {
+          e.stopPropagation(); // Prevent the click event from reaching the card
+          toggleEditable();
+      });
+
+      // Prevent card flipping when clicking the text area
+      summaryText.addEventListener('click', function (e) {
+          e.stopPropagation(); // Prevent the click event from reaching the card
+      });
+  });
+});
+
 
     
