@@ -25,7 +25,6 @@ body {
 
 .navbar-brand {
     font-size: 28px;
-   
     color: #fff;
 }
 
@@ -35,7 +34,6 @@ body {
 
 .nav-link {
     color: #fff !important;
-    
     transition: 0.3s;
 }
 
@@ -70,8 +68,8 @@ body {
     background-color: #ffcc00;
     color: #333;
 }
+
 /* Chatbot interface */
-/* Styles for the chatbot interface */
 .chat-container {
     background-color: white;
     border-radius: 8px;
@@ -86,26 +84,32 @@ body {
     margin-bottom: 10px;
 }
 
-.message {
-    border: 1px solid #e0e0e0;
-    padding: 10px 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    display: inline-block;
-    max-width: 70%;
+/* Add these styles to your CSS stylesheet */
+.user-message {
+    background-color: #e1e5bc;
+    float: right; /* Float user messages to the right */
+    clear: both;
+    max-width: 70%; /* Limit the width of user messages */
+    padding: 10px;
+    margin: 10px 20px 10px 10px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
 .bot-message {
     background-color: #c0daf0;
-    float: left;
+    float: left; /* Float bot messages to the left */
     clear: both;
+    max-width: 70%; /* Limit the width of bot messages */
+    padding: 10px;
+    margin: 10px 10px 10px 20px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
-.customer-message {
-    background-color: #e1e5bc;
-    float: right;
-    clear: both;
-}
+
+
+
 
 .input-container {
     display: flex;
@@ -134,78 +138,6 @@ body {
     background-color: #555;
 }
 
-
-/* Product display */
-.product {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.product:hover {
-    transform: translateY(-5px);
-}
-
-.product-image {
-    height: 340px;
-    overflow-y: auto;
-    margin-bottom: 10px;/* Adjust as needed */
-}
-
-
-/* ... Previous CSS code ... */
-/* Styles for the article section */
-#article-container {
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-}
-
-#article-container h5 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff3366; /* Customize the color to your liking */
-    text-transform: uppercase;
-}
-
-.article-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.article-item {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 15px 0;
-}
-
-.article-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333; /* Customize the color to your liking */
-    margin-bottom: 5px;
-}
-
-.article-date {
-    color: #888;
-}
-
-.article-toggle {
-    color: #007bff;
-    font-weight: bold;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
-
-.article-toggle:hover {
-    text-decoration: underline;
-}
-
 /* Add more specific styles for the content of the articles */
 .article-content {
     font-size: 16px;
@@ -228,15 +160,12 @@ body {
     margin-top: 10px;
 }
 
-
-
 /* Responsive adjustments for article section */
 @media (max-width: 768px) {
     .article-container {
         padding: 10px;
     }
 }
-
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -268,6 +197,4 @@ body {
         border-radius: 10px;
         max-width: 70%;
     }
-
-    /* Adjust other styles as needed for better mobile appearance */
 }
