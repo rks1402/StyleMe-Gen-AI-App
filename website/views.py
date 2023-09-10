@@ -90,66 +90,92 @@ def styleme():
      
     return render_template('styleme.html', products=products)
 
-@views.route('/magazine')
-def magazine():  
 
+# Define the Cloud Function and Cloud Run API URLs
+CLOUD_FUNCTION_URL = 'https://asia-south1-gen-ai-app.cloudfunctions.net/get-articles'
+CLOUD_RUN_API_URL = 'https://qnamagazine-hmvyexj3oa-el.a.run.app/ask'
+
+# Function to get articles for a magazine
+def get_articles(magazine_id):
+    try:
+        response = requests.post(CLOUD_FUNCTION_URL, json={'magazine_id': magazine_id})
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        # Handle the exception and return an error response
+        return None
+
+# Function to ask a question to the chatbot
+def ask_question(user_question, magazine_id, articles):
+    try:
+        payload = {
+            'question': user_question,
+            'articles': articles,
+            'magazine_id': magazine_id
+        }
+        response = requests.post(CLOUD_RUN_API_URL, json=payload)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        return response.json().get('answer', 'Sorry, I couldn\'t find an answer.')
+    except requests.exceptions.RequestException as e:
+        # Handle the exception and return an error response
+        return 'An error occurred while communicating with the chatbot.'
+
+# Flask route for the magazine page
+@views.route('/magazine')
+def magazine():
     return render_template('magazine.html')
 
-CLOUD_FUNCTION_URL = 'https://asia-south1-gen-ai-app.cloudfunctions.net/get-articles'
-
+# Flask route to get articles for a specific magazine
 @views.route('/magazine/<magazine_id>')
 def magazines(magazine_id):
-    response = requests.post(CLOUD_FUNCTION_URL, json={'magazine_id': magazine_id})
-    articles = response.json()
+    # Store the magazine_id in the session
+    session['magazine_id'] = magazine_id
+
+    articles = get_articles(magazine_id)
+    if articles is None:
+        return jsonify({'error': 'An error occurred while fetching articles.'}), 500
 
     return render_template('magazine.html', articles=articles)
 
+# Flask route to handle user questions
+@views.route('/qna', methods=['POST'])
+def qna():
+    # Get the magazine_id from the session
+    magazine_id = session.get('magazine_id')
 
-# Initialize the Datastore client
-datastore_client = datastore.Client()
+    if magazine_id is None:
+        return jsonify({'error': 'Magazine ID not found in the session.'}), 400
 
-# def fetchCustomerMetrics():
-#     try:
-#         customer_id = "C001"
-#         print(customer_id)
-#         if not customer_id:
-#             return 'Missing customerId parameter', 400
+    user_question = request.json.get('question')
+    if not user_question:
+        return jsonify({'error': 'Empty question.'}), 400
 
-#         query = datastore_client.query(kind='metric')  
-#         # Add a filter to fetch data specific to the provided customer ID
-#         query.add_filter('customer_id', '=', customer_id)
+    articles = get_articles(magazine_id)
+    if articles is None:
+        return jsonify({'error': 'An error occurred while fetching articles.'}), 500
 
-#         entities = list(query.fetch())
-        
-#         return entities
-#     except Exception as e:
-#         return str(e), 500
+    answer = ask_question(user_question, magazine_id, articles)
 
-# def fetch_products_with_discount(discount_value):
-#     try:
-#         # Create a client to interact with Google Cloud Datastore
-#         client = datastore.Client()
+    # Return the answer as a JSON response
+    return jsonify({'answer': answer})
 
-#         # Define the kind (entity type) in Datastore
-#         kind = "MasterData"
 
-#         # Define a query to filter products with a specific discount
-#         query = client.query(kind=kind)
-#         query.add_filter("discount", "=", str(discount_value))
+'''@views.route('/qna', methods=['POST'])
+def qna():
+    user_question = request.json.get('question')
 
-#         # Print the query being executed
-#         print(f"Executing query: {query}")
+    # Sample response - you should replace this with your actual logic
+    answer = "This is a sample answer to your question: " + user_question
 
-#         # Execute the query and fetch matching products
-#         matching_products = list(query.fetch())
+    # Return the answer as JSON
+    return jsonify({'answer': answer})'''
 
-#         # Print the number of matching products
-#         print(f"Found {len(matching_products)} matching products")
 
-#         return matching_products
-#     except Exception as e:
-#         print(f"Error fetching products: {str(e)}")
-#         return []
+
+
+
+
+
 
 
 
