@@ -208,6 +208,7 @@ body {
     transition: transform 0.3s;
     flex: 1 0 calc(33.33% - 20px);
     max-width: calc(33.33% - 20px);
+    text-align: center;
 }
 
 .product:hover {
@@ -344,6 +345,29 @@ body {
 }
 .product:hover {
     background-color: #f5c0c0;
+}
+
+.product h2 {
+    margin-top: 10px;
+    font-size: 15px;
+    
+    color: #000;
+}
+
+.product a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    /* Remove underline from all links within .product */
+}
+
+
+
+.product p {
+    margin-top: 5px;
+    font-size: 15px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
 }
 
 

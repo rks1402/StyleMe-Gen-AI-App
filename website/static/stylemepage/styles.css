@@ -127,7 +127,7 @@ body {
     transform: translateY(-5px);
 }
 ::placeholder {
-    font-weight: bold;
+    font-weight: lighter;
   }
 .product-image {
     height: 220px;
