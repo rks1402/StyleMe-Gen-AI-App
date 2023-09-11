@@ -265,7 +265,10 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-
+.container .form-box .input-group textarea {
+    border-top: 2px solid rgb(151, 248, 151);
+    border-left: 2px solid rgb(151, 248, 151) ;
+}
 /* ... More CSS code ... */
 
 /* Media Queries */
