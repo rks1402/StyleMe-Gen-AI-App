@@ -2,9 +2,42 @@ from flask import Flask, request, jsonify
 from google.cloud import datastore
 import vertexai
 from vertexai.language_models import TextGenerationModel
-import json
+import json, datetime, time, requests
+from google.cloud import storage
+import os
 
 app = Flask(__name__)
+
+@app.route('/service/product/all_products', methods=['GET'])
+def get_all_products():
+    try:
+        
+
+        # Create a Datastore client
+        client = datastore.Client()
+
+        # Define the kind from which you want to fetch the records
+        kind = "MasterData"
+
+        # Create a query to fetch the record with the specified product_id
+        query = client.query(kind=kind)
+
+        # Fetch the entities that match the query
+        results = list(query.fetch())
+
+        if not results:
+            return f"No record found.", 404
+
+        # Convert the entity to a dictionary
+        records = [dict(result) for result in results]
+
+        # Return the JSON response
+        return json.dumps(records)
+
+    except Exception as e:
+        error_message = f"Error occurred: {e}"
+        return jsonify(error=error_message), 500
+
 
 @app.route('/service/product/gender', methods=['GET'])
 def get_product_by_gender():
@@ -147,52 +180,46 @@ def get_products_by_ocassion():
 
 
 
-# @app.route('/service/product/recommendation', method=['GET'])
-# def get_recommended_products():
+@app.route('/service/product/recommendation', methods=['GET'])
+def get_recommended_products():
 
-    # This function needs to be modified !
-    # client = datastore.Client()
+    try:
+        datastore_client = datastore.Client()
+
+        request_json = request.get_json()
+        if not request_json:
+            return jsonify({'error': 'Invalid JSON'}), 400
+
+        query = datastore_client.query(kind='MasterData')
+
+        occasion = request_json.get('Occasion', '').lower()
+        if occasion:
+            query.add_filter('ocassion', '=', occasion)  # Adjusted property name here
+
+        demographics = request_json.get('Demographics', {})
+        gender = demographics.get('gender', '').lower()
+        if gender:
+            query.add_filter('gender', '=', gender)
+
+        color = request_json.get('color', '').lower()
+        if color:
+            query.add_filter('color', '=', color)
+
+        material = request_json.get('material', '').lower()
+        if material:
+            query.add_filter('material', '=', material)
+
+        pattern = request_json.get('pattern', '').lower()
+        if pattern:
+            query.add_filter('pattern', '=', pattern)
+
+        results = query.fetch()
+        product_ids = [result['product_ID'] for result in results]
+        return jsonify({'product_ids': product_ids})
     
-    # query = client.query(kind='MasterData')
-    # request_json = filter_request.get_json()
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    # if request_json and 'Occasion' in request_json:
-    #     ocassion = request_json['Occasion']
-    #     ocassion = ocassion.lower()
-    #     query.add_filter('ocassion', '=', ocassion)
-    # else:
-    #     return f'Data not found'
-
-    # request_json = request.get_json()
-    # if request_json and 'Demographics' in request_json:
-    #     Demographics = request_json['Demographics']
-    #     if 'gender' in 'Demographics':
-    #         gender = Demographics['gender']
-    #         gender = gender.lower()
-    #         query.add_filter('gender', '=', gender)
-
-    # if request_json and 'color' in request_json:
-    #     color = request_json['color']
-    #     color = color.lower()
-    #     query.add_filter('color', '=', color)
-
-    # if request_json and 'material' in request_json:
-    #     material = request_json['material']
-    #     material = material.lower()
-    #     query.add_filter('material', '=', material)
-
-    # if request_json and 'pattern' in request_json:
-    #     pattern = request_json['pattern']
-    #     pattern = pattern.lower()
-    #     query.add_filter('pattern', '=', pattern)
-
-    # results = query.fetch()
-    # l=list()
-    # for result in results:
-    #     l.append(result['product_ID'])
-    # result=str(l)
-    # result = str(['M01','F01','F02'])
-    # return result
 
 
 
@@ -200,7 +227,7 @@ def get_products_by_ocassion():
 def summarize():
 
     # Initialize Vertex AI
-    vertexai.init(project="gen-ai-app", location="us-central1")
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
 
     # Load the pre-trained text generation model
     model = TextGenerationModel.from_pretrained("text-bison@001")
@@ -231,7 +258,7 @@ def generate_promotion_text():
 
 
     # Initialize Vertex AI
-    vertexai.init(project="gen-ai-app", location="us-central1")
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
 
     # Load the pre-trained text generation model
     model = TextGenerationModel.from_pretrained("text-bison@001")
@@ -270,7 +297,7 @@ def evaluate_promotion_text():
 
 
     # Initialize Vertex AI
-    vertexai.init(project="gen-ai-app", location="us-central1")
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
 
     # Load the pre-trained text generation model
     model = TextGenerationModel.from_pretrained("text-bison@001")
@@ -306,6 +333,159 @@ def evaluate_promotion_text():
     except Exception as e:
         return jsonify({"error": str(e)})
     
+
+
+@app.route('/service/ai/magazine_qna', methods=['POST'])
+def magazine_qna():
+
+    # Initialize Vertex AI
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
+
+    # Load the pre-trained text generation model
+    model = TextGenerationModel.from_pretrained("text-bison@001")
+
+    try:
+        data = request.json
+
+        # Validate the input data
+        user_question = data.get('question', '')
+        if not user_question:
+            return jsonify({"error": "Missing or empty 'question' field in the request."}), 400
+
+        article = data.get('article', '')
+        articles = data.get('articles', '')
+
+        # Create a conversation context with the user's question and article text
+        conversation = f"User: {user_question}\nArticle: {article}\nArticles: {articles}"
+
+        # Text generation parameters
+        parameters = {
+            "max_output_tokens": 256,
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "top_k": 40
+        }
+
+        # Generate text using the model
+        response = model.predict(conversation, **parameters)
+        answer = response.text
+
+        return jsonify({"answer": answer})
+    
+    except Exception as e:
+        return jsonify({"error": "An error occurred while processing the request."}), 500    
+
+
+
+@app.route('/service/ai/demographic_json', methods=['POST'])
+def generate_demographic_json():
+
+
+    # Initialize Vertex AI
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
+
+    # Load the pre-trained text generation model
+    model = TextGenerationModel.from_pretrained("text-bison@001")
+
+    try:
+        chat = request.json['chat']
+        occasion_demographics = """
+        {
+            "Occasion": "wedding",
+            "color": "black",
+            "material": "silk",
+            "pattern": "solid",
+            "Demographics": {
+                "Budget": {
+                "Min": 150,
+                "Max": 200
+                },
+                "gender": "men",
+                "Style": "Classic and Elegant"
+            }
+        }
+            """
+        # Test POST request
+        prompt = chat + "Give the User Occasion and demographics from this conversation in JSON format." + occasion_demographics + "Don't give color. and gender can be only from (boys,girls,women and men)"
+
+        # Text generation parameters
+        parameters = {
+            "max_output_tokens": 256,
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "top_k": 40
+        }
+
+        # Generate text using the model
+        response = model.predict(prompt, **parameters)
+        demographic_json = response.text
+
+        return jsonify(demographic_json),200
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route('/service/store_conversation', methods=['POST'])
+def store_conversation():
+    try:
+        client = datastore.Client()
+        # Generate a unique key using a timestamp
+        current_datetime = datetime.datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y%m%d%H%M%S")
+        chat_id = f"user_{formatted_datetime}"
+
+        # Parse incoming conversation data from JSON in the request body
+        conversation_data = request.get_json()
+        user_consent = conversation_data.get('user_consent', True)  # Default to True if not provided
+        appointment_required = conversation_data.get('appointment_required', True)  # Default to True if not provided
+
+        # Create a new conversation entity with the generated key
+        conversation_entity = datastore.Entity(client.key('Conversation', chat_id))
+        conversation_entity['chat_id'] = chat_id # Store the generated key as a property
+        conversation_entity['chat'] = conversation_data['conversation']
+        conversation_entity['user_consent'] = user_consent
+        conversation_entity['appointment_required'] = appointment_required
+        conversation_entity['created_at'] = current_datetime
+        
+
+        # Save the conversation entity to Datastore
+        client.put(conversation_entity)
+
+        response = {
+            "status": "success",
+            "message": "Conversation stored successfully",
+            "chat_id": chat_id
+        }
+        return jsonify(response), 200
+    except Exception as e:
+        response = {
+            "status": "error",
+            "message": str(e)
+        }
+        return jsonify(response), 500    
+
+
+@app.route('/service/get_articles', methods=['POST'])
+def get_articles():
+    request_json = request.get_json()
+    if not request_json or 'magazine_id' not in request_json:
+        return 'Invalid request', 400
+
+    magazine_id = request_json['magazine_id']
+    bucket_name = 'drzzmagazine'
+    blob_prefix = f'magazine_{magazine_id}/'
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blobs = bucket.list_blobs(prefix=blob_prefix)
+
+    articles = []
+    for blob in blobs:
+        article_content = blob.download_as_text()
+        articles.append(article_content)
+
+    return json.dumps(articles)
 
 
 if __name__ == '__main__':
