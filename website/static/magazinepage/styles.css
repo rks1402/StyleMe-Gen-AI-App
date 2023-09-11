@@ -160,6 +160,79 @@ body {
     margin-top: 10px;
 }
 
+
+.flip-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #c07474;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-back {
+    background-color: #e5e5e5;
+    transform: rotateY(180deg);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.product-image {
+    width: 300px;
+    height: 400px;
+}
+
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 0.15em;
+    animation: typing 3s steps(40, end), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+
+
+
 /* Responsive adjustments for article section */
 @media (max-width: 768px) {
     .article-container {
@@ -198,3 +271,6 @@ body {
         max-width: 70%;
     }
 }
+
+
+
