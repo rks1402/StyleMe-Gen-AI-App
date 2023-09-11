@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching answer:', error);
         });
     });
+    
 });
 
 // Function to add a user message to the chatbox
@@ -54,3 +55,8 @@ function addBotMessage(message) {
     botMessageElement.textContent = message;
     chatbox.appendChild(botMessageElement);
 }
+
+function flipCard(element) {
+    element.closest('.flip-card').classList.toggle('flipped');
+}
+
