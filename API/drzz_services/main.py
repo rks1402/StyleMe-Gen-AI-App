@@ -78,11 +78,11 @@ def get_product_by_gender():
         return jsonify(error=error_message), 500
 
 
-@app.route('/service/product/id', methods=['GET'])
+@app.route('/service/product/id', methods=['POST'])
 def get_product_by_id():
     try:
         # Get the product_id from the query parameters in the HTTP request
-        product_id = request.args.get('product_id')
+        product_id = request.json['product_id']
 
         if not product_id:
             return "Product ID not provided.", 400
@@ -180,7 +180,7 @@ def get_products_by_ocassion():
 
 
 
-@app.route('/service/product/recommendation', methods=['GET'])
+@app.route('/service/product/recommendation', methods=['POST'])
 def get_recommended_products():
 
     try:
@@ -233,8 +233,19 @@ def summarize():
     model = TextGenerationModel.from_pretrained("text-bison@001")
 
     try:
-        content = request.json['content']
-        print(type(content))
+        summary = request.json['content']
+        print(type(summary))
+        json= '''{
+            "age": 35,
+        "gender": "female",
+        "income": "high",
+        "occupation": "professional",
+        "tone of text": "friendly"
+        "location": "urban"
+        }'''
+        
+        # Test POST request
+        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
 
         # Text generation parameters
         parameters = {
@@ -245,7 +256,7 @@ def summarize():
         }
 
         # Generate text using the model
-        response = model.predict(content, **parameters)
+        response = model.predict(prompt, **parameters)
         summarized_text = response.text
 
         return jsonify({"summary": summarized_text})
@@ -287,7 +298,7 @@ def generate_promotion_text():
         response = model.predict(prompt, **parameters)
         promotion_text = response.text
 
-        return jsonify(promotion_text),200
+        return jsonify({"summary": promotion_text}),200
 
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -304,16 +315,19 @@ def evaluate_promotion_text():
 
     try:
 
-        json_example = '''{
-            "promotion_text": "This is a sample text.",
-            "tone" : "friendly",
-            "is_abusive_language": false,
-            "is_adult_content": false
-        }'''
+        json_example = """
+        {
+            
+            "promotion tone": "friendly",
+            "emotion": "positive",
+            "season": "fall",
+            "occasion": "wedding"
+        }
+            """
         
         promotion_text = request.json['promotion_text']
         
-        prompt = "You are a marketing lead content moderator. " + promotion_text + " Review above marketing promotion text and return the result with following attributes such as Tone, is_abusive_language, is_adult_content in a json format like this " + json_example
+        prompt = "You are the marketing campaign consultant, Review the following text in the triple quotes and give the tone, emotion ,season and occasion from the text and return the value as son attributes. for any missing value, mention as null  " + promotion_text + "sample json like  " + json_example
 
 
         # Text generation parameters
@@ -328,7 +342,7 @@ def evaluate_promotion_text():
         response = model.predict(prompt, **parameters)
         evaluation_metric = response.text
 
-        return jsonify(evaluation_metric),200
+        return jsonify({"summary": evaluation_metric}),200
 
     except Exception as e:
         return jsonify({"error": str(e)})
@@ -420,7 +434,7 @@ def generate_demographic_json():
         response = model.predict(prompt, **parameters)
         demographic_json = response.text
 
-        return jsonify(demographic_json),200
+        return jsonify({"summary": demographic_json}),200
 
     except Exception as e:
         return jsonify({"error": str(e)})
