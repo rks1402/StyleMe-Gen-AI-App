@@ -245,7 +245,7 @@ def summarize():
         }'''
         
         # Test POST request
-        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
+        prompt = summary
 
         # Text generation parameters
         parameters = {
@@ -280,10 +280,9 @@ def generate_promotion_text():
             "promotion_text": "This is a sample text."
         }'''
         
-        occasion = request.json['occasion']
-        gender = request.json['gender']
+        summary = request.json['content']
         
-        prompt = "You are a creative marketing content writer. Generate marketing advertisement promotion text for the occasion " + occasion + " and gender " + gender + " with happy and excitment tone.Return the result in a json format like this" + json_example
+        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
 
 
         # Text generation parameters
@@ -487,7 +486,7 @@ def get_articles():
         return 'Invalid request', 400
 
     magazine_id = request_json['magazine_id']
-    bucket_name = 'drzzmagazine'
+    bucket_name = 'drzz_gen_ai_magazine'
     blob_prefix = f'magazine_{magazine_id}/'
 
     storage_client = storage.Client()

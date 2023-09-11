@@ -23,7 +23,7 @@ import re
 views = Blueprint('views', __name__)
 
 
-BASE_URL = "https://drzz-services-hmvyexj3oa-el.a.run.app"
+BASE_URL = "https://drzz-services-kcvokjzgdq-nw.a.run.app"
 
 @views.route('/')
 def home():
@@ -186,9 +186,6 @@ def qna():
 
 
 
-
-
-
     
 datastore_client= datastore.Client()
 @views.route('/marketing')
@@ -208,7 +205,7 @@ def marketing():
         data = {"content": summary}
         
         # json_metrics = fetchCustomerMetrics()
-        endpoint = '/service/ai/summarize'
+        endpoint = '/service/ai/promotion'
         api_url = f"{BASE_URL}{endpoint}"
 
         response_post = requests.post(api_url, json=data)
@@ -223,10 +220,14 @@ def marketing():
                 text_part = match.group(2)
             
             
-            session['promo'] = text_part
+            #Find the index of the colon ":" after the target text
+            start_index = text_part.find("**Promotion advertisement banner text:**") + len("**Promotion advertisement banner text:**")
+            # Extract the string after the colon
+            result = text_part[start_index:].strip()
+            session['promo'] = result
            
           
-            return render_template('marketing.html', json_part=json_part,text_part=text_part,summary=summary)
+            return render_template('marketing.html', json_part=json_part,text_part=result,summary=summary)
         
         else:
             print("POST Request Failed!")
@@ -239,7 +240,7 @@ def marketing():
 
 # Initialize the Google Cloud Storage client
 storage_client = storage.Client()
-bucket_name = 'uploaded-cloth'  # Replace with your GCS bucket name
+bucket_name = 'drzz_gen_ai_image_upload'  # Replace with your GCS bucket name
 
 
 
