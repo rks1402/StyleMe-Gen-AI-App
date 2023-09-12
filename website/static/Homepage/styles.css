@@ -107,8 +107,9 @@ body {
     color: #333;
 }
 .welcome {
-    font-size: 17px;
-    font-family: 'Times New Roman', Times, serif;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #000;
   }
 
 
@@ -123,7 +124,7 @@ body {
 .product {
     flex: 0 0 calc(25% - 20px); /* 4 products per row */
     margin: 10px;
-    padding: 10px;
+    
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     background-color: #fff;
@@ -184,7 +185,7 @@ body {
     }
 }*/
 .product:hover {
-    background-color: #f5c0c0;
+    background-color: #868484;
 }
 
 
@@ -326,10 +327,10 @@ body {
     }
 
     .product h2 {
-        background-color: #f2f2f2;
-        padding: 10px;
-        border-radius: 5px;
+        
         margin-top: 10px;
+        font-size: 15px;
+        color: #000;
     }
 
     .product p {
