@@ -23,7 +23,7 @@ import re
 views = Blueprint('views', __name__)
 
 
-BASE_URL = "https://drzz-services-kcvokjzgdq-nw.a.run.app"
+BASE_URL = "https://drzz-services-hmvyexj3oa-el.a.run.app"
 
 @views.route('/')
 def home():
@@ -212,22 +212,11 @@ def marketing():
         if response_post.status_code == 200:
             response_data = response_post.json()
             response = response_data.get("summary", "No summary available.")
-            pattern = r'({.*})\s+(.+)'
-            match = re.search(pattern, response, re.DOTALL)
-
-            if match:
-                json_part = match.group(1)
-                text_part = match.group(2)
             
-            
-            #Find the index of the colon ":" after the target text
-            start_index = text_part.find("**Promotion advertisement banner text:**") + len("**Promotion advertisement banner text:**")
-            # Extract the string after the colon
-            result = text_part[start_index:].strip()
-            session['promo'] = result
+            session['promo'] = response
            
           
-            return render_template('marketing.html', json_part=json_part,text_part=result,summary=summary)
+            return render_template('marketing.html',text_part=response,summary=summary)
         
         else:
             print("POST Request Failed!")
@@ -240,7 +229,7 @@ def marketing():
 
 # Initialize the Google Cloud Storage client
 storage_client = storage.Client()
-bucket_name = 'drzz_gen_ai_image_upload'  # Replace with your GCS bucket name
+bucket_name = 'uploaded-cloth'  # Replace with your GCS bucket name
 
 
 

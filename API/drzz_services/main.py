@@ -282,7 +282,7 @@ def generate_promotion_text():
         
         summary = request.json['content']
         
-        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing, return the user data in JSON format like this."
+        prompt = summary + f" Read the above passage and create a promotion advertisement banner text as one liner for the clothing."
 
 
         # Text generation parameters
