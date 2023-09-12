@@ -23,7 +23,7 @@ import re
 views = Blueprint('views', __name__)
 
 
-BASE_URL = "https://drzz-services-kcvokjzgdq-nw.a.run.app"
+BASE_URL = "https://drzz-services-hmvyexj3oa-el.a.run.app"
 
 @views.route('/')
 def home():

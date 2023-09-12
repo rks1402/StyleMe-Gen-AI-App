@@ -231,7 +231,13 @@ body {
 }
 
 
-
+.magazine-article {
+    font-family: 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 10px 0;
+}
 
 /* Responsive adjustments for article section */
 @media (max-width: 768px) {
