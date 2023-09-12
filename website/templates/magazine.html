@@ -80,61 +80,51 @@
        
         
     <!-- Main Content -->
-     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 flip-card">
-                <!-- Product Display -->
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <!-- Call the JavaScript function when the image is clicked -->
-                        <a href="javascript:void(0);" onclick="flipCard(this)">
-                            <img class="product-image" src="../static/magazinepage/vogue magazine.jpg" alt="Product 1">
-                        </a>
-                    </div>
-                    <div class="flip-card-back" onclick="flipCard(this)">
-                        {% if articles %}
-                        <!-- Display articles for a specific magazine -->
-                        <h5>Articles for Magazine {{ magazine_id }}</h5>
-                        <ul>
-                            {% for article in articles %}
-                            <li>
-                                <p>{{ article }}</p>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <h5>Welcome to the Magazine Page!</h5>
-                        <!-- Other content here -->
-                        {% endif %}
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Product Display -->
+        <div class="col-md-6 flip-card">
+            <div class="flip-card-inner" onclick="flipCard(this)">
+                <div class="flip-card-front">
+                    <a href="{{ url_for('views.magazines', magazine_id=1) }}">
+                        <img class="product-image" src="../static/magazinepage/vogue magazine.jpg" alt="Product 1">
+                    </a>
+                </div>
+                <div class="flip-card-back">
+                    {% if articles %}
+                    <h5>Articles for Magazine {{ magazine_id }}</h5>
+                    <ul>
+                        {% for article in articles %}
+                        <li>
+                            <p>{{ article }}</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <h5>Welcome to the Magazine Page!</h5>
+                    {% endif %}
                 </div>
             </div>
+        </div>
 
-            
-
-
-            <!-- HTML code for the chatbot container -->
-            <div class="col-md-6">
-                <div class="chat-container" class="chat-container mobile-only">
-                    <div class="chat-box" id="chat-box">
-                        <!-- Bot messages will be displayed here -->
-                        <div class="message bot-message">Hello! How can I assist you today?</div>
-                    </div>
-                    <div class="input-container">
+        <!-- Chatbot Container (Moved to the Left) -->
+        <div class="col-md-6">
+            <div class="chat-container">
+                <div class="chat-box" id="chat-box">
+                    <!-- Bot messages will be displayed here -->
+                    <div class="message bot-message">Hello! How can I assist you today?</div>
+                </div>
+                <div class="input-container">
                     <textarea class="form-control" id="user-input" rows="3" placeholder="Type your message..."></textarea>
                     <button class="btn btn-outline-secondary" id="send-button">Send</button>
-                    </div>
                 </div>
             </div>
-            
-            
-        </div>
-        
-    </div>
-        
-            
         </div>
     </div>
+</div>
+
+
+            
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
