@@ -1,0 +1,150 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation bar styles */
+.navbar {
+  background-color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+  font-size: 28px;
+ 
+  color: #fff;
+}
+
+.navbar-toggler-icon {
+  background-color: #fff;
+}
+
+.nav-link {
+  color: #fff !important;
+  
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+  background-color: #333;
+}
+
+.dropdown-item {
+  color: #464343 !important;
+}
+
+.dropdown-item:hover {
+  background-color: #ffcc00;
+}
+
+.form-control {
+  border: 1px solid #e0e0e0;
+  color: #333;
+  background-color: #fff;
+}
+
+.btn-outline-success {
+  color: #fff;
+  border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+  background-color: #ffcc00;
+  color: #333;
+}
+
+/* File upload form styles */
+.form-box {
+  margin-top: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-outline-secondary {
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #28a745;
+  color: #fff;
+}
+
+/* Product Display styles */
+.product {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product img {
+  width: 200px;
+  height: auto;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product img:hover {
+  transform: scale(1.1);
+}
+
+/* Bootstrap styles */
+.btn-outline-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-outline-success:hover {
+  background-color: #218838;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .navbar-brand {
+      font-size: 20px;
+  }
+
+  .navbar-nav .nav-link {
+      font-size: 14px;
+  }
+
+  .form-control {
+      padding: 8px;
+  }
+
+  .btn-outline-secondary {
+      padding: 8px 16px;
+  }
+
+  .product img {
+      width: 150px;
+  }
+}

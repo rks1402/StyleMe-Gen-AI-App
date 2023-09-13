@@ -1,0 +1,282 @@
+/* Reset default styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    background-color: #333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.nav-link {
+    color: #fff !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: #464343 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    color: #fff;
+    border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+/* Chatbot interface */
+.chat-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* Add these styles to your CSS stylesheet */
+.user-message {
+    background-color: #e1e5bc;
+    float: right; /* Float user messages to the right */
+    clear: both;
+    max-width: 70%; /* Limit the width of user messages */
+    padding: 10px;
+    margin: 10px 20px 10px 10px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.bot-message {
+    background-color: #c0daf0;
+    float: left; /* Float bot messages to the left */
+    clear: both;
+    max-width: 70%; /* Limit the width of bot messages */
+    padding: 10px;
+    margin: 10px 10px 10px 20px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+
+
+.input-container {
+    display: flex;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#send-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-button:hover {
+    background-color: #555;
+}
+
+/* Add more specific styles for the content of the articles */
+.article-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Style the images in the articles */
+.article-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Style the article's author information */
+.article-author {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+}
+
+
+.flip-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+}
+
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: #c07474;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip-card-back {
+    background-color: #e5e5e5;
+    transform: rotateY(180deg);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.product-image {
+    width: 300px;
+    height: 400px;
+}
+
+.typing-effect {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 0.15em;
+    animation: typing 3s steps(40, end), blink-caret 0.5s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+
+
+.magazine-article {
+    font-family: 'Times New Roman', serif;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: justify;
+    margin: 10px 0;
+}
+
+/* Responsive adjustments for article section */
+@media (max-width: 768px) {
+    .article-container {
+        padding: 10px;
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar {
+        padding: 5px 0;
+    }
+
+    .chat-container {
+        margin-top: 20px;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .chat-box {
+        height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
+    .bot-message, .customer-message {
+        border-radius: 10px;
+        max-width: 70%;
+    }
+}
+
+
+

@@ -1,0 +1,351 @@
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.navbar {
+    background-color: #333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+    font-size: 28px;
+   
+    color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.nav-link {
+    color: #fff !important;
+    
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: #464343 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    color: #fff;
+    border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffcc00;
+    color: #333;
+}
+.welcome {
+    margin-top: 10px;
+    font-size: 15px;
+    color: #000;
+  }
+
+
+/* Add this CSS for product grid layout */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: -10px;
+}
+
+.product {
+    flex: 0 0 calc(25% - 20px); /* 4 products per row */
+    margin: 10px;
+    
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+
+
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product h2 {
+    font-size: 15px;
+    margin-top: 5px;
+    color: #000;
+}
+
+.product p {
+    font-size: 15px;
+    margin-top: 5px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+    
+}
+
+/* Change color of product links to blue and remove underline */
+.product a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active product link */
+.product a.active {
+    font-weight: bold; /* Highlight the active link */
+}
+
+/*.product {
+    animation: pulse 2s infinite;
+    
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}*/
+.product:hover {
+    background-color: #bbb9b9;
+}
+
+
+
+
+
+
+/* Dropdown adjustments */
+.dropdown-menu {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    font-size: 16px;
+    color: #333;
+}
+
+
+/* Style for pagination */
+/* Style for pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0; /* Add margin on top and bottom */
+}
+
+.pagination a {
+    color: #333;
+    text-decoration: none;
+    padding: 4px 8px; /* Adjust padding for smaller size */
+    border: 1px solid #ccc;
+    margin: 0 2px; /* Adjust margin for smaller spacing */
+    border-radius: 4px;
+    font-size: 14px; /* Adjust font size for smaller text */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Change color of pagination links to blue and remove underline */
+.pagination a {
+    color: rgb(0, 0, 0); /* Change to your desired color */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Style the active pagination link */
+.pagination a.active {
+    font-weight: bold; /* Highlight the active link */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .nav-link {
+        font-size: 16px;
+    }
+
+    .product {
+        flex: 0 0 calc(50% - 20px); /* 2 products per row */
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .product p {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .form-control {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
+.container {
+    width: 100%;
+}
+
+    .product {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product h2 {
+        
+        margin-top: 10px;
+        font-size: 15px;
+        color: #000;
+    }
+
+    .product p {
+        margin-top: 10px;
+    }
+  
+   
+    
+        .pagination a {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    
+        .pagination a.active {
+            margin: 4px 0;
+            padding: 6px 10px;
+        }
+    
