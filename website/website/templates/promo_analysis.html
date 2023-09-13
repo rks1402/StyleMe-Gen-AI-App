@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Web Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='marketingpage/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('views.homepage') }}">DRZZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Navigation Links -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('views.homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.styleme') }}">Style Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.magazine') }}">Magazine</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.chathistory') }}">Fashion Advisor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.marketing') }}">Marketing</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look-Alike</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Shop For
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Men</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Women</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Boys</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Girls</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Wedding</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Party</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Birthday</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Casual</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Formal</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- Search Form -->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <!-- User Authentication Links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Modal -->
+
+
+    <div class="container-fluid">
+        <div class="row">
+            
+            <div class="col-md-6">
+                <!-- Marketing Prompt Box Container -->
+                <div class="horizontal-container">
+                    <div class="template">
+                        <h6>Promotional Text :</h6>
+                        {{text_part}} <!-- Replace this with your promotional text -->
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6">
+                <!-- Marketing Prompt Box Container -->
+                <div class="horizontal-container">
+                    <div class="template">
+                        <h6>Promotional Metrics:</h6>
+                        <!-- Parse the JSON string into a JavaScript object -->
+                        <script>
+                            var jsonString = `{{ summary | safe }}`; // Use backticks to preserve line breaks
+                            var metrics = JSON.parse(jsonString);
+                        </script>
+                        <!-- Display promotional metrics in a table -->
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Promotion Tone</th>
+                                    <td id="promotionTone"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Emotion</th>
+                                    <td id="emotion"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Season</th>
+                                    <td id="season"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Occasion</th>
+                                    <td id="occasion"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Button to toggle the product display -->
+<button class="btn btn-success ml-2" id="shopNowButton">View The Collection</button>
+
+<!-- Product Display -->
+<div class="container-fluid product-container" id="productDisplayContainer" style="display: none;">
+    {% for product in products %}
+      <div class="product">
+        <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
+          <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
+          <h2>{{ product.product_name }}</h2>
+          <p>${{ product.price }}</p>
+        </a>
+      </div>
+    {% endfor %}
+</div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="../static/promo_analysis/scripts.js"></script>    
+    <script>
+        document.getElementById('promotionTone').textContent = metrics['promotion tone'];
+        document.getElementById('emotion').textContent = metrics['emotion'];
+        document.getElementById('season').textContent = metrics['season'];
+        document.getElementById('occasion').textContent = metrics['occasion'];
+    </script>
+    
+</body>
+
+</html>

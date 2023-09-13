@@ -1,0 +1,343 @@
+/* Reset default styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; /* Makes the two divs appear side by side */
+}
+
+.navbar {
+    background-color: #333;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+    font-size: 28px;
+   
+    color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+
+.nav-link {
+    color: #fff !important;
+    
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffcc00 !important;
+}
+
+.dropdown-menu {
+    background-color: #333;
+}
+
+.dropdown-item {
+    color: #464343 !important;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    color: #fff;
+    border-color: #ffcc00;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+
+/* ... Previous CSS code ... */
+
+/* Product display */
+.product {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+::placeholder {
+    font-weight: lighter;
+  }
+.product-image {
+    height: 220px;
+    overflow-y: auto;
+    margin-bottom: 10px;/* Adjust as needed */
+}
+
+/*.product {
+    animation: pulse 2s infinite;
+    
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}*/
+.product:hover {
+    background-color: #bbb9b9;
+}
+
+    
+
+/* Media Queries ... */
+
+
+
+/* ... Previous CSS code ... */
+
+
+
+/* Default styles for larger screens */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product img {
+    width: 100%;
+    height: 300px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.product h2 {
+    margin-top: 10px;
+    font-size: 15px;
+    
+    color: #000;
+}
+
+.product a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    /* Remove underline from all links within .product */
+}
+
+
+
+.product p {
+    margin-top: 5px;
+    font-size: 15px;
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.product-container {
+    display: flex;
+    max-height: max-content;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    flex: 1 0 calc(33.33% - 20px);
+    max-width: calc(33.33% - 20px);
+    text-align: center;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+.container .form-box .input-group textarea {
+    border-top: 2px solid rgb(151, 248, 151);
+    border-left: 2px solid rgb(151, 248, 151) ;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-box, .product-container {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
+/* Chatbot interface */
+.chat-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* Add these styles to your CSS stylesheet */
+.user-message {
+    background-color: #e1e5bc;
+    float: right; /* Float user messages to the right */
+    clear: both;
+    max-width: 70%; /* Limit the width of user messages */
+    padding: 10px;
+    margin: 10px 20px 10px 10px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.bot-message {
+    background-color: #c0daf0;
+    float: left; /* Float bot messages to the left */
+    clear: both;
+    max-width: 70%; /* Limit the width of bot messages */
+    padding: 10px;
+    margin: 10px 10px 10px 20px; /* Adjust margin for spacing */
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+
+
+
+.input-container {
+    display: flex;
+}
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+#send-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-button:hover {
+    background-color: #555;
+}
+
+/* Add this CSS to your existing stylesheet */
+.row {
+    display: flex; /* Use flexbox to make columns the same height */
+    align-items: stretch; /* Stretch columns to the same height */
+}
+
+
+/* ... More CSS code ... */
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .chat-container {
+        margin-top: 20px;
+        max-width: 100%; /* Make chat container full width */
+        border-radius: 10px; /* Slightly rounded corners */
+    }
+
+    .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    .input-container {
+        flex-direction: column; /* Stack input and send button vertically */
+    }
+
+    #user-input {
+        margin-right: 0; /* Remove margin to make full width */
+        border-radius: 10px; /* Slightly rounded input */
+    }
+
+    #send-button {
+        margin-top: 10px; /* Add some space between input and button */
+        border-radius: 10px; /* Slightly rounded button */
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%; /* Adjust message width for mobile */
+    }
+
+    .bot-message, .customer-message {
+        border-radius: 10px; /* Slightly rounded message bubbles */
+        max-width: 70%; /* Limit message width */
+    }
+
+    .bot-message {
+        background-color: #c0daf0;
+        float: left;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    .customer-message {
+        background-color: #e1e5bc;
+        float: right;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    /* Adjust other styles as needed for better mobile appearance */
+}

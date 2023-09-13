@@ -91,14 +91,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <div class="chat-container">
-                    <div class="chat-box" id="chat-box">
-                        <!-- Bot messages will be displayed here -->
-                        <div class="message bot-message">Hello! How can I assist you today?</div>
-                    </div>
-                    <div class="input-container">
-                        <textarea class="form-control" id="user-input" rows="3" placeholder="Type your message..."></textarea>
-                        <button class="btn btn-outline-secondary" id="send-button">Send</button>
+                <div class="container">
+                    <div class="form-box">
+                        <form action="/submit_chat" method="post">
+                            
+                            <div class="input-group">
+                                <textarea class="form-control" name="chat" rows="5"
+                                    placeholder="Enter your chat script here"></textarea>
+                                <button class="btn btn-outline-secondary" type="submit">Submit Chat</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

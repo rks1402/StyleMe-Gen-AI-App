@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Web Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='marketingpage/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+      
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('views.homepage') }}">DRZZ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <!-- Navigation Links -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('views.homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.styleme') }}">Style Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.magazine') }}">Magazine</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.chathistory') }}">Fashion Advisor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.marketing') }}">Marketing</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look-Alike</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Shop For
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Men</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Women</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Boys</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Girls</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Wedding</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Party</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Birthday</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Casual</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('views.homepage') }}">Formal</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- Search Form -->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <!-- User Authentication Links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Modal -->
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- Flip Card Container -->
+                <div class="flip-card" id="flip-card-1">
+                    <div class="flip-card-inner">
+                        <!-- Summary Side -->
+                        <div class="flip-card-front horizontal-container">
+                            <div class="summary">
+                                <h6>Occasions and Demographics :</h6>
+                                <p id="summaryText">{{summary}}</p>
+                                <button id="editButton">Edit</button>
+                            </div>
+                        </div>
+                        <!-- JSON Data Side -->
+                        <div class="flip-card-back horizontal-container">
+                            <div class="json">
+                                <h6>JSON Data :</h6>
+                                <pre>{{json_part}}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Marketing Prompt Box Container -->
+                <div class="horizontal-container">
+                    <div class="template">
+                        <h6>Promotional Text :</h6>
+                        {{text_part}} <!-- Replace this with your promotional text -->
+                    </div>
+                </div>
+                <!--<div class="horizontal-container">
+                    <div class="template">
+                        <h6>Discount :</h6>
+                    
+                        {{discount}}  
+                    </div>
+                </div>-->
+                
+            </div>
+            <div class="col-md-4">
+                <!-- Marketing Prompt Box Container -->
+                <div class="horizontal-container">
+                    <div class="template">
+                        <h6>User Promotional Text :</h6>
+                        <!-- Display previous and current promotional texts as an unordered list -->
+                        <div>
+                        <ul id="user-promotional-text">
+                            <!-- Previous texts will be added here -->
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+            </div>
+            
+            
+            <!-- Button to reload the page -->
+            <div class="reload-button">
+                <button id="send-button" onclick="location.reload()">Regenerate Promotional Text</button>
+            </div>
+            <br>
+            <div class="reload-button">
+                <a href="{{ url_for('views.promo_analysis') }}"><button id="send-button" style="margin-top: 10px;">Promotional Analysis</button></a> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="../static/marketingpage/scripts.js"></script>
+</body>
+
+</html>
