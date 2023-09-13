@@ -60,6 +60,7 @@ function flipCard(element) {
     element.closest('.flip-card').classList.toggle('flipped');
 }
 
+
 const userInput = document.getElementById("user-input");
     const sendButton = document.getElementById("send-button");
 
@@ -73,3 +74,20 @@ const userInput = document.getElementById("user-input");
             sendButton.click();
         }
     });
+
+
+    // Get the summary button and the summary section
+const summaryButton = document.getElementById("summary-button");
+const summarySection = document.getElementById("summary");
+
+// Add a click event listener to the button
+summaryButton.addEventListener("click", function () {
+    // Toggle the visibility of the summary section
+    if (summarySection.style.display === "none" || summarySection.style.display === "") {
+        summarySection.style.display = "block";
+        summaryButton.textContent = "Hide Summary"; // Change button text
+    } else {
+        summarySection.style.display = "none";
+        summaryButton.textContent = "Show Summary"; // Change button text
+    }
+});
