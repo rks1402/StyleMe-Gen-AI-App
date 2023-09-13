@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInput.value = '';
 
         // Make a request to the Cloud Run API with userQuestion
-        fetch('/qna', {
+        fetch('/stylemeqna', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,3 +68,65 @@ const maxHeight = Math.max(chatContainer.clientHeight, productContainer.clientHe
 // Set both containers to have the same height
 chatContainer.style.height = `${maxHeight}px`;
 productContainer.style.height = `${maxHeight}px`;
+
+
+
+
+const userInput = document.getElementById("user-input");
+    const sendButton = document.getElementById("send-button");
+
+    // Listen for the "Enter" keypress event in the user input field
+    userInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            // Prevent the default "Enter" key behavior (e.g., line break)
+            event.preventDefault();
+
+            // Simulate a click on the send button
+            sendButton.click();
+        }
+    });
+
+
+
+    /*document.addEventListener('DOMContentLoaded', () => {
+        const chatHistory = []; // Create an array to store the conversation history
+    
+        // ... (other code)
+    
+        // Add a click event listener to the "Submit Chat" button
+        const submitButton = document.getElementById('submit-button');
+    
+        submitButton.addEventListener('click', () => {
+            // Get the user's input
+            const userInput = document.getElementById('user-input').value;
+    
+            if (!userInput) {
+                return; // Do nothing if the input is empty
+            }
+    
+            // Add the user's message to the conversation history
+            chatHistory.push({ role: 'user', message: userInput });
+    
+            // Clear the user input field
+            document.getElementById('user-input').value = '';
+    
+            // Make a request to the server with the entire conversation
+            fetch('/submit_chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ conversation: chatHistory }), // Send the entire conversation
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response as needed
+            })
+            .catch(error => {
+                console.error('Error submitting chat:', error);
+            });
+        });
+    
+        // ... (other code)
+    });
+    */

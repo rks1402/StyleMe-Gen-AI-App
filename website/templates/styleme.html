@@ -84,7 +84,18 @@
         </div>
     </nav>
 
-
+    <style>
+        .btn-black-grey {
+            background-color: #333; /* Black background color */
+            color: #ccc; /* Grey text color */
+            border: 1px solid #ccc; /* Grey border */
+        }
+        .btn-black-grey:hover {
+            background-color: #444; /* Darker black on hover */
+            color: #fff; /* White text on hover */
+            border: 1px solid #444; /* Darker grey border on hover */
+        }
+    </style>
 
     <!-- Main Content -->
     <!-- Main Content -->
@@ -97,11 +108,22 @@
                         <div class="message bot-message">Hello! How can I assist you today?</div>
                     </div>
                     <div class="input-container">
-                        <textarea class="form-control" id="user-input" rows="3" placeholder="Type your message..."></textarea>
-                        <button class="btn btn-outline-secondary" id="send-button">Send</button>
+                        <input id="user-input" class="form-control" type="text" placeholder="Type your message...">
+                        <button id="send-button" class="btn btn-outline-secondary">Send</button>
                     </div>
+                    <div class="container">
+                        <div class="form-box">
+                            <form action="/submit_chat" method="post" id="chatForm">
+                                <button class="btn btn-black-grey" type="submit">Submit Chat</button>
+                            </form>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
+            
+            
+          
         
             <div class="col-md-6">
                 <div class="container-fluid product-container" >
@@ -118,6 +140,18 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <div class="form-box">
+            <form action="/submit_chat" method="post">
+                <div class="input-group">
+                    <textarea class="form-control" name="chat" rows="5" placeholder="Enter your chat script here"></textarea>
+                    <button class="btn btn-outline-secondary" type="submit">Submit Chat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

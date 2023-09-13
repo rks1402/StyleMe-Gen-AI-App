@@ -92,6 +92,13 @@ def fetch_products_styleme():
     return products[:3]
 
 
+@views.route('/conversation')
+def conversation():
+     
+    products = fetch_products_styleme() 
+     
+    return render_template('conversation.html', products=products)
+
 @views.route('/styleme')
 def styleme():
 
@@ -100,12 +107,100 @@ def styleme():
     return render_template('styleme.html', products=products)
 
 
-@views.route('/conversation')
-def conversation():
 
-    products = fetch_products_styleme() 
-     
-    return render_template('conversation.html', products=products)
+
+def ask_question_from_fashion(data):
+    try:
+        api_url = "https://fashionadvisor-iqcjxj5v4a-el.a.run.app/fashion_advisor"
+        payload = {
+            'question': data
+            
+        }
+        response = requests.post(api_url, json=payload)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        return response.json().get('answer', 'Sorry, I couldn\'t find an answer.')
+    except requests.exceptions.RequestException as e:
+        # Handle the exception and return an error response
+        return 'An error occurred while communicating with the chatbot.'
+# Initialize an empty list to store the conversation
+conversation_list = []
+ 
+@views.route('/stylemeqna', methods=['POST'])
+def styleme_qna():
+    # Get the magazine_id from the session
+    
+    user_question = request.json.get('question')
+    if not user_question:
+        return jsonify({'error': 'Empty question.'}), 400
+    prompt = "\n".join(user_question) + "\n\n You are a Fashion advisor read user_question above and give response as a real Fashion advisor would give ."
+    chat = convert_conversation_list_to_plain_text(conversation_list)
+    data = {"content": prompt}
+    
+    answer = ask_question_from_fashion(data)
+        
+    conversation_list.append({'User': user_question, 'Fashion Advisor': answer})
+    print(conversation_list)
+    # Return the answer as a JSON response
+    return jsonify({'answer': answer})
+
+def convert_conversation_list_to_plain_text(conversation_list):
+  """
+  Converts a conversation list to plain text.
+
+  Args:
+    conversation_list: A list of conversation objects.
+
+  Returns:
+    A string of plain text representing the conversation.
+  """
+
+  plain_text = ""
+  for conversation in conversation_list:
+    plain_text += f"User: {conversation['User']}\n"
+    plain_text += f"Fashion Advisor: {conversation['Fashion Advisor']}\n"
+    print(plain_text)
+  return plain_text
+
+
+@views.route('/submit_chat', methods=['POST'])
+def submit_chat():
+
+    #chat = request.form['chat']
+    chat = convert_conversation_list_to_plain_text(conversation_list)
+    conversation = parse_conversation(chat)
+    chat_conversation = {"conversation": conversation}  # Removed the jsonify call here
+
+    response_message = store_conversation_in_datastore(chat_conversation)
+
+    data = {"chat": chat}
+
+    endpoint = '/service/ai/demographic_json'
+    api_url = f"{BASE_URL}{endpoint}"
+    response_post = requests.post(api_url, json=data)
+    if response_post.status_code == 200:
+        response_data = response_post.json()
+        summary = response_data.get("summary", "No summary available.")
+        try:
+            summary_dict = json.loads(summary)
+            print(summary_dict)  # This should now be a dictionary
+            product_ids = get_product_by_json_summary(summary_dict)
+            # Rest of your code
+        except json.JSONDecodeError as e:
+            print("Failed to decode JSON:", e)
+        #return summary
+        #return product_ids  # Return the product_ids as JSON response
+        print(product_ids)
+        print(type(product_ids))
+        products = get_products_by_id(product_ids)
+        print(products)
+        session['products'] = products
+        #return products
+        return render_template('styleme.html', products=products)
+    
+    else:
+        print("POST Request Failed!")
+        print(response_post.text)
+
 
 # Function to get articles for a magazine
 def get_articles(magazine_id):
@@ -787,43 +882,7 @@ def get_products_by_id(product_ids):
             "message": str(e)
         }    
 
-@views.route('/submit_chat', methods=['POST'])
-def submit_chat():
 
-    chat = request.form['chat']
-    conversation = parse_conversation(chat)
-    chat_conversation = {"conversation": conversation}  # Removed the jsonify call here
-
-    response_message = store_conversation_in_datastore(chat_conversation)
-
-    data = {"chat": chat}
-
-    endpoint = '/service/ai/demographic_json'
-    api_url = f"{BASE_URL}{endpoint}"
-    response_post = requests.post(api_url, json=data)
-    if response_post.status_code == 200:
-        response_data = response_post.json()
-        summary = response_data.get("summary", "No summary available.")
-        try:
-            summary_dict = json.loads(summary)
-            print(summary_dict)  # This should now be a dictionary
-            product_ids = get_product_by_json_summary(summary_dict)
-            # Rest of your code
-        except json.JSONDecodeError as e:
-            print("Failed to decode JSON:", e)
-        #return summary
-        #return product_ids  # Return the product_ids as JSON response
-        print(product_ids)
-        print(type(product_ids))
-        products = get_products_by_id(product_ids)
-        print(products)
-        session['products'] = products
-        #return products
-        return render_template('styleme.html', products=products)
-    
-    else:
-        print("POST Request Failed!")
-        print(response_post.text)
 
 
 @views.route('/promo_analysis', methods=['GET'])
