@@ -100,14 +100,6 @@ def styleme():
     return render_template('styleme.html', products=products)
 
 
-@views.route('/conversation')
-def conversation():
-
-    products = fetch_products_styleme() 
-     
-    return render_template('conversation.html', products=products)
-
-
 
 # Function to get articles for a magazine
 def get_articles(magazine_id):

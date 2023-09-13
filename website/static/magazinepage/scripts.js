@@ -60,16 +60,3 @@ function flipCard(element) {
     element.closest('.flip-card').classList.toggle('flipped');
 }
 
-const userInput = document.getElementById("user-input");
-    const sendButton = document.getElementById("send-button");
-
-    // Listen for the "Enter" keypress event in the user input field
-    userInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            // Prevent the default "Enter" key behavior (e.g., line break)
-            event.preventDefault();
-
-            // Simulate a click on the send button
-            sendButton.click();
-        }
-    });
