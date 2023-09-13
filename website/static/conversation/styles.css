@@ -1,0 +1,341 @@
+/* Reset default styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Global styles */
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 28px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffcc00;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    background-color: #333;
+    border: none;
+}
+
+.dropdown-item {
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #ffcc00;
+}
+
+/* Form styles */
+.form-control {
+    border: 1px solid #e0e0e0;
+    color: #333;
+    background-color: #fff;
+}
+
+.btn-outline-success {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-outline-success:hover {
+    background-color: #555;
+}
+
+/* Chatbot interface styles */
+/* Enhanced chat container */
+.chat-container {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid #ccc; /* Add a border */
+}
+
+/* Chat box styles */
+.chat-box {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* User and bot message styles with animations */
+.user-message, .bot-message {
+    background-color: #e1e5bc;
+    max-width: 70%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease; /* Add a fade-in animation */
+}
+
+.user-message {
+    float: right;
+    clear: both;
+    margin-right: 20px;
+    background-color: #3498db; /* Blue for user messages */
+    color: #fff;
+}
+
+.bot-message {
+    float: left;
+    clear: both;
+    margin-left: 20px;
+    background-color: #2ecc71; /* Green for bot messages */
+    color: #fff;
+}
+
+/* Input container styles with subtle gradient background */
+.input-container {
+    display: flex;
+    background: linear-gradient(to bottom, #f7f7f7, #e0e0e0);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+#user-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px; /* Add some right margin for spacing */
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc; /* Add a border */
+}
+
+#send-button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid #2980b9; /* Add a border */
+    margin-top: 10px; /* Add margin to the top of the send button for spacing */
+}
+
+#send-button:hover {
+    background-color: #2980b9;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.product {
+    width: calc(33.33% - 10px); /* Adjust the width and spacing for three products in a row */
+    margin-right: 10px; /* Add spacing between products */
+    margin-bottom: 20px; /* Add spacing below products */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-align: center; /* Center align the content */
+    display: flex;
+    flex-direction: column; /* Arrange content in a column layout */
+}
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Set a fixed height for the product container */
+.product-container .product {
+    height: 350px; /* Adjust the height as needed */
+    padding: 10px;
+}
+
+/* Style for the product image */
+.product img {
+    width: 100%; /* Set a fixed width for the image */
+    max-height: 100%; /* Ensure the image does not exceed its container's height */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .product {
+        width: calc(50% - 10px); /* Adjust the width and spacing for two products in a row on smaller screens */
+    }
+}
+
+
+
+
+
+/* Style for the product image */
+.product img {
+    width: 100%; /* Set a fixed width for the image */
+    max-height: 200px; /* Set a maximum height for the image */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+}
+
+
+
+
+/* Style for the "Show Summary" button */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the summary section */
+.summary {
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 10px;
+    display: none;
+}
+
+.summary p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Style for the summary when it's visible */
+.summary.visible {
+    display: block;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .product {
+        width: calc(50% - 10px); /* Adjust the width and spacing for two products in a row on smaller screens */
+    }
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    .product {
+        width: calc(50% - 10px); /* Adjust the width and spacing for two products in a row on smaller screens */
+    }
+}
+
+
+.product a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+.product h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6600;
+    margin: 10px 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar {
+        padding: 5px 0;
+    }
+
+    .chat-container {
+        margin-top: 20px;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    .chat-box {
+        height: 300px;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%;
+    }
+
+    .user-message, .bot-message {
+        border-radius: 10px;
+        max-width: 70%;
+    }
+
+    .product-container {
+        flex-direction: column;
+        margin-right: 0;
+    }
+
+    .product {
+        width: 100%;
+        margin-right: 0;
+    }
+}
