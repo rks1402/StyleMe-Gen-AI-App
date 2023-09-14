@@ -452,11 +452,11 @@ def get_product_type():
     try:
         article_text = request.json['article_text']
 
-        occasion_demographics = """
-        {"product_type" : ["dress","jeans"]}
+        product_demographics = """
+        {"product_name": "sample product name"}
         """
         # Test POST request
-        prompt = article_text + "Provide the different products types mentioned from the article. Give the response in Json format like the json mentioned " + occasion_demographics
+        prompt = article_text + "Provide recommended products names mentioned in the above article in Json format like this :" + product_demographics
 
         # Text generation parameters
         parameters = {
