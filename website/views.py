@@ -231,6 +231,7 @@ def ask_question(user_question, magazine_id, articles):
         # Handle the exception and return an error response
         return 'An error occurred while communicating with the chatbot.'
 
+
 # Flask route for the magazine page
 @views.route('/magazine')
 def magazine():
@@ -911,4 +912,39 @@ def promo_analysis():
 
     return render_template('promo_analysis.html', text_part = promo, summary=summary ,products=products[:3])
 
-     
+@views.route('/service/ai/product_type', methods=['POST'])
+def get_product_type():
+
+
+    # Initialize Vertex AI
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
+
+    # Load the pre-trained text generation model
+    model = TextGenerationModel.from_pretrained("text-bison@001")
+
+    try:
+        article_text = request.json['article_text']
+
+        occasion_demographics = """
+        {"product_type" : ["dress","jeans"]}
+        """
+        # Test POST request
+        prompt = article_text + "Provide the different products types mentioned from the article. Give the response in Json format like the json mentioned " + occasion_demographics
+
+        # Text generation parameters
+        parameters = {
+            "max_output_tokens": 256,
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "top_k": 40
+        }
+
+        # Generate text using the model
+        response = model.predict(prompt, **parameters)
+        product_type = response.text
+
+        return jsonify(product_type),200
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
