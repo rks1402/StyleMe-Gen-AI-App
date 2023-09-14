@@ -111,7 +111,7 @@ def styleme():
 
 def ask_question_from_fashion(data):
     try:
-        api_url = "https://fashionadvisor-iqcjxj5v4a-el.a.run.app/fashion_advisor"
+        api_url = "https://drzz-services-hmvyexj3oa-el.a.run.app/service/ai/fashionqna"
         payload = {
             'question': data
             
@@ -142,6 +142,39 @@ def styleme_qna():
     print(conversation_list)
     # Return the answer as a JSON response
     return jsonify({'answer': answer})
+
+
+
+def get_products_by_ids(product_ids):
+    try:
+        # Make a POST request to the cloud function for each product ID
+        product_details = []
+        print(product_ids)
+        for product_id in product_ids['product_ids']:
+            print(product_id)
+
+            endpoint = '/service/product/id'
+            api_url = f"{BASE_URL}{endpoint}"
+            response = requests.post(api_url, json={"product_id": product_id})
+            
+            if response.status_code == 200:
+                response_data = response.json()  # Parse the response JSON
+                product_details.append(response_data)
+            else:
+                # Handle the error response if needed
+                print(f"Failed to fetch details for product ID {product_id}: {response.status_code}")
+
+        return product_details
+
+    except Exception as e:
+        return {
+            "message": str(e)
+        }    
+
+# Define the URL of the second Cloud Run service
+
+
+
 
 def convert_conversation_list_to_plain_text(conversation_list):
   """
@@ -911,40 +944,4 @@ def promo_analysis():
     products = session.get('products')
 
     return render_template('promo_analysis.html', text_part = promo, summary=summary ,products=products[:3])
-
-@views.route('/service/ai/product_type', methods=['POST'])
-def get_product_type():
-
-
-    # Initialize Vertex AI
-    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
-
-    # Load the pre-trained text generation model
-    model = TextGenerationModel.from_pretrained("text-bison@001")
-
-    try:
-        article_text = request.json['article_text']
-
-        occasion_demographics = """
-        {"product_type" : ["dress","jeans"]}
-        """
-        # Test POST request
-        prompt = article_text + "Provide the different products types mentioned from the article. Give the response in Json format like the json mentioned " + occasion_demographics
-
-        # Text generation parameters
-        parameters = {
-            "max_output_tokens": 256,
-            "temperature": 0.2,
-            "top_p": 0.8,
-            "top_k": 40
-        }
-
-        # Generate text using the model
-        response = model.predict(prompt, **parameters)
-        product_type = response.text
-
-        return jsonify(product_type),200
-
-    except Exception as e:
-        return jsonify({"error": str(e)})
 
