@@ -6,7 +6,17 @@ import json, datetime, time, requests
 from google.cloud import storage
 import os
 
+
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
+# Initialize Vertex AI
+
+
+# Load the pre-trained text generation model
+model = TextGenerationModel.from_pretrained("text-bison@001")
 
 @app.route('/service/product/all_products', methods=['GET'])
 def get_all_products():
@@ -326,7 +336,7 @@ def evaluate_promotion_text():
         
         promotion_text = request.json['promotion_text']
         
-        prompt = "You are the marketing campaign consultant, Review the following text in the triple quotes and give the tone, emotion ,season and occasion from the text and return the value as son attributes. for any missing value, mention as null  " + promotion_text + "sample json like  " + json_example
+        prompt = "You are the marketing campaign consultant, Review the following text in the triple quotes and give the tone, emotion ,season and occasion from the "+ promotion_text +"  and return the value as json attributes, for any missing value, mention as null  and give response structured like this  sample json   " + json_example
 
 
         # Text generation parameters
@@ -346,6 +356,48 @@ def evaluate_promotion_text():
     except Exception as e:
         return jsonify({"error": str(e)})
     
+
+
+conversation_history = []
+
+@app.route('/service/ai/fashionqna', methods=['POST'])
+def fashion_advisor():
+    # Initialize Vertex AI
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
+
+    # Load the pre-trained text generation model
+    model = TextGenerationModel.from_pretrained("text-bison@001")
+    try:
+        data = request.json
+        user_question = data.get('question', '')
+
+        # Add the user's question to the conversation history
+        conversation_history.append(f"User: {user_question}")
+
+        # Construct the conversation history prompt with clear context
+        conversation_prompt = "\n".join(conversation_history)
+        conversation_prompt += "\nFashion Advisor: "
+
+        # Text generation parameters
+        parameters = {
+            "max_output_tokens": 256,
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "top_k": 40
+        }
+
+        # Generate a response using the model and conversation prompt
+        response = model.predict(conversation_prompt, **parameters)
+        answer = response.text
+
+        # Append the bot's response to the conversation history
+        conversation_history.append(f"Fashion Advisor: {answer}")
+
+        return jsonify({"answer": answer})
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
 
 
 @app.route('/service/ai/magazine_qna', methods=['POST'])
@@ -434,43 +486,6 @@ def generate_demographic_json():
         demographic_json = response.text
 
         return jsonify({"summary": demographic_json}),200
-
-    except Exception as e:
-        return jsonify({"error": str(e)})
-    
-
-@app.route('/service/ai/product_type', methods=['POST'])
-def get_product_type():
-
-
-    # Initialize Vertex AI
-    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
-
-    # Load the pre-trained text generation model
-    model = TextGenerationModel.from_pretrained("text-bison@001")
-
-    try:
-        article_text = request.json['article_text']
-
-        product_demographics = """
-        {"product_name": "sample product name"}
-        """
-        # Test POST request
-        prompt = article_text + "Provide recommended products names mentioned in the above article in Json format like this :" + product_demographics
-
-        # Text generation parameters
-        parameters = {
-            "max_output_tokens": 256,
-            "temperature": 0.2,
-            "top_p": 0.8,
-            "top_k": 40
-        }
-
-        # Generate text using the model
-        response = model.predict(prompt, **parameters)
-        product_type = response.text
-
-        return jsonify(product_type),200
 
     except Exception as e:
         return jsonify({"error": str(e)})
