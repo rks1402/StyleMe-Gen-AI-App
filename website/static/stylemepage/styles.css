@@ -204,7 +204,7 @@ body {
 .form-box, .product-container {
     flex: 1;
     margin: 10px;
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
 }
 
@@ -341,3 +341,119 @@ body {
 
     /* Adjust other styles as needed for better mobile appearance */
 }
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    /* Adjust the styles for the navigation bar */
+    .navbar {
+        padding: 10px; /* Add some padding to the navbar */
+    }
+
+    .navbar-brand {
+        font-size: 24px; /* Decrease the font size for the brand */
+    }
+
+    .navbar-toggler-icon {
+        background-color: #fff;
+    }
+
+    .nav-link {
+        font-size: 14px; /* Decrease the font size for navigation links */
+    }
+
+    .dropdown-menu {
+        background-color: #333;
+    }
+
+    .dropdown-item {
+        font-size: 14px; /* Decrease the font size for dropdown items */
+    }
+
+    /* Adjust the styles for the chat container */
+    .chat-container {
+       
+        margin-top: 20px;
+        max-width: 100%; /* Make chat container full width */
+        border-radius: 10px; /* Slightly rounded corners */
+    }
+    .chat-container {
+        max-height: 550px; /* Adjust the max-height as needed */
+    }
+    .chat-box {
+        height: 300px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    .input-container {
+        flex-direction: column; /* Stack input and send button vertically */
+    }
+
+    #user-input {
+        margin-right: 0; /* Remove margin to make full width */
+        border-radius: 10px; /* Slightly rounded input */
+    }
+
+    #send-button {
+        margin-top: 10px; /* Add some space between input and button */
+        border-radius: 10px; /* Slightly rounded button */
+    }
+
+    .message {
+        margin: 10px 0;
+        max-width: 80%; /* Adjust message width for mobile */
+    }
+
+    .bot-message,
+    .customer-message {
+        border-radius: 10px; /* Slightly rounded message bubbles */
+        max-width: 70%; /* Limit message width */
+    }
+
+    .bot-message {
+        background-color: #c0daf0;
+        float: left;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+
+    .customer-message {
+        background-color: #e1e5bc;
+        float: right;
+        clear: both;
+        padding: 10px; /* Add padding for message bubbles */
+    }
+    #submit-button{
+        text-align: center;
+        margin-left: 8px;
+    }
+
+    
+    /* Product display */
+    .product-container {
+        flex-direction: row; /* Stack products vertically on smaller screens */
+    }
+
+    .product {
+        flex: 1; /* Distribute available space equally among products */
+        margin-bottom: 20px; 
+        max-width: 700px;/* Add space between products on smaller screens */
+    }
+
+    .product img {
+        width: 200px; /* Ensure images don't exceed their container */
+    }
+
+    .product h6 {
+        font-size: 15px; /* Increase font size for product titles */
+    }
+
+    .product p {
+        font-size: 18px; /* Increase font size for product prices */
+    }
+    .btn-outline-secondary{
+       margin-top: 100px;
+    }
+    /* Adjust other styles as needed for better mobile appearance */
+}
+

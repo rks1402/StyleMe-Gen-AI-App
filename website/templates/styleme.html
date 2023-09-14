@@ -114,7 +114,7 @@
                     <div class="container">
                         <div class="form-box">
                             <form action="/submit_chat" method="post" id="chatForm">
-                                <button class="btn btn-black-grey" type="submit">Submit Chat</button>
+                                <button id="submit-button" class="btn btn-black-grey" type="submit">Submit Chat</button>
                             </form>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
         
             <div class="col-md-6">
                 <div class="container-fluid product-container" >
-                        {% for product in products %}
+                        {% for product in products[:3] %}
                         <div class="product">
                             <a href="{{ url_for('views.product_details', product_id=product.product_ID) }}">
                                 <img src="{{ product.image_URL }}" alt="{{ product.product_name }}">
