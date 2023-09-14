@@ -289,3 +289,8 @@ input[type=checkbox] {
     }
 }
 
+@media (max-width:780px){
+    .box{
+        margin-top: 15px;
+    }
+}
