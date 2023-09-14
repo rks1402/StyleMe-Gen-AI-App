@@ -491,6 +491,43 @@ def generate_demographic_json():
         return jsonify({"error": str(e)})
 
 
+@app.route('/service/ai/product_type', methods=['POST'])
+def get_product_type():
+
+
+    # Initialize Vertex AI
+    vertexai.init(project=os.environ.get("PROJECT_ID"), location=os.environ.get("LOCATION"))
+
+    # Load the pre-trained text generation model
+    model = TextGenerationModel.from_pretrained("text-bison@001")
+
+    try:
+        article_text = request.json['article_text']
+
+        product_demographics = """
+        {"products": ["sample product name"]}
+        """
+        # Test POST request
+        prompt = article_text + "Provide recommended products only  names  without image links mentioned in the above article in valid Json format without the indentation like this :" + product_demographics
+
+        # Text generation parameters
+        parameters = {
+            "max_output_tokens": 256,
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "top_k": 40
+        }
+
+        # Generate text using the model
+        response = model.predict(prompt, **parameters)
+        product_type = response.text
+
+        return jsonify(product_type),200
+
+    except Exception as e:
+        return jsonify({"error": str(e)})        
+
+
 @app.route('/service/store_conversation', methods=['POST'])
 def store_conversation():
     try:
