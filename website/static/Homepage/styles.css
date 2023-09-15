@@ -319,11 +319,13 @@ body {
         padding: 20px;
         margin: 10px;
         text-align: center;
+        position: relative;
     }
 
     .product img {
-        max-width: 100%;
-        height: auto;
+        width: 200px; /* Set your desired width */
+    height: 200px; /* Set your desired height */
+    object-fit: cover;
     }
 
     .product h2 {
@@ -337,7 +339,11 @@ body {
         margin-top: 10px;
     }
   
-   
+    .product p.price {
+        position: absolute;
+        bottom: 0; /* Position it at the bottom of the product container */
+        /* Add other styles for the price here */
+      }
     
         .pagination a {
             margin: 4px 0;
