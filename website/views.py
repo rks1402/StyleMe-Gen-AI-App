@@ -99,12 +99,8 @@ def conversation():
      
     return render_template('conversation.html', products=products)
 
-@views.route('/styleme')
-def styleme():
 
-    products = fetch_products_styleme() 
-     
-    return render_template('styleme.html', products=products)
+
 
 
 
@@ -123,12 +119,12 @@ def ask_question_from_fashion(data):
         # Handle the exception and return an error response
         return 'An error occurred while communicating with the chatbot.'
 # Initialize an empty list to store the conversation
-conversation_list = []
+#conversation_list = []
  
 @views.route('/stylemeqna', methods=['POST'])
 def styleme_qna():
     # Get the magazine_id from the session
-    
+    conversation_list = []
     user_question = request.json.get('question')
     if not user_question:
         return jsonify({'error': 'Empty question.'}), 400
@@ -139,7 +135,7 @@ def styleme_qna():
     answer = ask_question_from_fashion(data)
         
     conversation_list.append({'User': user_question, 'Fashion Advisor': answer})
-    print(conversation_list)
+    #print(conversation_list)
     # Return the answer as a JSON response
     return jsonify({'answer': answer})
 
@@ -195,44 +191,45 @@ def convert_conversation_list_to_plain_text(conversation_list):
   return plain_text
 
 
-@views.route('/submit_chat', methods=['POST'])
-def submit_chat():
 
-    #chat = request.form['chat']
-    chat = convert_conversation_list_to_plain_text(conversation_list)
-    conversation = parse_conversation(chat)
-    chat_conversation = {"conversation": conversation}  # Removed the jsonify call here
-
-    response_message = store_conversation_in_datastore(chat_conversation)
-
-    data = {"chat": chat}
-
-    endpoint = '/service/ai/demographic_json'
-    api_url = f"{BASE_URL}{endpoint}"
-    response_post = requests.post(api_url, json=data)
-    if response_post.status_code == 200:
-        response_data = response_post.json()
-        summary = response_data.get("summary", "No summary available.")
+@views.route('/styleme', methods=['POST', 'GET'])
+def styleme():
+    if request.method == 'POST':
         try:
-            summary_dict = json.loads(summary)
-            print(summary_dict)  # This should now be a dictionary
-            product_ids = get_product_by_json_summary(summary_dict)
-            # Rest of your code
-        except json.JSONDecodeError as e:
-            print("Failed to decode JSON:", e)
-        #return summary
-        #return product_ids  # Return the product_ids as JSON response
-        print(product_ids)
-        print(type(product_ids))
-        products = get_products_by_id(product_ids)
-        print(products)
-        session['products'] = products
-        #return products
-        return render_template('styleme.html', products=products)
-    
+            request_data = request.get_json()
+            conversation_list = request_data.get('conversation')
+            chat = convert_conversation_list_to_plain_text(conversation_list)
+            conversation = parse_conversation(chat)
+            chat_conversation = {"conversation": conversation}
+            
+            response_message = store_conversation_in_datastore(chat_conversation)
+
+            data = {"chat": chat}
+            endpoint = '/service/ai/demographic_json'
+            api_url = f"{BASE_URL}{endpoint}"
+
+            response_post = requests.post(api_url, json=data)
+
+            if response_post.status_code == 200:
+                summary_dict = json.loads(response_post.json().get("summary", "{}"))
+                product_ids = get_product_by_json_summary(summary_dict)
+                products = get_products_by_id(product_ids)
+                session['products'] = products
+                
+
+                # Return products and product details as JSON
+                return jsonify(products=products)
+
+        except Exception as e:
+            print("Error:", str(e))
+
+        # If any error occurs or no products are found, return an empty JSON
+        return jsonify(products=[])
+
     else:
-        print("POST Request Failed!")
-        print(response_post.text)
+        products = fetch_products_styleme()
+        return render_template('styleme.html', products=products)
+        
 
 
 # Function to get articles for a magazine
@@ -872,16 +869,16 @@ def store_conversation_in_datastore(conversation_data):
     
 def get_product_by_json_summary(summary):
     try:
-        print(summary)
-        print(type(summary))
+        #print(summary)
+        #print(type(summary))
         # Make a POST request to the cloud function
         endpoint = '/service/product/recommendation'
         api_url = f"{BASE_URL}{endpoint}"
         response = requests.post(api_url, json = summary)
 
-        print(response)
+        #print(response)
         response_data = response.json()  # Parse the response JSON
-        print(response_data)
+        #print(response_data)
         return response_data
         
         
