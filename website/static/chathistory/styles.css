@@ -164,8 +164,7 @@ body {
 }
 
 .product img {
-   width: 150px;
-   height: 250px; /* Ensure images don't exceed their container */
+    max-width: 100%; /* Ensure images don't exceed their container */
 }
 
 

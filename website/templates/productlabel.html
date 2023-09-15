@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fashion Web Page</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='upload/style.css') }}">
+  <!-- Add Bootstrap CSS link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<body>
+  <!-- Use Bootstrap container for better content alignment -->
+
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('views.homepage')}}">DRZZ </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ url_for('views.homepage')}}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.styleme') }}">Style Me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.magazine') }}">Magazine</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.chathistory') }}">Fashion Advisor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.marketing') }}">Marketing</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.lookalike') }}">Look Alike</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Shop For
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_men_data')}}">Men</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_women_data')}}">Women</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_boys_data')}}">Boys</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_girls_data')}}">Girls</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_wedding_data')}}">Wedding</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_party_data')}}">Party</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_birthday_data')}}">Birthday</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_casual_data')}}">Casual</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_formal_data')}}">Formal</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('views.fetch_vacation_data')}}">Vacations</a></li>
+
+            </ul>
+          </li>
+
+        </ul>
+
+        <form class="d-flex" role="search" action="/search" method="GET">
+          <input class="form-control me-2" type="search" name="query" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth.login') }}">Login </a>
+
+          </li>
+          
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <br>
+  <div class="container">
+    <div class="form-box">
+      <form action="/product_label" method="post" enctype="multipart/form-data">
+        <div class="input-group">
+          <input type="file" name="file" class="form-control" id="inputGroupFile04"
+            aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+          <button class="btn btn-outline-secondary" type="submit" id="analyze-button">Upload</button>
+        </div>
+      </form>
+      <img id="output" />
+    </div>
+  </div>
+
+  <img id="uploaded-image" style="max-width: 100%;" />
+
+  <style>
+    /* Style the container for the labels */
+    .label-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    /* Style individual label tags */
+    .label-tag {
+      background-color: #007bff; /* Blue background color */
+      color: #fff; /* White text color */
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 20px; /* Rounded corners */
+      font-weight: bold;
+    }
+  
+    /* Define different colors for each label */
+    .label-tag:nth-child(1) {
+      background-color: #ff5722; /* Orange */
+    }
+  
+    .label-tag:nth-child(2) {
+      background-color: #4caf50; /* Green */
+    }
+  
+    .label-tag:nth-child(3) {
+      background-color: #f44336; /* Red */
+    }
+  
+    /* Add more styles for additional label tags if needed */
+  </style>
+  
+
+  <!-- Product Display -->
+  <!-- Product Display -->
+<!-- Product Display -->
+<div class="container-fluid product-container">
+  <div class="label-container">
+    {% for label in labels %}
+      <span class="label-tag">{{ label }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="../static/upload/scripts.js"></script>
+  <script>
+    // Function to display the uploaded image
+    function displayImage(input) {
+      const uploadedImage = document.getElementById('uploaded-image');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+  
+        reader.onload = function (e) {
+          uploadedImage.src = e.target.result;
+        };
+  
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  
+    // Listen for changes in the file input
+    const fileInput = document.getElementById('inputGroupFile04');
+    fileInput.addEventListener('change', function () {
+      displayImage(this);
+    });
+  </script>
+  
+</body>
+
+</html>

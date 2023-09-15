@@ -363,7 +363,99 @@ def marketing():
 storage_client = storage.Client()
 bucket_name = 'uploaded-cloth'  # Replace with your GCS bucket name
 
+'''from typing import Sequence
 
+from google.cloud import vision
+
+
+def analyze_image_from_uri(
+    image_uri: str,
+    feature_types: Sequence,
+) -> vision.AnnotateImageResponse:
+    client = vision.ImageAnnotatorClient()
+
+    image = vision.Image()
+    image.source.image_uri = image_uri
+    features = [vision.Feature(type_=feature_type) for feature_type in feature_types]
+    request = vision.AnnotateImageRequest(image=image, features=features)
+
+    response = client.annotate_image(request=request)
+    print(response)
+    return response
+
+
+
+def print_labels(response: vision.AnnotateImageResponse):
+    print("=" * 80)
+    for label in response.label_annotations:
+        print(
+            f"{label.score:4.0%}",
+            f"{label.description:5}",
+            sep=" | ",
+        )
+
+def print_objects(response: vision.AnnotateImageResponse):
+    print("=" * 80)
+    for obj in response.localized_object_annotations:
+        nvertices = obj.bounding_poly.normalized_vertices
+        print(
+            f"{obj.score:4.0%}",
+            f"{obj.name:15}",
+            f"{obj.mid:10}",
+            ",".join(f"({v.x:.1f},{v.y:.1f})" for v in nvertices),
+            sep=" | ",
+        )
+        
+image_uri = "gs://photodrzz/photo/13000072a.jpg"
+features = [
+    # vision.Feature.Type.OBJECT_LOCALIZATION,
+    # vision.Feature.Type.FACE_DETECTION,
+    # vision.Feature.Type.LANDMARK_DETECTION,
+    # vision.Feature.Type.LOGO_DETECTION,
+     vision.Feature.Type.LABEL_DETECTION,
+    # vision.Feature.Type.TEXT_DETECTION,
+    # vision.Feature.Type.DOCUMENT_TEXT_DETECTION,
+    # vision.Feature.Type.SAFE_SEARCH_DETECTION,
+     #vision.Feature.Type.IMAGE_PROPERTIES,
+    # vision.Feature.Type.CROP_HINTS,
+     #vision.Feature.Type.WEB_DETECTION,
+     #vision.Feature.Type.PRODUCT_SEARCH,
+    # vision.Feature.Type.OBJECT_LOCALIZATION,
+]
+
+response = analyze_image_from_uri(image_uri, features)
+print_labels(response)
+
+image_uri = "gs://photodrzz/photo/-473Wx593H-443007260-pink-MODEl6.jpg"
+features = [vision.Feature.Type.OBJECT_LOCALIZATION]
+
+response = analyze_image_from_uri(image_uri, features)
+print_objects(response)'''
+
+
+@views.route('/product_label', methods=['POST','GET'])
+def product_label():
+    if request.method == 'POST':
+
+        uploaded_image = request.files['file']
+        if uploaded_image:
+            # Ensure the filename is secure (prevents directory traversal attacks)
+            filename = secure_filename(uploaded_image.filename)
+            # Upload the image to GCS
+            image_blob = upload_image_to_gcs(uploaded_image, filename)
+            # Analyze the image using its GCS URI
+            image_uri = f'gs://{bucket_name}/{image_blob.name}'
+            features = [vision.Feature.Type.LABEL_DETECTION,vision.Feature.Type.IMAGE_PROPERTIES]
+            response = analyze_image_from_uri(image_uri, features)
+            
+            labels = [label.description for label in response.label_annotations]
+            print(labels)
+            return render_template('productlabel.html', labels=labels)
+    else:
+        return render_template('productlabel.html')
+
+
+        
 
 @views.route('/upload', methods=['POST'])
 def upload():
@@ -376,7 +468,8 @@ def upload():
         image_blob = upload_image_to_gcs(uploaded_image, filename)
         # Analyze the image using its GCS URI
         image_uri = f'gs://{bucket_name}/{image_blob.name}'
-        features = [vision.Feature.Type.WEB_DETECTION]
+        features = [vision.Feature.Type.WEB_DETECTION,vision.Feature.Type.LABEL_DETECTION]
+       
         response = analyze_image_from_uri(image_uri, features)
         original_image_url = image_blob.public_url
         visually_similar_images = get_visual_similar_images(response)
@@ -390,6 +483,9 @@ def upload_image_to_gcs(uploaded_image, filename):
     image_blob.upload_from_string(uploaded_image.read(), content_type=uploaded_image.content_type)
     return image_blob
 
+
+
+
 def analyze_image_from_uri(image_uri: str, feature_types: list) -> vision.AnnotateImageResponse:
     client = vision.ImageAnnotatorClient()
     image = vision.Image()
@@ -398,7 +494,13 @@ def analyze_image_from_uri(image_uri: str, feature_types: list) -> vision.Annota
     request = vision.AnnotateImageRequest(image=image, features=features)
 
     response = client.annotate_image(request=request)
+    print(response)
     return response
+    
+
+
+
+
 
 def get_visual_similar_images(response):
     visually_similar_images = []
