@@ -122,6 +122,42 @@ def get_product_by_id():
     except Exception as e:
         error_message = f"Error occurred: {e}"
         return jsonify(error=error_message), 500
+    
+
+@app.route('/service/celebrity/celebrity_id', methods=['POST'])
+def get_product_by_id():
+    try:
+        # Get the product_id from the query parameters in the HTTP request
+        celebrity_id = request.json['celebrity_id']
+
+        if not celebrity_id:
+            return "celebrity_id not provided.", 400
+
+        # Create a Datastore client
+        client = datastore.Client()
+
+        # Define the kind from which you want to fetch the records
+        kind = "celebrity"
+
+        # Create a query to fetch the record with the specified product_id
+        query = client.query(kind=kind)
+        query.add_filter('celebrity_id', '=', celebrity_id)
+
+        # Fetch the entities that match the query
+        results = list(query.fetch())
+
+        if not results:
+            return f"No record found with Product ID: {celebrity_id}", 404
+
+        # Convert the entity to a dictionary
+        record = dict(results[0])
+
+        # Return the JSON response
+        return jsonify(record)
+       
+    except Exception as e:
+        error_message = f"Error occurred: {e}"
+        return jsonify(error=error_message), 500    
 
 
 @app.route('/service/product/description', methods=['GET'])
