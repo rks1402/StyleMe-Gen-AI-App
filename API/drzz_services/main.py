@@ -125,7 +125,7 @@ def get_product_by_id():
     
 
 @app.route('/service/celebrity/celebrity_id', methods=['POST'])
-def get_product_by_id():
+def get_celebrity_by_id():
     try:
         # Get the product_id from the query parameters in the HTTP request
         celebrity_id = request.json['celebrity_id']
