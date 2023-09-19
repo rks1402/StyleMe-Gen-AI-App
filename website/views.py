@@ -23,7 +23,7 @@ import re
 views = Blueprint('views', __name__)
 
 
-BASE_URL = "https://drzz-services-hmvyexj3oa-el.a.run.app"
+BASE_URL = "https://drzz-services-kcvokjzgdq-nw.a.run.app"
 
 @views.route('/')
 def home():
@@ -107,7 +107,9 @@ def conversation():
 
 def ask_question_from_fashion(data):
     try:
-        api_url = "https://drzz-services-hmvyexj3oa-el.a.run.app/service/ai/fashionqna"
+        
+        endpoint = '/service/ai/fashionqna'
+        api_url = f"{BASE_URL}{endpoint}"
         payload = {
             'question': data
             
@@ -361,7 +363,7 @@ def marketing():
 
 # Initialize the Google Cloud Storage client
 storage_client = storage.Client()
-bucket_name = 'uploaded-cloth'  # Replace with your GCS bucket name
+bucket_name = 'drzz_gen_ai_image_upload'  # Replace with your GCS bucket name
 
 '''from typing import Sequence
 
